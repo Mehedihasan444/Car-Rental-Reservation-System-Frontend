@@ -1,10 +1,10 @@
-import Home from "../../pages/home/Home";
+import { Outlet } from "react-router-dom";
 
 
 const Mainlayout = () => {
     return (
         <div>
-            <Home/>
+            <Outlet/>
         </div>
     );
 };
