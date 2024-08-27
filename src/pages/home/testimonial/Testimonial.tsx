@@ -1,4 +1,3 @@
-import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -14,7 +13,6 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { RatingComponent } from "@/utils/RatingComponent";
-import { FaAngleDoubleRight } from "react-icons/fa";
 import { HoverCardReview } from "./HoverCardReview";
 
 const testimonials = [
@@ -78,6 +76,7 @@ export const Testimonial = () => {
             they have to say about their experiences with us.
           </p>
         </div>
+        {/* testimonials */}
         <div className="w-full flex justify-center items-center flex-1">
           <Carousel
             opts={{
