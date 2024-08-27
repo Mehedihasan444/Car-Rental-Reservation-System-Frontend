@@ -2,7 +2,7 @@ import CarSlider from "./CarSlider";
 
 const FeaturedCars = () => {
   return (
-    <div className="h-screen flex justify-center items-center flex-col">
+    <div className="lg:h-screen flex justify-center items-center flex-col">
       <div className="text-center mb-10 space-y-3 max-w-xl mx-auto">
         <h4 className="text-blue-600 p-3 inline-flex font-bold rounded-md bg-gray-200">
           Enjoy Your Ride
@@ -14,8 +14,6 @@ const FeaturedCars = () => {
         </p>
       </div>
       <div className="">
-        {/* Add Car Cards here */}
-
         <CarSlider />
       </div>
     </div>
