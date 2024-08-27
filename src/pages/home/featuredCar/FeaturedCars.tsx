@@ -1,11 +1,25 @@
-import CarCard from "../../../components/ui/carCard";
+import CarSlider from "./CarSlider";
 
 const FeaturedCars = () => {
-    return (
-        <div>
-            <CarCard/>
-        </div>
-    );
+  return (
+    <div className="h-screen flex justify-center items-center flex-col">
+      <div className="text-center mb-10 space-y-3 max-w-xl mx-auto">
+        <h4 className="text-blue-600 p-3 inline-flex font-bold rounded-md bg-gray-200">
+          Enjoy Your Ride
+        </h4>
+        <h2 className="text-4xl font-bold text-center ">Featured Cars</h2>
+        <p className="inline-flex text-gray-600 font-semibold">
+          Driving your dreams to reality with an exquisite fleet of versatile
+          vehicles for unforgettable journeys.
+        </p>
+      </div>
+      <div className="">
+        {/* Add Car Cards here */}
+
+        <CarSlider />
+      </div>
+    </div>
+  );
 };
 
 export default FeaturedCars;

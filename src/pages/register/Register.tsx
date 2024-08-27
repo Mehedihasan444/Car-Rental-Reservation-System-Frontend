@@ -3,15 +3,12 @@ import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import SocialLogin from "@/components/ui/socialLogin";
-import { FaFacebook } from "react-icons/fa";
-import { FcGoogle } from "react-icons/fc";
 
 const Register = () => {
   return (
@@ -20,8 +17,7 @@ const Register = () => {
         <CardHeader>
           <CardTitle>Register</CardTitle>
           <CardDescription>
-          Already have an account?
-           
+            Already have an account?
             <Button variant={"link"} className="text-blue-500">
               Login
             </Button>
@@ -44,13 +40,18 @@ const Register = () => {
               </div>
               <div className="flex flex-col space-y-1.5">
                 <Label htmlFor="confirm-password">Confirm Password</Label>
-                <Input id="confirm-password" placeholder="Confirm Password" type="password" />
+                <Input
+                  id="confirm-password"
+                  placeholder="Confirm Password"
+                  type="password"
+                />
               </div>
             </div>
             <Button className="w-full mt-5">Sign Up</Button>
           </form>
         </CardContent>
-      <SocialLogin/>
+        {/* social login component */}
+        <SocialLogin />
       </Card>
     </div>
   );

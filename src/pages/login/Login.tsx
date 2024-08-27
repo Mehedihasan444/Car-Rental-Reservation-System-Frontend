@@ -41,6 +41,7 @@ const Login = () => {
             </Button>
           </form>
         </CardContent>
+        {/* social login component */}
         <SocialLogin />
       </Card>
     </div>
