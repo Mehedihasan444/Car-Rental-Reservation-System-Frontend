@@ -5,7 +5,6 @@ import {
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
-
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
 import { Link } from "react-router-dom";
@@ -29,49 +28,48 @@ export function Navbar() {
 
       {/* Navigation Menu */}
       <div className="">
-
-      <ResponsiveSidebar />
-      <NavigationMenu className="hidden sm:inline-block">
-        <NavigationMenuList className="space-x-4">
-          <NavigationMenuItem>
-            <Link to="/">
-              <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                Home
-              </NavigationMenuLink>
-            </Link>
-          </NavigationMenuItem>
-          <NavigationMenuItem>
-            <Link to="/about">
-              <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                About Us
-              </NavigationMenuLink>
-            </Link>
-          </NavigationMenuItem>
-          <NavigationMenuItem>
-            <Link to="/booking">
-              <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                Booking
-              </NavigationMenuLink>
-            </Link>
-          </NavigationMenuItem>
-          <NavigationMenuItem>
-            <Link to="/contact">
-              <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                Contact
-              </NavigationMenuLink>
-            </Link>
-          </NavigationMenuItem>
-        </NavigationMenuList>
-      </NavigationMenu>
+        <ResponsiveSidebar />
+        <NavigationMenu className="hidden sm:inline-block">
+          <NavigationMenuList className="space-x-4">
+            <NavigationMenuItem>
+              <Link to="/">
+                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                  Home
+                </NavigationMenuLink>
+              </Link>
+            </NavigationMenuItem>
+            <NavigationMenuItem>
+              <Link to="/about">
+                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                  About Us
+                </NavigationMenuLink>
+              </Link>
+            </NavigationMenuItem>
+            <NavigationMenuItem>
+              <Link to="/booking">
+                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                  Booking
+                </NavigationMenuLink>
+              </Link>
+            </NavigationMenuItem>
+            <NavigationMenuItem>
+              <Link to="/contact">
+                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                  Contact
+                </NavigationMenuLink>
+              </Link>
+            </NavigationMenuItem>
+          </NavigationMenuList>
+        </NavigationMenu>
       </div>
 
       {/* Login/Sign Up Buttons */}
       <div className="space-x-2 hidden sm:inline-block">
         <Link to="/login">
-        <Button variant="outline">Login</Button>
+          <Button variant="outline">Login</Button>
         </Link>
         <Link to="/register">
-        <Button>Sign Up</Button>
+          <Button>Sign Up</Button>
         </Link>
       </div>
     </div>

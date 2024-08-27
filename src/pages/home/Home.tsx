@@ -1,4 +1,5 @@
 import FeaturedCars from "./featuredCar/FeaturedCars";
+import { Testimonial } from "./testimonial/Testimonial";
 import WhyChooseUs from "./whyChooseUs/WhyChooseUs";
 
 const Home = () => {
@@ -6,6 +7,7 @@ const Home = () => {
         <div>
             <FeaturedCars/>
             <WhyChooseUs/>
+            <Testimonial/>
         </div>
     );
 };
