@@ -2,9 +2,9 @@ import { FaMapPin, FaRoad, FaTag, FaTrophy } from "react-icons/fa";
 
 const WhyChooseUs = () => {
   return (
-    <div className="mx-5  lg:h-screen max-w-7xl lg:mx-auto flex flex-col justify-center items-center space-y-10">
+    <div className="mx-5 my-10 lg:my-0   lg:h-screen max-w-7xl lg:mx-auto flex flex-col justify-center items-center space-y-10">
       <div className="text-center mb-10 space-y-3 max-w-xl mx-auto">
-        <h4 className="text-blue-600 p-3 inline-flex font-bold rounded-md bg-gray-200">
+        <h4 className="text-blue-600 p-3 text-xs  inline-flex font-bold rounded-md bg-gray-200">
           Why Choose Us
         </h4>
         <h2 className="text-4xl font-bold text-center ">Our Features</h2>
