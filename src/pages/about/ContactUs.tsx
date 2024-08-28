@@ -3,7 +3,7 @@ import { FaHome, FaPhone, FaEnvelopeSquare, FaClock } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
 const ContactUs = () => {
   return (
-    <div className=" lg:h-screen flex justify-center items-center ">
+    <div className=" lg:h-screen flex justify-center items-center bg-white">
         <div className="">
         <div className="text-center">
         <h2 className="text-3xl font-bold mb-4">Contact Us</h2>
@@ -23,25 +23,29 @@ const ContactUs = () => {
       <span>
         <FaHome />
       </span>
-      Address: 1600 Pennsylvania Ave NW, Washington, D.C. DC 20500, USA
+      <span className="font-semibold">Address:</span>
+       1600 Pennsylvania Ave NW, Washington, D.C. DC 20500, USA
     </h3>
     <h3 className="flex items-center gap-2">
       <span>
         <FaPhone />
       </span>{" "}
-      Support Phone: +1 (202) 456-1111
+      <span className="font-semibold">Support Phone:</span>
+       +1 (202) 456-1111
     </h3>
     <h3 className="flex items-center gap-2">
       <span>
         <FaEnvelopeSquare />
       </span>
-      Email: support@carrental.com
+      <span className="font-semibold">Email:</span>
+      support@carrental.com
     </h3>
     <h3 className="flex items-center gap-2">
       <span>
         <FaClock />
       </span>
-      Working Hours: 09:00 AM - 09:00 PM, Monday to Saturday
+      <span className="font-semibold">Working Hours:</span>
+       09:00 AM - 09:00 PM, Monday to Saturday
     </h3>
     <h3 className="flex items-center gap-2">
       <span>
