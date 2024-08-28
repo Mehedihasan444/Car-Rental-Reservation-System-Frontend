@@ -3,6 +3,7 @@ import App from "../App";
 import Login from "@/pages/login/Login";
 import Home from "@/pages/home/Home";
 import Register from "@/pages/register/Register";
+import AboutUsPage from "@/pages/about/About";
 
 const Router = createBrowserRouter([
     {
@@ -13,6 +14,10 @@ const Router = createBrowserRouter([
             {
                 path:"/",
                 element:<Home/>
+            },
+            {
+                path:"about",
+                element:<AboutUsPage/>
             },
             {
                 path:"register",

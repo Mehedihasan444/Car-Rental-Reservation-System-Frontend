@@ -11,62 +11,62 @@ import { BsSuitHeartFill } from "react-icons/bs";
 import { FaCar, FaUser } from "react-icons/fa";
 import { GiCarDoor, GiSuitcase } from "react-icons/gi";
 
-
-const CarCard = (car:TCar) => {
-const {title,
+const CarCard = ({ 
+  title,
   likes,
   numberOfRented,
   carType,
   pricePerHour,
   status,
-  // isElectric,
-  // averageRating,
-  image}=car
-
+  image
+}: TCar) => {
   return (
-    <Card className="w-[300px] sm:w-auto">
-      <CardHeader>
+    <Card className="w-full sm:w-[300px] md:w-[350px] lg:w-[400px] mx-auto my-4 sm:my-6 bg-white  rounded-md overflow-hidden">
+      <CardHeader className="relative">
         <img
           src={image}
-          alt=""
-          className="hover:scale-105  transform transition-transform duration-300 ease-in-out "
+          alt={title}
+          className="w-full h-48 object-cover transform transition-transform duration-300 ease-in-out hover:scale-105"
         />
       </CardHeader>
       <CardContent>
         <div className="flex justify-between items-center py-3">
-          <CardTitle>{title}</CardTitle>
-          <span className="flex gap-1 items-center justify-center">
-            <BsSuitHeartFill className="size-4" />
+          <CardTitle className="text-lg font-semibold">{title}</CardTitle>
+          <span className="flex gap-1 items-center text-red-500">
+            <BsSuitHeartFill size={20} />
             {likes}
           </span>
         </div>
-        <div className="text-xs flex items-center gap-4 ">
-          <span className="flex items-center justify-start gap-1 font-bold">
-            <FaUser className="size-3" color="blue"/>
+        <div className="text-sm flex flex-wrap items-center gap-4">
+          <span className="flex items-center gap-1 font-medium text-gray-700">
+            <FaUser size={14} color="blue" />
             {numberOfRented}
           </span>
-          <span className="flex items-center justify-start gap-1 font-bold">
-            <GiSuitcase className="size-4" color="blue"/>
+          <span className="flex items-center gap-1 font-medium text-gray-700">
+            <GiSuitcase size={18} color="blue" />
             {numberOfRented}
           </span>
-          <span className="flex items-center justify-start gap-1 font-bold">
-            <FaCar className="size-4" color="blue"/>
+          <span className="flex items-center gap-1 font-medium text-gray-700">
+            <FaCar size={16} color="blue" />
             {carType}
           </span>
-          <span className="flex items-center justify-start gap-1 font-bold">
-            <GiCarDoor className="size-3" color="blue"/>
+          <span className="flex items-center gap-1 font-medium text-gray-700">
+            <GiCarDoor size={16} color="blue" />
             {numberOfRented}
           </span>
         </div>
       </CardContent>
-      <hr className="mx-6 py-1" />
-      <CardFooter className="flex justify-between">
-        <div className="">
-          <span className="font-semibold text-gray-400">Per Hour Rate</span>
-          <h2 className="font-bold text-2xl">TK {pricePerHour}</h2>
+      <hr className="mx-6 my-2 border-gray-200" />
+      <CardFooter className="flex flex-col sm:flex-row justify-between items-center p-4">
+        <div className="text-center sm:text-left">
+          <span className="font-medium text-gray-600">Per Hour Rate</span>
+          <h2 className="font-bold text-xl">TK {pricePerHour}</h2>
         </div>
-
-        <Button className="" disabled={status !== "available"}>
+        <Button 
+          className="mt-4 sm:mt-0 " 
+          disabled={status !== "available"}
+          // variant={status === "available" ? "primary" : "secondary"}
+        >
           Rent Now
         </Button>
       </CardFooter>
