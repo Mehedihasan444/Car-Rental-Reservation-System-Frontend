@@ -6,8 +6,8 @@ export const BreadcrumbComponent = () => {
   const pathSegments = location.pathname.split("/").filter((seg) => seg);
 
   return (
-    <Breadcrumb>
-      <BreadcrumbList className="text-white text-lg hover:text-blue-700">
+    <Breadcrumb className="flex justify-center items-center">
+      <BreadcrumbList className="text-white text-lg hover:text-blue-700 ">
         <BreadcrumbItem >
           <BreadcrumbLink  href="/" >
             Home

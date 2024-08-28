@@ -1,11 +1,9 @@
 import { HistoryTab } from "@/components/ui/historyTab";
 
-
 const CompanyHistory = () => {
-    return (
-        <section className="max-w-7xl mx-auto lg:h-screen  flex justify-between items-center">
-        <div className="sm:flex justify-between items-center gap-10">
-
+  return (
+    <section className="max-w-7xl lg:mx-auto lg:h-screen my-10 lg:my-0 mx-5   flex justify-between items-center">
+      <div className="lg:flex justify-between items-center gap-10 space-y-5">
         <div className="flex-1">
           <img
             src="https://cinemavehicles.com/files/new/images/service-vehicle-rental.jpg"
@@ -26,12 +24,12 @@ const CompanyHistory = () => {
             industry.
           </p>
           <div className="">
-            <HistoryTab/>
+            <HistoryTab />
           </div>
         </div>
-        </div>
-      </section>
-    );
+      </div>
+    </section>
+  );
 };
 
 export default CompanyHistory;

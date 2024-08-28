@@ -13,7 +13,7 @@ const TeamMembers = () => {
   }, []);
   return (
     <div
-      className=" lg:h-screen flex justify-center items-center bg-fixed"
+      className="px-5 lg:px-0 lg:h-screen flex justify-center items-center bg-fixed"
       style={{
         backgroundImage: `url('https://www.madebydesignesia.com/themes/rentaly/images/background/8.jpg')`, // Replace with your background image URL
       }}
@@ -25,7 +25,7 @@ const TeamMembers = () => {
         <div className="flex justify-center md:justify-start items-center my-2 ">
           <hr className="w-[50px] border-2 border-blue-700" />
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-4 justify-center items-center gap-5 my-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 justify-center items-center gap-5 my-10">
           {data?.map((item, idx) => {
             return <Team_Member_Card key={idx} member={item} />;
           })}

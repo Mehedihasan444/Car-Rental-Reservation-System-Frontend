@@ -55,7 +55,7 @@ export function ContactForm() {
 
   return (
     <Form {...form} >
-      <form onSubmit={form.handleSubmit(onSubmit)} className="bg-gray-100 p-5 rounded-md  w-full max-w-lg space-y-3 mx-auto">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="bg-gray-100 p-5 rounded-md  w-full lg:max-w-lg space-y-3 mx-auto">
         <div className="flex flex-col md:flex-row md:space-x-4">
           <FormField
             control={form.control}
