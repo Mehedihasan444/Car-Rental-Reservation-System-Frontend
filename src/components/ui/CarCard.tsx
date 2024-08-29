@@ -10,6 +10,7 @@ import {
 import { BsSuitHeartFill } from "react-icons/bs";
 import { FaCar, FaUser } from "react-icons/fa";
 import { GiCarDoor, GiSuitcase } from "react-icons/gi";
+import { Link } from "react-router-dom";
 
 const CarCard = ({ 
   title,
@@ -62,6 +63,8 @@ const CarCard = ({
           <span className="font-medium text-gray-600">Per Hour Rate</span>
           <h2 className="font-bold text-xl">TK {pricePerHour}</h2>
         </div>
+        <Link to="/details">
+        
         <Button 
           className="mt-4 sm:mt-0 " 
           disabled={status !== "available"}
@@ -69,6 +72,7 @@ const CarCard = ({
         >
           Rent Now
         </Button>
+        </Link>
       </CardFooter>
     </Card>
   );

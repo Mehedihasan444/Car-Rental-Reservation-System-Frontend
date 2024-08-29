@@ -7,9 +7,9 @@ export const BreadcrumbComponent = () => {
 
   return (
     <Breadcrumb className="flex justify-center items-center">
-      <BreadcrumbList className="text-white text-lg hover:text-blue-700 ">
-        <BreadcrumbItem >
-          <BreadcrumbLink  href="/" >
+      <BreadcrumbList className="text-white text-lg ">
+        <BreadcrumbItem className="">
+          <BreadcrumbLink  href="/" className="hover:text-blue-700 ">
             Home
           </BreadcrumbLink>
         </BreadcrumbItem>

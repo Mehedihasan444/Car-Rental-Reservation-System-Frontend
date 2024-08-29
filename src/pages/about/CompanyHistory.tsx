@@ -8,7 +8,7 @@ const CompanyHistory = () => {
           <img
             src="https://cinemavehicles.com/files/new/images/service-vehicle-rental.jpg"
             alt=""
-            className="object-cover w-full h-full rounded-l-lg"
+            className="object-cover w-full h-full rounded-lg"
           />
         </div>
         <div className="flex-1">

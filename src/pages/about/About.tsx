@@ -10,7 +10,7 @@ const AboutUsPage = () => {
     <div className=" bg-gray-100 min-h-screen">
       {/* Header */}
       <header
-        className="bg-blue-600 text-white py-6 text-center bg-center bg-cover bg-no-repeat"
+        className=" text-white py-6 text-center bg-center bg-cover bg-no-repeat"
         style={{
           backgroundImage: `url('https://www.madebydesignesia.com/themes/rentaly/images/background/subheader.jpg')`, // Replace with your background image URL
         }}
