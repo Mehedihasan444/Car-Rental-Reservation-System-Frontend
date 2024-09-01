@@ -1,6 +1,8 @@
+
 import CarSlider from "./CarSlider";
 
 const FeaturedCars = () => {
+
   return (
     <div className="my-10 lg:my-0 lg:h-screen flex justify-center items-center flex-col">
       <div className="text-center mb-10 space-y-3 max-w-xl mx-auto">
@@ -14,7 +16,7 @@ const FeaturedCars = () => {
         </p>
       </div>
       <div className="">
-        <CarSlider />
+        <CarSlider/>
       </div>
     </div>
   );

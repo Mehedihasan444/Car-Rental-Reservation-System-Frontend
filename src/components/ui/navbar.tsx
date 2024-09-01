@@ -39,6 +39,13 @@ export function Navbar() {
               </Link>
             </NavigationMenuItem>
             <NavigationMenuItem>
+              <Link to="/cars">
+                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                  Cars
+                </NavigationMenuLink>
+              </Link>
+            </NavigationMenuItem>
+            <NavigationMenuItem>
               <Link to="/about">
                 <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                   About Us
