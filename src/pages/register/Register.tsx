@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import SocialLogin from "@/components/ui/socialLogin";
+import SocialLogin from "@/components/ui/SocialLogin";
 import { useToast } from "@/components/ui/use-toast";
 import { useRegisterMutation } from "@/redux/features/auth/authApi";
 import { FormData, FormErrors } from "@/types/TRegister";

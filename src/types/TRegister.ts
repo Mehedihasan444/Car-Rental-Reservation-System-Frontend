@@ -13,4 +13,5 @@ export type FormData = {
     password?: string;
     confirmPassword?: string;
     terms?: string;
+    apiError?:string;
   };
