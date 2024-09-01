@@ -11,8 +11,19 @@ import { Link } from "react-router-dom";
 import { Button } from "./button";
 import carLogo from "../../assets/carLogo.png";
 import { ResponsiveSidebar } from "./responsiveSidebar";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { RootState } from "@/redux/store";
+import { logout } from "@/redux/features/auth/authSlice";
 
 export function Navbar() {
+  const user = useAppSelector((state: RootState) => state?.auth?.user);
+  const dispatch = useAppDispatch();
+
+  
+  const handleLogout = () => {
+    // Logout logic here
+    dispatch(logout());
+  };
   return (
     <div className="flex justify-between items-center max-w-7xl mx-auto py-4 px-5 lg:px-0">
       {/* Logo and Company Name */}
@@ -72,12 +83,18 @@ export function Navbar() {
 
       {/* Login/Sign Up Buttons */}
       <div className="space-x-2 hidden sm:inline-block">
-        <Link to="/login">
-          <Button variant="outline">Login</Button>
-        </Link>
-        <Link to="/register">
-          <Button>Sign Up</Button>
-        </Link>
+        {user ? (
+          <Button onClick={handleLogout}>Logout</Button>
+        ) : (
+          <>
+            <Link to="/login">
+              <Button variant="outline">Login</Button>
+            </Link>
+            <Link to="/register">
+              <Button>Sign Up</Button>
+            </Link>
+          </>
+        )}
       </div>
     </div>
   );

@@ -23,8 +23,7 @@ const Login = () => {
   const [login, { isLoading }] = useLoginMutation();
   const navigate = useNavigate();
   const { toast } = useToast();
-  // const cart = useAppSelector((state: RootState) => state.cart.products);
-  // const dispatch = useAppDispatch();
+
 
   const dispatch = useAppDispatch();
 
