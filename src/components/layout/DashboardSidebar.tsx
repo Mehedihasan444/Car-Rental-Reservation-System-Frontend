@@ -149,7 +149,7 @@ export function DashboardSidebar() {
       </div>
       {/*  */}
 
-      <div className="hidden lg:flex flex-col w-64 bg-gray-800 text-white  p-6">
+      <div className="hidden lg:flex flex-col  bg-gray-800 text-white  p-6">
         <div className="mb-6">
           <h3 className="text-2xl font-semibold text-gray-200 text-center pb-5">
             Dashboard
