@@ -6,6 +6,8 @@ import Register from "@/pages/register/Register";
 import AboutUsPage from "@/pages/about/About";
 import CarDetailsPage from "@/pages/carDetailsPage/CarDetailsPage";
 import CarListingPage from "@/pages/carListingPage/CarListingPage";
+import Dashboard from "@/components/layout/Dashboard";
+import UserDashboard from "@/pages/Dashboard/user/UserDashboard";
 
 const Router = createBrowserRouter([
   {
@@ -39,6 +41,16 @@ const Router = createBrowserRouter([
       },
     ],
   },
+  {
+    path:"/dashboard",
+    element: <Dashboard/>,
+    errorElement: <h1>Error</h1>,
+    children: [
+      {
+path:"/dashboard/user-dashboard",
+element:<UserDashboard/>
+      }]
+  }
 ]);
 
 export default Router;
