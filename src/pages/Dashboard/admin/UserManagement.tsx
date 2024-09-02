@@ -117,8 +117,8 @@ const UserManagement = () => {
                   <div className="flex flex-col">
                     <Label htmlFor="role">Role</Label>
                     <Select
-                      id="role"
-                      value={formData.role}
+                      id="role" 
+                      value={formData?.role}
                       onChange={handleInputChange}
                       options={[
                         { value: "admin", label: "Admin" },

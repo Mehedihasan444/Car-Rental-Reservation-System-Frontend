@@ -17,87 +17,111 @@ import ManageReturnCars from "@/pages/Dashboard/admin/ManageReturnCars";
 import UserManagement from "@/pages/Dashboard/admin/UserManagement";
 import ReportsPage from "@/pages/Dashboard/admin/ReportsPage";
 import BookingPage from "@/pages/booking/BookingPage";
+import ProtectedRoute from "@/components/layout/ProtectedRoute";
 
-const Router = createBrowserRouter([
-  {
-    path: "/",
-    element: <App />,
-    errorElement: <h1>Error</h1>,
-    children: [
-      {
-        path: "/",
-        element: <Home />,
-      },
-      {
-        path: "cars",
-        element: <CarListingPage />,
-      },
-      {
-        path: "about",
-        element: <AboutUsPage />,
-      },
-      {
-        path: "details/:id",
-        element: <CarDetailsPage />,
-      },
-      {
-        path: "register",
-        element: <Register />,
-      },
-      {
-        path: "login",
-        element: <Login />,
-      },
-      {
-        path: "booking",
-        element: <BookingPage />,
-      },
-    ],
-  },
-  {
-    path: "/dashboard",
-    element: <Dashboard />,
-    errorElement: <h1>Error</h1>,
-    children: [
-      {
-        path: "/dashboard/user-dashboard",
-        element: <UserDashboard />,
-      },
-      {
-        path: "/dashboard/booking-management",
-        element: <BookingManagement />,
-      },
-      {
-        path: "/dashboard/payment-management",
-        element: <PaymentManagement />,
-      },
-      // admin pages
-      {
-        path: "/dashboard/admin-dashboard",
-        element: <AdminDashboard />,
-      },
-      {
-        path: "/dashboard/manage-cars",
-        element: <ManageCars />,
-      },
-      {
-        path: "/dashboard/manage-bookings",
-        element: <ManageBookings />,
-      },
-      {
-        path: "/dashboard/manage-return-cars",
-        element: <ManageReturnCars />,
-      },
-      {
-        path: "/dashboard/user-management",
-        element: <UserManagement />,
-      },
-      {
-        path: "/dashboard/reports",
-        element: <ReportsPage />,
-      },
-    ],
-  },
-]);
+
+// Define routes for users
+const userRoutes = [
+    {
+      path: "/dashboard/user/user-dashboard",
+      element: <UserDashboard />,
+    },
+    {
+      path: "/dashboard/user/booking-management",
+      element: <BookingManagement />,
+    },
+    {
+      path: "/dashboard/user/payment-management",
+      element: <PaymentManagement />,
+    },
+  ];
+  
+  // Define routes for admins
+  const adminRoutes = [
+    {
+      path: "/dashboard/admin/admin-dashboard",
+      element: <AdminDashboard />,
+    },
+    {
+      path: "/dashboard/admin/manage-cars",
+      element: <ManageCars />,
+    },
+    {
+      path: "/dashboard/admin/manage-bookings",
+      element: <ManageBookings />,
+    },
+    {
+      path: "/dashboard/admin/manage-return-cars",
+      element: <ManageReturnCars />,
+    },
+    {
+      path: "/dashboard/admin/user-management",
+      element: <UserManagement />,
+    },
+    {
+      path: "/dashboard/admin/reports",
+      element: <ReportsPage />,
+    },
+  ];
+  
+
+  const Router = createBrowserRouter([
+    {
+      path: "/",
+      element: <App />,
+      errorElement: <h1>Error</h1>,
+      children: [
+        {
+          path: "/",
+          element: <Home />,
+        },
+        {
+          path: "cars",
+          element: <CarListingPage />,
+        },
+        {
+          path: "about",
+          element: <AboutUsPage />,
+        },
+        {
+          path: "details/:id",
+          element: <CarDetailsPage />,
+        },
+        {
+          path: "register",
+          element: <Register />,
+        },
+        {
+          path: "login",
+          element: <Login />,
+        },
+        {
+          path: "booking",
+          element: <BookingPage />,
+        },
+      ],
+    },
+    {
+      path: "/dashboard/user",
+      element: (
+        <ProtectedRoute>
+          <Dashboard />
+        </ProtectedRoute>
+      ),
+      errorElement: <h1>Error</h1>,
+      children: userRoutes,
+    },
+    {
+      path: "/dashboard/admin",
+      element: (
+        <ProtectedRoute>
+          <Dashboard />
+        </ProtectedRoute>
+      ),
+      errorElement: <h1>Error</h1>,
+      children: adminRoutes,
+    },
+  ]);
+
 
 export default Router;
