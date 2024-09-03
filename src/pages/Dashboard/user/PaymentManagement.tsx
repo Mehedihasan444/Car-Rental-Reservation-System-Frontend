@@ -1,32 +1,22 @@
-import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
-
-// Sample data for returned cars (replace with actual data from your API or state)
-const returnedCars = [
-  {
-    id: 1,
-    carName: "Tesla Model 3",
-    returnDate: "2024-08-20",
-    amountDue: 150,
-  },
-  {
-    id: 2,
-    carName: "Ford Mustang",
-    returnDate: "2024-07-08",
-    amountDue: 200,
-  },
-];
-
+import { useGetUserBookingsQuery } from "@/redux/features/booking/bookingApi";
+import { TBooking } from "@/types/TBooking";
+import axios from "axios";
 const PaymentManagement = () => {
-  const [selectedCar, setSelectedCar] = useState<number | null>(null);
-  const [amountPaid, setAmountPaid] = useState<number | "">("");
+  // fetch user bookings
+  const { data = {} } = useGetUserBookingsQuery(undefined);
+  const { data: bookings } = data;
 
-  const handlePay = (carId: number) => {
-    console.log(`Pay for car with ID: ${carId}`);
+  const returnedCars = bookings?.filter(
+    (booking: TBooking) => booking.isBooked === "returned"
+  );
+
+  const handlePay = async (car: TBooking) => {
     // Implement payment logic here
+    const res = await axios.post("http://localhost:5000/api/payment", car);
+    if (res?.data?.data?.payment_url)
+      window.location.href = res?.data?.data?.payment_url;
   };
 
   return (
@@ -39,21 +29,30 @@ const PaymentManagement = () => {
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
-              {returnedCars.length > 0 ? (
-                returnedCars.map((car) => (
+              {returnedCars?.length > 0 ? (
+                returnedCars?.map((car: TBooking) => (
                   <div
-                    key={car.id}
+                    key={car._id}
                     className="border border-gray-200 p-4 rounded-lg"
                   >
-                    <p className="text-sm font-semibold">Car Name: {car.carName}</p>
-                    <p className="text-sm">Return Date: {car.returnDate}</p>
-                    <p className="text-sm font-semibold text-red-500">
-                      Amount Due: ${car.amountDue}
+                    <p className="text-sm font-semibold">
+                      Car Name: {car?.car?.name}
                     </p>
+                    <p className="text-sm">Return Time: {car.endTime}</p>
+                    {car?.payment === "due" ? (
+                      <p className="text-sm font-semibold text-red-500">
+                        Amount Due: TK{car?.totalCost}
+                      </p>
+                    ) : (
+                      <p className="text-sm font-semibold text-green-500">
+                        Amount Paid: TK{car?.totalCost}
+                      </p>
+                    )}
                     <Button
                       variant="outline"
                       className="mt-4"
-                      onClick={() => setSelectedCar(car.id)}
+                      onClick={() => handlePay(car)}
+                      disabled={car?.payment === "paid"}
                     >
                       Pay Now
                     </Button>
@@ -65,43 +64,6 @@ const PaymentManagement = () => {
             </div>
           </CardContent>
         </Card>
-
-        {/* Payment Form */}
-        {selectedCar && (
-          <Card className="shadow-lg mt-6">
-            <CardHeader>
-              <CardTitle>Process Payment</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <form
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  handlePay(selectedCar);
-                }}
-              >
-                <div className="space-y-4">
-                  <div className="flex flex-col space-y-1.5">
-                    <Label htmlFor="amountPaid">Amount Paid</Label>
-                    <Input
-                      id="amountPaid"
-                      type="number"
-                      value={amountPaid}
-                      onChange={(e) => setAmountPaid(Number(e.target.value))}
-                      placeholder="Enter amount"
-                    />
-                  </div>
-                  <Button
-                    type="submit"
-                    className="w-full"
-                    disabled={typeof amountPaid === "number" && amountPaid <= 0}
-                  >
-                    Submit Payment
-                  </Button>
-                </div>
-              </form>
-            </CardContent>
-          </Card>
-        )}
       </div>
     </div>
   );

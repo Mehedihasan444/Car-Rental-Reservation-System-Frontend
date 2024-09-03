@@ -35,7 +35,8 @@ export type TBooking = {
     startTime: string;
     endTime: string | null;
     totalCost: number;
-    isBooked: "unconfirmed" | "confirmed" | "canceled";
+    payment: string
+    isBooked: "unconfirmed" | "confirmed" | "canceled"|"returned";
     createdAt: string;
     updatedAt: string;
     __v: number;
