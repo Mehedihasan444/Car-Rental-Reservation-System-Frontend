@@ -21,19 +21,20 @@ const BookingApi = baseApi.injectEndpoints({
         method: "GET",
       }),
     }),
-    // updateBooking: builder.mutation({
-    //   query: ({ BookingId, ...data }) => ({
-    //     url: `/Bookings/${BookingId}`,
-    //     method: "PUT",
-    //     body: data,
-    //   }),
-    // }),
-    // deleteBooking: builder.mutation({
-    //   query: (BookingId) => ({
-    //     url: `/Bookings/${BookingId}`,
-    //     method: "DELETE",
-    //   }),
-    // }),
+    updateBooking: builder.mutation({
+
+      query: ({ bookingId, ...data }) => ({
+        url: `/bookings/${bookingId}`,
+        method: "PUT",
+        body: data,
+      }),
+    }),
+    deleteBooking: builder.mutation({
+      query: (bookingId) => ({
+        url: `/bookings/${bookingId}`,
+        method: "DELETE",
+      }),
+    }),
   }),
 });
 
@@ -41,6 +42,6 @@ export const {
   useCreateBookingMutation,
   useGetAllBookingsQuery,
   useGetUserBookingsQuery,
-//   useDeleteBookingMutation,
-//   useUpdateBookingMutation,
+  useDeleteBookingMutation,
+  useUpdateBookingMutation,
 } = BookingApi;

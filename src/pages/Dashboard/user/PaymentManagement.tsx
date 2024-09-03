@@ -93,7 +93,7 @@ const PaymentManagement = () => {
                   <Button
                     type="submit"
                     className="w-full"
-                    disabled={amountPaid <= 0}
+                    disabled={typeof amountPaid === "number" && amountPaid <= 0}
                   >
                     Submit Payment
                   </Button>
