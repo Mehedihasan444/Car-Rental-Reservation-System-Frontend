@@ -38,7 +38,7 @@ const handleFeatureChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         {/* Image Gallery */}
         <div className="md:col-span-1">
           <ImageGallery
-            items={car?.images?.map((image:string) => ({
+            items={(car?.images || []).map((image:string) => ({
               original: image,
               thumbnail: image,
             }))}
@@ -51,8 +51,8 @@ const handleFeatureChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 
         {/* Car Details */}
         <div className="md:col-span-1 space-y-4">
-          <h1 className="text-4xl font-bold">{car.name}</h1>
-          <p className="text-lg">{car.description}</p>
+          <h1 className="text-4xl font-bold">{car?.name}</h1>
+          <p className="text-lg">{car?.description}</p>
 
           <div className="space-y-2">
             <h2 className="text-2xl font-semibold">Features:</h2>
@@ -71,28 +71,28 @@ const handleFeatureChange = (e: React.ChangeEvent<HTMLInputElement>) => {
           <div className="flex gap-5 items-center">
             <h2 className="text-xl font-semibold">Color:</h2>
             <p className="bg-blue-300  shadow-inner  rounded-md px-4 py-1 text-sm  font-semibold">
-              {car.color}
+              {car?.color}
             </p>
           </div>
           <div className="flex gap-5 items-center">
             <h2 className="text-xl font-semibold">Type:</h2>
             <p className="bg-blue-300  shadow-inner  rounded-md px-4 py-1 text-sm  font-semibold">
-              {car?.isElectric ? "Electric" : "Petrol"}
+              {car?.engineType}
             </p>
           </div>
           <div className="flex gap-5 items-center">
             <h2 className="text-xl font-semibold">Per Hour:</h2>
-            <p className="text-xl font-semibold">TK{car.pricePerHour}</p>
+            <p className="text-xl font-semibold">TK{car?.pricePerHour}</p>
           </div>
 
           <div className="flex gap-5 items-center">
             <h2 className="text-xl font-semibold">Availability:</h2>
             <p
               className={`${
-                car.status === "available" ? "text-green-700 " : "text-red-700 "
+                car?.status === "available" ? "text-green-700 " : "text-red-700 "
               } text-sm  font-semibold`}
             >
-              {car.status === "available" ? "Available" : "Not Available"}
+              {car?.status === "available" ? "Available" : car?.status === "booked"?"Booked":car?.status === "maintenance"?"Maintenance":""}
             </p>
           </div>
         </div>
@@ -113,7 +113,7 @@ const handleFeatureChange = (e: React.ChangeEvent<HTMLInputElement>) => {
                   className="w-16 h-16 mr-4"
                 />
                 <span className="text-lg font-semibold">
-                  {car.name} - TK{car.pricePerHour}
+                  {car?.name} - TK{car?.pricePerHour}
                 </span>
               </div>
               <div className="flex gap-5 justify-between items-center">
@@ -161,7 +161,7 @@ const handleFeatureChange = (e: React.ChangeEvent<HTMLInputElement>) => {
                     <input
                       type="checkbox"
                       name="insurance"
-                      checked={selectedFeatures.insurance}
+                      checked={selectedFeatures?.insurance}
                       onChange={handleFeatureChange}
                       className="mr-2"
                     />
@@ -171,7 +171,7 @@ const handleFeatureChange = (e: React.ChangeEvent<HTMLInputElement>) => {
                     <input
                       type="checkbox"
                       name="gps"
-                      checked={selectedFeatures.gps}
+                      checked={selectedFeatures?.gps}
                       onChange={handleFeatureChange}
                       className="mr-2"
                     />
@@ -181,7 +181,7 @@ const handleFeatureChange = (e: React.ChangeEvent<HTMLInputElement>) => {
                     <input
                       type="checkbox"
                       name="childSeat"
-                      checked={selectedFeatures.childSeat}
+                      checked={selectedFeatures?.childSeat}
                       onChange={handleFeatureChange}
                       className="mr-2"
                     />

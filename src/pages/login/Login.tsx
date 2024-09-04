@@ -15,7 +15,7 @@ import { signIn } from "@/redux/features/auth/authSlice";
 import { useAppDispatch } from "@/redux/hooks";
 import { FormErrors } from "@/types/TRegister";
 import { useState, FormEvent } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [formData, setFormData] = useState({ email: "", password: "" });
@@ -80,9 +80,11 @@ const Login = () => {
           <CardTitle>Login</CardTitle>
           <CardDescription>
             Don't have an account?
+            <Link to="/register">
             <Button variant={"link"} className="text-blue-500">
               Register
             </Button>
+            </Link>
           </CardDescription>
         </CardHeader>
         <CardContent className="pb-0">

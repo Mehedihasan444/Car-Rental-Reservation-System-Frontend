@@ -23,7 +23,7 @@ import ProtectedRoute from "@/components/layout/ProtectedRoute";
 // Define routes for users
 const userRoutes = [
     {
-      path: "/dashboard/user/user-dashboard",
+      path: "/dashboard/user",
       element: <UserDashboard />,
     },
     {
@@ -39,7 +39,7 @@ const userRoutes = [
   // Define routes for admins
   const adminRoutes = [
     {
-      path: "/dashboard/admin/admin-dashboard",
+      path: "/dashboard/admin",
       element: <AdminDashboard />,
     },
     {
@@ -104,7 +104,7 @@ const userRoutes = [
     {
       path: "/dashboard/user",
       element: (
-        <ProtectedRoute>
+        <ProtectedRoute allowedRoles={['user']}>
           <Dashboard />
         </ProtectedRoute>
       ),
@@ -114,7 +114,7 @@ const userRoutes = [
     {
       path: "/dashboard/admin",
       element: (
-        <ProtectedRoute>
+        <ProtectedRoute allowedRoles={['admin']}>
           <Dashboard />
         </ProtectedRoute>
       ),

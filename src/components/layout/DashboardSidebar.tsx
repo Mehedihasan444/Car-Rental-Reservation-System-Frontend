@@ -20,20 +20,20 @@ export function DashboardSidebar() {
   const role = useAppSelector((state: RootState) => state.auth.user?.role);
 
   const commonRoutes = [
-    { path: "/dashboard/user/user-dashboard", label: "User Dashboard" },
+    { path: "/dashboard/user", label: "User Dashboard" },
     { path: "/dashboard/user/booking-management", label: "Booking Management" },
     { path: "/dashboard/user/payment-management", label: "Payment Management" },
   ];
 
   const adminRoutes = [
-    ...commonRoutes,
-    { path: "/dashboard/admin/admin-dashboard", label: "Admin Dashboard" },
+    // ...commonRoutes,
+    { path: "/dashboard/admin", label: "Admin Dashboard" },
     { path: "/dashboard/admin/manage-cars", label: "Manage Cars" },
     { path: "/dashboard/admin/manage-bookings", label: "Manage Bookings" },
     { path: "/dashboard/admin/manage-return-cars", label: "Manage Return Cars" },
     { path: "/dashboard/admin/user-management", label: "User Management" },
     { path: "/dashboard/admin/reports", label: "Reports" },
-    { path: "/dashboard/admin/booking-page", label: "Booking Page" },
+    // { path: "/dashboard/admin/booking-page", label: "Booking Page" },
   ];
 
   const userRoutes = [...commonRoutes];
@@ -65,7 +65,7 @@ export function DashboardSidebar() {
     
     {/* Main content area with flex-grow */}
     <div className=" grid gap-4 mt-2">
-      {combinedRoutes.map((route) => (
+      {combinedRoutes?.map((route) => (
         <Link to={route.path} key={route.path}>
           <Button
             variant="link"
@@ -104,7 +104,7 @@ export function DashboardSidebar() {
         </div>
         <div className="grid gap-4">
           {combinedRoutes.map((route) => (
-            <Link to={route.path} key={route.path}>
+            <Link to={route.path} key={route.path} >
               <Button
                 variant="link"
                 className={`w-full text-left ${getLinkClasses(route.path)}`}

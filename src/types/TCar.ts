@@ -4,7 +4,7 @@ export type TCar = {
   type: string;
   pricePerHour: number;
   status: string;
-  isElectric: boolean;
+  engineType: string;
   description: string;
   isDeleted: boolean;
   features: string[];
@@ -14,4 +14,7 @@ export type TCar = {
   fuelType: string;
   transmission: string;
   seatingCapacity: number;
+  color: string;
+  noOfDoors: number;
+  year: number;
 };

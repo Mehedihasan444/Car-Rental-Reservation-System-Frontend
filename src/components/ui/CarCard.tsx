@@ -23,15 +23,16 @@ const CarCard = ({
   // fuelType,
   // transmission,
   seatingCapacity,
+  noOfDoors,
   images,
 }: TCar) => {
   return (
     <Card className="w-full sm:w-[300px]  mx-auto my-4 sm:my-6 bg-white  rounded-md overflow-hidden">
-      <CardHeader className="relative">
+      <CardHeader className="relative p-3">
         <img
           src={images[0] || ""}
           alt={name}
-          className="w-full h-48 object-cover transform transition-transform duration-300 ease-in-out hover:scale-105"
+          className="w-full h-48 rounded-md border  object-cover transform transition-transform duration-300 ease-in-out hover:scale-105"
         />
       </CardHeader>
       <CardContent>
@@ -49,7 +50,7 @@ const CarCard = ({
           </span>
           <span className="flex items-center gap-1 font-medium text-gray-700">
             <GiSuitcase size={18} color="blue" />
-            {4556}
+            {seatingCapacity}
           </span>
           <span className="flex items-center gap-1 font-medium text-gray-700">
             <FaCar size={16} color="blue" />
@@ -57,7 +58,7 @@ const CarCard = ({
           </span>
           <span className="flex items-center gap-1 font-medium text-gray-700">
             <GiCarDoor size={16} color="blue" />
-            {seatingCapacity}
+            {noOfDoors}
           </span>
         </div>
       </CardContent>

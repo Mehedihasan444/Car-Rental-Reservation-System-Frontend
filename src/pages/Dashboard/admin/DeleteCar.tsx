@@ -10,17 +10,17 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { toast } from "@/components/ui/use-toast";
-import { useDeleteBookingMutation } from "@/redux/features/booking/bookingApi";
-import { TBooking } from "@/types/TBooking";
+import { useDeleteCarMutation } from "@/redux/features/car/carApi";
+import { TCar } from "@/types/TCar";
 
-export function CancelBooking({ booking }: { booking: TBooking }) {
-  const [deleteBooking] = useDeleteBookingMutation();
+export function DeleteCar({ car }: { car: TCar }) {
+  const [deleteCar] = useDeleteCarMutation();
 
-  const confirmCancel = async () => {
-    const res = await deleteBooking(booking?._id);
+  const confirmDelete = async () => {
+    const res = await deleteCar(car?._id);
     if (res?.data?.success) {
       toast({
-        description: "Booking canceled successfully!",
+        description: "Booking Deleteed successfully!",
       });
     } else {
       console.error("Failed to delete booking");
@@ -29,30 +29,31 @@ export function CancelBooking({ booking }: { booking: TBooking }) {
 
   return (
     <div>
-      {/* Cancel Confirmation Dialog */}
+      {/* Delete Confirmation Dialog */}
       <Dialog>
-        <DialogTrigger asChild>
+        <DialogTrigger asChild className="w-full">
           <Button
             variant="destructive"
-            disabled={booking?.isBooked=== "confirmed"}
+            className="w-full"
+            // disabled={car?. === "confirmed"}
           >
-            Cancel
+            Delete
           </Button>
         </DialogTrigger>
         <DialogContent className="sm:max-w-[425px]">
           <DialogHeader>
             <DialogTitle>Are you sure?</DialogTitle>
             <DialogDescription>
-              Do you really want to cancel? Unsaved changes will be lost.
+              Do you really want to Delete? Unsaved changes will be lost.
             </DialogDescription>
           </DialogHeader>
           <DialogFooter>
             <DialogClose asChild>
               <Button variant="outline">No, Go Back</Button>
             </DialogClose>
-              <Button variant="destructive" onClick={confirmCancel}>
-                Yes, Cancel
-              </Button>
+            <Button variant="destructive" onClick={confirmDelete}>
+              Yes, Delete
+            </Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>

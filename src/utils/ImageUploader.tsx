@@ -1,21 +1,21 @@
 import React from "react";
+import { Input } from "@/components/ui/input";
 
-interface ImageUploaderProps {
-  onUpload: (file: File | null) => void;
-}
-
-export const ImageUploader: React.FC<ImageUploaderProps> = ({ onUpload }) => {
+export const ImageUploader: React.FC<{ onUpload: (files: FileList | null) => void }> = ({ onUpload }) => {
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files ? e.target.files[0] : null;
-    onUpload(file);
+    const files = e.target.files;
+    onUpload(files);
   };
 
   return (
-    <input
-      type="file"
-      accept="image/*"
-      onChange={handleFileChange}
-      className="border border-gray-300 p-2 rounded"
-    />
+    <div className="flex gap-2 justify-between items-center">
+      <Input
+        id="picture"
+        type="file"
+        accept="image/*"
+        multiple
+        onChange={handleFileChange}
+      />
+    </div>
   );
 };

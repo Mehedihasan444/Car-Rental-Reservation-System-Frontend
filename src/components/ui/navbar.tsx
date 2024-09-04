@@ -70,13 +70,13 @@ export function Navbar() {
                 </NavigationMenuLink>
               </Link>
             </NavigationMenuItem>
-            <NavigationMenuItem>
-              <Link to="/contact">
+           { user&&<NavigationMenuItem>
+              <Link to={`/dashboard/${user?.role}`}>
                 <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                  Contact
+                  Dashboard
                 </NavigationMenuLink>
               </Link>
-            </NavigationMenuItem>
+            </NavigationMenuItem>}
           </NavigationMenuList>
         </NavigationMenu>
       </div>

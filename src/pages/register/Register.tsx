@@ -13,7 +13,7 @@ import { useToast } from "@/components/ui/use-toast";
 import { useRegisterMutation } from "@/redux/features/auth/authApi";
 import { FormData, FormErrors } from "@/types/TRegister";
 import { FormEvent, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Register = () => {
   const [formData, setFormData] = useState<FormData>({
@@ -90,9 +90,11 @@ const Register = () => {
           <CardTitle>Register</CardTitle>
           <CardDescription>
             Already have an account?
+            <Link to="/login">
             <Button variant={"link"} className="text-blue-500">
               Login
             </Button>
+            </Link>
           </CardDescription>
         </CardHeader>
         <CardContent className="">

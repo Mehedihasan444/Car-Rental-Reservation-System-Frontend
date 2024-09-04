@@ -16,8 +16,8 @@ export type TBooking = {
       name: string;
       description: string;
       color: string;
-      isElectric: boolean;
-      status: "available" | "unavailable";
+      engineType: string;
+      status: "available" | "booked"|"maintenance";
       features: string[];
       pricePerHour: number;
       isDeleted: boolean;
