@@ -2,7 +2,6 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { toast } from "@/components/ui/use-toast";
 import {
-  useDeleteBookingMutation,
   useGetAllBookingsQuery,
   useUpdateBookingMutation,
 } from "@/redux/features/booking/bookingApi";
@@ -15,8 +14,6 @@ const ManageBookings = () => {
   const { data: bookings } = data;
   // update bookings
   const [updateBooking] = useUpdateBookingMutation();
-  const [deleteBooking] = useDeleteBookingMutation();
-  // const [bookings, setBookings] = useState<Booking[]>(initialBookings);
 
   const handleApprove = async (booking: TBooking) => {
     const newData = {
@@ -30,24 +27,10 @@ const ManageBookings = () => {
         description: "Booking updated successfully!",
       });
     }
-    //   setBookings(
-    //     bookings.map((booking) =>
-    //       booking.id === id ? { ...booking,
-    // isBooked: "Approved" } : booking
-    //     )
-    //   );
+  
   };
 
-  const handleCancel =async (booking:TBooking) => {
-    const res = await deleteBooking(booking._id);
-    if (res?.data?.success) {
-      toast({
-        description: "Booking canceled successfully!",
-      });
-    } else {
-      console.error("Failed to delete booking");
-    }
-  };
+
 
   return (
     <div className="p-6 bg-gray-50 h-screen overflow-y-scroll">
