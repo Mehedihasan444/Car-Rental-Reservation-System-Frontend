@@ -1,17 +1,29 @@
-
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { StatsCard } from "./StatsCard";
+import { useGetAllBookingsQuery } from "@/redux/features/booking/bookingApi";
+import { useGetAllCarsQuery } from "@/redux/features/car/carApi";
+import { TBooking } from "@/types/TBooking";
+import PieChart from "./PieChart";
+import LineChart from "./LineChart";
 
 const AdminDashboard = () => {
-  // Static data for demonstration
+  const { data = {} } = useGetAllBookingsQuery(undefined);
+  const { data: bookings = [] } = data;
+
+  const { data: allCars = {} } = useGetAllCarsQuery(undefined);
+  const { data: cars } = allCars;
+
+  const totalIncome = bookings
+    .filter((booking: TBooking) => booking.isBooked === "returned")
+    .reduce((sum: number, booking: TBooking) => sum + booking?.totalCost, 0);
   const stats = {
-    totalBookings: 125,
-    availableCars: 42,
-    totalRevenue: 75420,
+    totalBookings: bookings?.length,
+    availableCars: cars?.length,
+    totalRevenue: totalIncome,
   };
 
   return (
-    <div className="p-6 bg-gray-50 min-h-screen">
+    <div className="p-6 bg-gray-50 h-screen overflow-y-scroll">
       <div className="max-w-6xl mx-auto space-y-6">
         {/* Dashboard Overview */}
         <Card className="shadow-lg">
@@ -34,12 +46,20 @@ const AdminDashboard = () => {
               />
               <StatsCard
                 title="Total Revenue"
-                value={`$${stats.totalRevenue.toLocaleString()}`}
+                value={`TK${stats.totalRevenue.toLocaleString()}`}
                 icon={<i className="fas fa-dollar-sign text-yellow-500"></i>} // Example icon
                 description="Total revenue generated from bookings."
               />
             </div>
           </CardContent>
+        </Card>
+      </div>
+      <div className="lg:flex justify-between items-center gap-5  mt-5">
+        <Card className="shadow-lg  w-full flex-grow h-full">
+          <PieChart />
+        </Card>
+        <Card className="shadow-lg w-full flex-grow h-full mt-5 lg:mt-0">
+          <LineChart />
         </Card>
       </div>
     </div>
