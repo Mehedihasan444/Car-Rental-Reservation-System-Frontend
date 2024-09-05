@@ -34,7 +34,8 @@ export function CancelBooking({ booking }: { booking: TBooking }) {
         <DialogTrigger asChild>
           <Button
             variant="destructive"
-            disabled={booking?.isBooked=== "confirmed"}
+            disabled={booking?.isBooked === "returned"}
+            //booking?.isBooked=== "confirmed"||
           >
             Cancel
           </Button>
