@@ -1,10 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { toast } from "@/components/ui/use-toast";
-import {
-  useGetAllBookingsQuery,
-  useUpdateBookingMutation,
-} from "@/redux/features/booking/bookingApi";
+import {useGetAllBookingsQuery,useUpdateBookingMutation,} from "@/redux/features/booking/bookingApi";
 import { TBooking } from "@/types/TBooking";
 import { CancelBooking } from "../user/CancelBooking";
 

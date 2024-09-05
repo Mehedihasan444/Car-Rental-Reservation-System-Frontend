@@ -9,6 +9,8 @@ export interface TUser {
   role: string;
   createdAt: string;
   updatedAt: string;
+  status: string;
+  isDeleted: boolean;
 }
 type TAuthState = {
   user: null | TUser;
