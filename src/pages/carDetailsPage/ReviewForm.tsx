@@ -34,7 +34,9 @@ const ReviewForm = ({ car }: { car: string }) => {
   };
 
   return (
-    <div className="my-12 bg-gray-100 p-8 rounded-md lg:flex justify-center  gap-5">
+    <div className="my-12 bg-gray-100 p-8 rounded-md ">
+            <h2 className="text-2xl font-bold  mb-6">Reviews</h2>
+    <div className="lg:flex justify-center  gap-5">
       <div className="max-w-xl mx-auto p-6 bg-white shadow-lg rounded-lg flex-1 h-full ">
       <h2 className="text-2xl font-bold  mb-6">Customer Reviews</h2>
 
@@ -162,6 +164,7 @@ const ReviewForm = ({ car }: { car: string }) => {
           </div>
         </form>
       </div>
+    </div>
     </div>
   );
 };

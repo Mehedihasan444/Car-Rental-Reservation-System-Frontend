@@ -204,10 +204,7 @@ export function CarsPageSideBer() {
                 </Label>
                 <div className="col-span-3 flex justify-between items-center gap-2">
                   <PriceSlider />
-                  <Button
-                    variant={"default"}
-                    className="bg-green-900 hover:bg-green-700"
-                  >
+                  <Button variant={"outline"} className="">
                     Set
                   </Button>
                 </div>
@@ -226,10 +223,7 @@ export function CarsPageSideBer() {
       <div className="hidden lg:inline-block w-full">
         <div className="flex justify-between items-center">
           <h2 className="text-lg font-semibold mb-4">Filter Options</h2>
-          <Button
-            variant={"default"}
-            className="bg-green-900 hover:bg-green-700"
-          >
+          <Button variant={"outline"} className="">
             Reset
           </Button>
         </div>
@@ -240,10 +234,10 @@ export function CarsPageSideBer() {
           <select className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300">
             <option value="">All Car Types</option>
             {cars?.map((car, idx) => (
-                    <option value={car.type} key={idx}>
-                      {car?.type}
-                    </option>
-                  ))}
+              <option value={car.type} key={idx}>
+                {car?.type}
+              </option>
+            ))}
           </select>
         </div>
 
@@ -252,11 +246,11 @@ export function CarsPageSideBer() {
           <h3 className="text-sm font-semibold mb-2">Brand</h3>
           <select className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300">
             <option value="">All Brands</option>
-            {cars?.map((car,idx) => (
-        <option value={car.brand} key={idx}>
-          {car.brand}
-        </option>
-      ))}
+            {cars?.map((car, idx) => (
+              <option value={car.brand} key={idx}>
+                {car.brand}
+              </option>
+            ))}
           </select>
         </div>
 
@@ -265,11 +259,11 @@ export function CarsPageSideBer() {
           <h3 className="text-sm font-semibold mb-2">Fuel Type</h3>
           <select className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300">
             <option value="">All Fuel Types</option>
-            {cars?.map((car,idx) => (
-        <option value={car.fuelType} key={idx}>
-          {car.fuelType}
-        </option>
-      ))}
+            {cars?.map((car, idx) => (
+              <option value={car.fuelType} key={idx}>
+                {car.fuelType}
+              </option>
+            ))}
           </select>
         </div>
 
@@ -278,11 +272,11 @@ export function CarsPageSideBer() {
           <h3 className="text-sm font-semibold mb-2">Transmission</h3>
           <select className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300">
             <option value="">All Transmissions</option>
-            {cars?.map((car,idx) => (
-        <option value={car.transmission} key={idx}>
-          {car.transmission}
-        </option>
-      ))}
+            {cars?.map((car, idx) => (
+              <option value={car.transmission} key={idx}>
+                {car.transmission}
+              </option>
+            ))}
           </select>
         </div>
 
@@ -292,10 +286,10 @@ export function CarsPageSideBer() {
           <select className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300">
             <option value="">All Seating Capacities</option>
             {cars?.map((car, idx) => (
-                    <option value={car?.seatingCapacity} key={idx}>
-                      {car?.seatingCapacity} seats
-                    </option>
-                  ))}
+              <option value={car?.seatingCapacity} key={idx}>
+                {car?.seatingCapacity} seats
+              </option>
+            ))}
           </select>
         </div>
 
@@ -305,8 +299,8 @@ export function CarsPageSideBer() {
           <div className="flex justify-between items-center gap-2">
             <PriceSlider />
             <Button
-              variant={"default"}
-              className="bg-green-900 hover:bg-green-700"
+              variant={"outline"}
+              className=""
               // onClick={() =>
               //   setQueries({
               //     ...queries,

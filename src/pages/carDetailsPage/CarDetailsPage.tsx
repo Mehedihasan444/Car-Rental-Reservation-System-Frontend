@@ -1,19 +1,35 @@
 import ImageGallery from "react-image-gallery";
 import "react-image-gallery/styles/css/image-gallery.css";
-
 import { Separator } from "@/components/ui/separator";
 import BookingSteps from "./BookingSteps";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useGetCarQuery } from "@/redux/features/car/carApi";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import ReviewForm from "./ReviewForm";
-import BookingForm from "./BookingForm";
+import { Button } from "@/components/ui/button";
+import { useState } from "react";
+import { useAppDispatch } from "@/redux/hooks";
+import { setInfo } from "@/redux/features/booking/bookingInfoSlice";
 
 const CarDetailsPage = () => {
   const { id } = useParams();
   const { data = {} } = useGetCarQuery(id);
   const { data: car } = data;
+  const [selectedFeatures, setSelectedFeatures] = useState({
+    insurance: false,
+    gps: false,
+    childSeat: false,
+  });
+  const dispatch = useAppDispatch();
+  const handleFeatureChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSelectedFeatures({
+      ...selectedFeatures,
+      [e.target.name]: e.target.checked,
+    });
+  };
 
+  const handleBooking = () => {
+    dispatch(setInfo({...car,...selectedFeatures}));
+  };
   return (
     <div className="max-w-7xl mx-auto p-6">
       {/* Car Details */}
@@ -86,25 +102,57 @@ const CarDetailsPage = () => {
                 : ""}
             </p>
           </div>
+          {/* Additional Features */}
+          <div className="space-y-4">
+            <h2 className="text-2xl font-semibold">Additional Features:</h2>
+            <div className="flex flex-col space-y-2">
+              <label className="flex items-center">
+                <input
+                  type="checkbox"
+                  name="insurance"
+                  checked={selectedFeatures?.insurance}
+                  onChange={handleFeatureChange}
+                  className="mr-2"
+                />
+                Insurance
+              </label>
+              <label className="flex items-center">
+                <input
+                  type="checkbox"
+                  name="gps"
+                  checked={selectedFeatures?.gps}
+                  onChange={handleFeatureChange}
+                  className="mr-2"
+                />
+                GPS
+              </label>
+              <label className="flex items-center">
+                <input
+                  type="checkbox"
+                  name="childSeat"
+                  checked={selectedFeatures?.childSeat}
+                  onChange={handleFeatureChange}
+                  className="mr-2"
+                />
+                Child Seat
+              </label>
+            </div>
+          </div>
+          <div className="flex items-center space-x-2">
+            <Link to="/booking">
+              <Button
+                onClick={handleBooking}
+                className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded"
+              >
+                Book Now
+              </Button>
+            </Link>
+          </div>
         </div>
       </div>
       <Separator className="mt-10" />
-      <Tabs defaultValue="Booking" className="">
-        <TabsList>
-          <TabsTrigger value="Booking" className="">
-            Booking
-          </TabsTrigger>
-          <TabsTrigger value="Review">Review</TabsTrigger>
-        </TabsList>
-        <TabsContent value="Booking">
-          {/* Booking Form */}
-          <BookingForm car={car} />
-        </TabsContent>
-        <TabsContent value="Review">
-          {/* Review Section */}
-          <ReviewForm car={car?._id} />
-        </TabsContent>
-      </Tabs>
+      {/* Review form */}
+      <ReviewForm car={car?._id} />
 
       {/* BookingSteps */}
       <BookingSteps />
