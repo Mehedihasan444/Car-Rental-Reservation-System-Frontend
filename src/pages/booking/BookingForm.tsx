@@ -193,6 +193,7 @@ const BookingForm = ({
 
         <button
           type="submit"
+          disabled={isSubmitted}
           className="bg-blue-600 mt-4 text-white py-2 px-4 rounded hover:bg-blue-700 w-full"
         >
           Next

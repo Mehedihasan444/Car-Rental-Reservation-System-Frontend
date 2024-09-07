@@ -47,6 +47,7 @@ const BookingConfirmation = ({
       toast({
         description: "Booking Placed Successfully",
       });
+      navigate("/");
     }
   };
   return (

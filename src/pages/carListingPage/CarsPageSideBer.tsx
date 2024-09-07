@@ -1,5 +1,4 @@
 import { Button } from "@/components/ui/button";
-import { Label } from "@/components/ui/label";
 import PriceSlider from "@/components/ui/priceSlider";
 import {
   Sheet,
@@ -11,62 +10,23 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { FaFilter } from "react-icons/fa";
-// fake data
-const cars = [
-  {
-    id: 1,
-    type: "SUV",
-    brand: "Toyota",
-    model: "RAV4",
-    fuelType: "Hybrid",
-    transmission: "Automatic",
-    seatingCapacity: 5,
-    pricePerDay: 85,
-  },
-  {
-    id: 2,
-    type: "Sedan",
-    brand: "Honda",
-    model: "Accord",
-    fuelType: "Petrol",
-    transmission: "Automatic",
-    seatingCapacity: 5,
-    pricePerDay: 75,
-  },
-  {
-    id: 3,
-    type: "Electric",
-    brand: "Tesla",
-    model: "Model 3",
-    fuelType: "Electric",
-    transmission: "Automatic",
-    seatingCapacity: 5,
-    pricePerDay: 120,
-  },
-  {
-    id: 4,
-    type: "Convertible",
-    brand: "BMW",
-    model: "Z4",
-    fuelType: "Petrol",
-    transmission: "Manual",
-    seatingCapacity: 2,
-    pricePerDay: 150,
-  },
-  {
-    id: 5,
-    type: "Minivan",
-    brand: "Honda",
-    model: "Odyssey",
-    fuelType: "Petrol",
-    transmission: "Automatic",
-    seatingCapacity: 7,
-    pricePerDay: 90,
-  },
-];
 
-export function CarsPageSideBer() {
+import { TQueries } from "@/types/TQueries";
+import { useState } from "react";
+import { FaFilter } from "react-icons/fa";
+
+export function CarsPageSideBer({
+  queries,
+  setQueries,
+}: {
+  queries: TQueries;
+  setQueries: React.Dispatch<React.SetStateAction<TQueries>>;
+}) {
+  const [priceRange, setPriceRange] = useState<number[]>([50]);
+  const handlePriceChange = (value:number[]) => {
+    setPriceRange(value);
+  };
+
   return (
     <div className="">
       <div className="lg:hidden">
@@ -87,126 +47,152 @@ export function CarsPageSideBer() {
               </SheetDescription>
             </SheetHeader>
             <div className="grid gap-4 py-4">
-              {/* Car Type filter */}
-              <div className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor="carType" className="text-right">
-                  Car Type
-                </Label>
+              {/* Category filter */}
+              <div className="mb-4">
+                <h3 className="text-sm font-semibold mb-2">Car Type</h3>
                 <select
-                  id="carType"
-                  className="col-span-3 px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300"
+                  className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300"
+                  value={queries.type || ""}
+                  onChange={(e) =>
+                    setQueries({ ...queries, type: e.target.value })
+                  }
                 >
-                  <option value="">All Car Types</option>
-                  {cars?.map((car, idx) => (
-                    <option value={car.type} key={idx}>
-                      {car?.type}
-                    </option>
-                  ))}
+                  <option selected value="" disabled>
+                    Select Type
+                  </option>
+                  <option value="Sedan">Sedan</option>
+                  <option value="SUV">SUV</option>
+                  <option value="Hatchback">Hatchback</option>
+                  <option value="Convertible">Convertible</option>
+                  <option value="Truck">Truck</option>
+                  <option value="Coupe">Coupe</option>
+                  <option value="Minivan">Minivan</option>
+                  <option value="Hybrid">Hybrid</option>
+                  <option value="Electric">Electric</option>
                 </select>
               </div>
-              {/*  */}
-              <div className="grid grid-cols-4 items-center gap-4 ">
-                <Label htmlFor="sortBy" className="text-right">
-                  Sort By:
-                </Label>
-                <div>
-                  <select
-                    // value={queries?.sort}
-                    // onChange={(e) =>
-                    //   setQueries({ ...queries, sort: e.target.value })
-                    // }
-                    className="col-span-3 px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300"
-                  >
-                    <option value="" disabled selected>
-                      Price
-                    </option>
-                    <option value="desc">High To Low</option>
-                    <option value="asc">Low To High</option>
-                  </select>
-                </div>
-              </div>
+
               {/* Brand filter */}
-              <div className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor="brand" className="text-right">
-                  Brand
-                </Label>
+              <div className="mb-4">
+                <h3 className="text-sm font-semibold mb-2">Brand</h3>
                 <select
-                  id="brand"
-                  className="col-span-3 px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300"
+                  className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300"
+                  value={queries.brand || ""}
+                  onChange={(e) =>
+                    setQueries({ ...queries, brand: e.target.value })
+                  }
                 >
-                  <option value="">All Brands</option>
-                  {cars?.map((car, idx) => (
-                    <option value={car.brand} key={idx}>
-                      {car?.brand}
-                    </option>
-                  ))}
+                  <option selected value="">
+                    All Brands
+                  </option>
+                  {["Toyota", "Honda", "BMW", "Mercedes", "Tesla", "Ford"].map(
+                    (brand, idx) => (
+                      <option value={brand} key={idx}>
+                        {brand}
+                      </option>
+                    )
+                  )}
                 </select>
               </div>
 
               {/* Fuel Type filter */}
-              <div className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor="fuelType" className="text-right">
-                  Fuel Type
-                </Label>
+              <div className="mb-4">
+                <h3 className="text-sm font-semibold mb-2">Fuel Type</h3>
                 <select
-                  id="fuelType"
-                  className="col-span-3 px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300"
+                  className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300"
+                  value={queries.fuelType || ""}
+                  onChange={(e) =>
+                    setQueries({ ...queries, fuelType: e.target.value })
+                  }
                 >
-                  <option value="">All Fuel Types</option>
-                  {cars?.map((car, idx) => (
-                    <option value={car?.fuelType} key={idx}>
-                      {car?.fuelType}
-                    </option>
-                  ))}
+                  <option selected value="" disabled>
+                    Select Fuel Type
+                  </option>
+                  <option value="Petrol">Petrol</option>
+                  <option value="Diesel">Diesel</option>
+                  <option value="Electric">Electric</option>
+                  <option value="Hybrid">Hybrid</option>
+                  <option value="CNG">CNG</option>
+                  <option value="LPG">LPG</option>
                 </select>
               </div>
 
               {/* Transmission filter */}
-              <div className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor="transmission" className="text-right">
-                  Transmission
-                </Label>
+              <div className="mb-4 ">
+                <h3 className="text-sm font-semibold mb-2">Transmission</h3>
                 <select
-                  id="transmission"
-                  className="col-span-3 px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300"
+                  className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300"
+                  value={queries.transmission || ""}
+                  onChange={(e) =>
+                    setQueries({ ...queries, transmission: e.target.value })
+                  }
                 >
-                  <option value="">All Transmissions</option>
-                  {cars?.map((car, idx) => (
-                    <option value={car?.transmission} key={idx}>
-                      {car?.transmission}
-                    </option>
-                  ))}
+                  <option selected value="" disabled>
+                    Select Transmission
+                  </option>
+                  <option value="Manual">Manual</option>
+                  <option value="Automatic">Automatic</option>
                 </select>
               </div>
 
               {/* Seating Capacity filter */}
-              <div className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor="seatingCapacity" className="text-right">
-                  Seating Capacity
-                </Label>
+              <div className="mb-4">
+                <h3 className="text-sm font-semibold mb-2">Seating Capacity</h3>
                 <select
-                  id="seatingCapacity"
-                  className="col-span-3 px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300"
+                  className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300"
+                  value={queries.seatingCapacity || ""}
+                  onChange={(e) =>
+                    setQueries({ ...queries, seatingCapacity: Number(e.target.value) })
+                  }
                 >
                   <option value="">All Seating Capacities</option>
-                  {cars?.map((car, idx) => (
-                    <option value={car?.seatingCapacity} key={idx}>
-                      {car?.seatingCapacity} seats
+                  {[4, 6, 8, 10, 12, 14]?.map((seatingCapacity, idx) => (
+                    <option value={seatingCapacity} key={idx}>
+                      {seatingCapacity} seats
                     </option>
                   ))}
                 </select>
               </div>
-
-              {/* Price Range filter */}
-              <div className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor="priceRange" className="text-right">
-                  Price Range
-                </Label>
-                <div className="col-span-3 flex justify-between items-center gap-2">
-                  <PriceSlider />
-                  <Button variant={"outline"} className="">
+              {/*number of  doors */}
+              <div className="mb-4">
+                <h3 className="text-sm font-semibold mb-2">No. of Doors</h3>
+                <select
+                  className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300"
+                  value={queries.noOfDoors || ""}
+                  onChange={(e) =>
+                    setQueries({ ...queries, noOfDoors: Number(e.target.value) })
+                  }
+                >
+                  <option value="" selected disabled>
+                    Select Number of Doors
+                  </option>
+                  <option value={2}>2 Doors</option>
+                  <option value={3}>3 Doors</option>
+                  <option value={4}>4 Doors</option>
+                  <option value={5}>5 Doors</option>
+                </select>
+              </div>
+              {/* Price range filter */}
+              <div className="mb-4">
+                <h3 className="text-sm font-semibold mb-2">Price Range</h3>
+                <div className="flex justify-between items-center gap-2">
+                  <PriceSlider value={priceRange} onChange={handlePriceChange}/>
+                  <Button
+                    variant={"outline"}
+                    className=""
+                    onClick={() =>
+                      setQueries({
+                        ...queries,
+                        minPrice: 1,
+                        maxPrice: priceRange[0],
+                      })
+                    }
+                  >
                     Set
                   </Button>
+                </div>
+                <div>
+                  <p>Selected price range: $1 - ${priceRange.join(" - ")}</p>
                 </div>
               </div>
             </div>
@@ -223,7 +209,11 @@ export function CarsPageSideBer() {
       <div className="hidden lg:inline-block w-full">
         <div className="flex justify-between items-center">
           <h2 className="text-lg font-semibold mb-4">Filter Options</h2>
-          <Button variant={"outline"} className="">
+          <Button
+            variant={"outline"}
+            className=""
+            onClick={() => setQueries({})}
+          >
             Reset
           </Button>
         </div>
@@ -231,165 +221,148 @@ export function CarsPageSideBer() {
         {/* Category filter */}
         <div className="mb-4">
           <h3 className="text-sm font-semibold mb-2">Car Type</h3>
-          <select className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300">
-            <option value="">All Car Types</option>
-            {cars?.map((car, idx) => (
-              <option value={car.type} key={idx}>
-                {car?.type}
-              </option>
-            ))}
+          <select
+            className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300"
+            value={queries.type || ""}
+            onChange={(e) => setQueries({ ...queries, type: e.target.value })}
+          >
+            <option selected value="" disabled>
+              Select Type
+            </option>
+            <option value="Sedan">Sedan</option>
+            <option value="SUV">SUV</option>
+            <option value="Hatchback">Hatchback</option>
+            <option value="Convertible">Convertible</option>
+            <option value="Truck">Truck</option>
+            <option value="Coupe">Coupe</option>
+            <option value="Minivan">Minivan</option>
+            <option value="Hybrid">Hybrid</option>
+            <option value="Electric">Electric</option>
           </select>
         </div>
 
         {/* Brand filter */}
         <div className="mb-4">
           <h3 className="text-sm font-semibold mb-2">Brand</h3>
-          <select className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300">
-            <option value="">All Brands</option>
-            {cars?.map((car, idx) => (
-              <option value={car.brand} key={idx}>
-                {car.brand}
-              </option>
-            ))}
+          <select
+            className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300"
+            value={queries.brand || ""}
+            onChange={(e) => setQueries({ ...queries, brand: e.target.value })}
+          >
+            <option selected value="">
+              All Brands
+            </option>
+            {["Toyota", "Honda", "BMW", "Mercedes", "Tesla", "Ford"].map(
+              (brand, idx) => (
+                <option value={brand} key={idx}>
+                  {brand}
+                </option>
+              )
+            )}
           </select>
         </div>
 
         {/* Fuel Type filter */}
         <div className="mb-4">
           <h3 className="text-sm font-semibold mb-2">Fuel Type</h3>
-          <select className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300">
-            <option value="">All Fuel Types</option>
-            {cars?.map((car, idx) => (
-              <option value={car.fuelType} key={idx}>
-                {car.fuelType}
-              </option>
-            ))}
+          <select
+            className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300"
+            value={queries.fuelType || ""}
+            onChange={(e) =>
+              setQueries({ ...queries, fuelType: e.target.value })
+            }
+          >
+            <option selected value="" disabled>
+              Select Fuel Type
+            </option>
+            <option value="Petrol">Petrol</option>
+            <option value="Diesel">Diesel</option>
+            <option value="Electric">Electric</option>
+            <option value="Hybrid">Hybrid</option>
+            <option value="CNG">CNG</option>
+            <option value="LPG">LPG</option>
           </select>
         </div>
 
         {/* Transmission filter */}
         <div className="mb-4 ">
           <h3 className="text-sm font-semibold mb-2">Transmission</h3>
-          <select className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300">
-            <option value="">All Transmissions</option>
-            {cars?.map((car, idx) => (
-              <option value={car.transmission} key={idx}>
-                {car.transmission}
-              </option>
-            ))}
+          <select
+            className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300"
+            value={queries.transmission || ""}
+            onChange={(e) =>
+              setQueries({ ...queries, transmission: e.target.value })
+            }
+          >
+            <option selected value="" disabled>
+              Select Transmission
+            </option>
+            <option value="Manual">Manual</option>
+            <option value="Automatic">Automatic</option>
           </select>
         </div>
 
         {/* Seating Capacity filter */}
         <div className="mb-4">
           <h3 className="text-sm font-semibold mb-2">Seating Capacity</h3>
-          <select className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300">
+          <select
+            className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300"
+            value={queries.seatingCapacity || ""}
+            onChange={(e) =>
+              setQueries({ ...queries, seatingCapacity: Number(e.target.value )})
+            }
+          >
             <option value="">All Seating Capacities</option>
-            {cars?.map((car, idx) => (
-              <option value={car?.seatingCapacity} key={idx}>
-                {car?.seatingCapacity} seats
+            {[4, 6, 8, 10, 12, 14]?.map((seatingCapacity, idx) => (
+              <option value={seatingCapacity} key={idx}>
+                {seatingCapacity} seats
               </option>
             ))}
           </select>
         </div>
-
+        {/*number of  doors */}
+        <div className="mb-4">
+          <h3 className="text-sm font-semibold mb-2">No. of Doors</h3>
+          <select
+            className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300"
+            value={queries.noOfDoors || ""}
+            onChange={(e) =>
+              setQueries({ ...queries, noOfDoors: Number(e.target.value) })
+            }
+          >
+            <option value="" selected disabled>
+              Select Number of Doors
+            </option>
+            <option value={2}>2 Doors</option>
+            <option value={3}>3 Doors</option>
+            <option value={4}>4 Doors</option>
+            <option value={5}>5 Doors</option>
+          </select>
+        </div>
         {/* Price range filter */}
         <div className="mb-4">
           <h3 className="text-sm font-semibold mb-2">Price Range</h3>
           <div className="flex justify-between items-center gap-2">
-            <PriceSlider />
+            <PriceSlider  value={priceRange} onChange={handlePriceChange}/>
             <Button
               variant={"outline"}
               className=""
-              // onClick={() =>
-              //   setQueries({
-              //     ...queries,
-              //     minPrice: 1,
-              //     maxPrice: priceRange[0],
-              //   })
-              // }
+              onClick={() =>
+                setQueries({
+                  ...queries,
+                  minPrice: 1,
+                  maxPrice: priceRange[0],
+                })
+              }
             >
               Set
             </Button>
           </div>
           <div>
-            {/* <p>Selected price range: $1 - ${priceRange.join(" - ")}</p> */}
+            <p>Selected price range: TK1 - TK{priceRange.join(" - ")}</p>
           </div>
         </div>
       </div>
     </div>
   );
 }
-// import { useEffect, useState } from "react";
-// import PriceSlider from "@/components/ui/priceSlider";
-// import { Button } from "@/components/ui/button";
-
-// export function CarsPageSideBer({ queries, setQueries }) {
-//   const [items, setItems] = useState([]);
-//   const [priceRange, setPriceRange] = useState([50]);
-
-//   useEffect(() => {
-//     fetch("https://car-rental-api.com/api/v1/cars")
-//       .then((response) => response.json())
-//       .then((data) => setItems(data?.data?.cars));
-//   }, []);
-
-//   // Get unique car types
-//   const carTypes = Array.from(new Set(items?.map((car) => car?.type)));
-
-//   return (
-//     <>
-//       <div className="flex justify-between items-center">
-//         <h2 className="text-lg font-semibold mb-4">Filter Options</h2>
-//         <Button
-//           variant={"default"}
-//           className="bg-green-900 hover:bg-green-700"
-//           onClick={() => setQueries({})}
-//         >
-//           Reset
-//         </Button>
-//       </div>
-
-//       {/* Car Type filter */}
-//       <div className="mb-4">
-//         <h3 className="text-sm font-semibold mb-2">Car Type</h3>
-//         <select
-//           value={queries.type || ""}
-//           onChange={(e) => setQueries({ ...queries, type: e.target.value })}
-//           className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300"
-//         >
-//           <option value="">All Types</option>
-//           {carTypes?.map((type) => (
-//             <option value={type} key={type}>
-//               {type}
-//             </option>
-//           ))}
-//         </select>
-//       </div>
-
-//       {/* Price range filter */}
-//       <div className="mb-4">
-//         <h3 className="text-sm font-semibold mb-2">Price Range</h3>
-//         <div className="flex justify-between items-center gap-2">
-//           <PriceSlider value={priceRange} onChange={setPriceRange} />
-//           <Button
-//             variant={"default"}
-//             className="bg-green-900 hover:bg-green-700"
-//             onClick={() =>
-//               setQueries({
-//                 ...queries,
-//                 minPrice: 1,
-//                 maxPrice: priceRange[0],
-//               })
-//             }
-//           >
-//             Set
-//           </Button>
-//         </div>
-//         <div>
-//           <p>Selected price range: $1 - ${priceRange.join(" - ")}</p>
-//         </div>
-//       </div>
-//     </>
-//   );
-// }

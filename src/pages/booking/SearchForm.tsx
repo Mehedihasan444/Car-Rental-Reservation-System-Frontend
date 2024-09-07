@@ -1,4 +1,4 @@
-import { Label } from "@/components/ui/label";
+
 import  { useState } from "react";
 
 const SearchForm = ({ onSearch }) => {

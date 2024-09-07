@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -13,7 +12,6 @@ import { Separator } from "../ui/separator";
 import { FaBars, FaHome } from "react-icons/fa";
 import { useAppSelector } from "@/redux/hooks";
 import { RootState } from "@/redux/store";
-
 
 export function DashboardSidebar() {
   const location = useLocation();
@@ -30,7 +28,10 @@ export function DashboardSidebar() {
     { path: "/dashboard/admin", label: "Admin Dashboard" },
     { path: "/dashboard/admin/manage-cars", label: "Manage Cars" },
     { path: "/dashboard/admin/manage-bookings", label: "Manage Bookings" },
-    { path: "/dashboard/admin/manage-return-cars", label: "Manage Return Cars" },
+    {
+      path: "/dashboard/admin/manage-return-cars",
+      label: "Manage Return Cars",
+    },
     { path: "/dashboard/admin/user-management", label: "User Management" },
     { path: "/dashboard/admin/reports", label: "Reports" },
     // { path: "/dashboard/admin/booking-page", label: "Booking Page" },
@@ -49,49 +50,51 @@ export function DashboardSidebar() {
     <div className="lg:h-screen">
       {/* Mobile View */}
       <div className="grid grid-cols-1 gap-2 lg:hidden">
-      <Sheet key={"left"}>
-  <SheetTrigger asChild>
-    <Button variant="ghost" size={"icon"} className="text-2xl m-5">
-      <FaBars />
-    </Button>
-  </SheetTrigger>
-  <SheetContent side={"left"} className="bg-gray-800 text-white flex flex-col h-full">
-    <SheetHeader>
-      <SheetTitle className="text-2xl font-semibold text-gray-200 text-center pb-5">
-        Dashboard
-      </SheetTitle>
-    </SheetHeader>
-    <Separator className="mb-3" />
-    
-    {/* Main content area with flex-grow */}
-    <div className=" grid gap-4 mt-2">
-      {combinedRoutes?.map((route) => (
-        <Link to={route.path} key={route.path}>
-          <Button
-            variant="link"
-            className={`w-full text-left ${getLinkClasses(route.path)}`}
+        <Sheet key={"left"}>
+          <SheetTrigger asChild>
+            <Button variant="ghost" size={"icon"} className="text-2xl m-5">
+              <FaBars />
+            </Button>
+          </SheetTrigger>
+          <SheetContent
+            side={"left"}
+            className="bg-gray-800 text-white flex flex-col h-full"
           >
-            {route.label}
-          </Button>
-        </Link>
-      ))}
-    </div>
+            <SheetHeader>
+              <SheetTitle className="text-2xl font-semibold text-gray-200 text-center pb-5">
+                Dashboard
+              </SheetTitle>
+            </SheetHeader>
+            <Separator className="mb-3" />
 
-    {/* Footer area that stays at the bottom */}
-    <SheetFooter className="mt-auto">
-      <Link to="/" className="w-full">
-        <Button
-          variant="outline"
-          className="w-full mt-4 text-gray-800 text-lg flex items-center justify-center"
-        >
-          <FaHome size={25} className="mr-5" />
-          Back To Home
-        </Button>
-      </Link>
-    </SheetFooter>
-  </SheetContent>
-</Sheet>
+            {/* Main content area with flex-grow */}
+            <div className=" grid gap-4 mt-2">
+              {combinedRoutes?.map((route) => (
+                <Link to={route.path} key={route.path}>
+                  <Button
+                    variant="link"
+                    className={`w-full text-left ${getLinkClasses(route.path)}`}
+                  >
+                    {route.label}
+                  </Button>
+                </Link>
+              ))}
+            </div>
 
+            {/* Footer area that stays at the bottom */}
+            <SheetFooter className="mt-auto">
+              <Link to="/" className="w-full">
+                <Button
+                  variant="outline"
+                  className="w-full mt-4 text-gray-800 text-lg flex items-center justify-center"
+                >
+                  <FaHome size={25} className="mr-5" />
+                  Back To Home
+                </Button>
+              </Link>
+            </SheetFooter>
+          </SheetContent>
+        </Sheet>
       </div>
 
       {/* Desktop View */}
@@ -104,7 +107,7 @@ export function DashboardSidebar() {
         </div>
         <div className="grid gap-4">
           {combinedRoutes.map((route) => (
-            <Link to={route.path} key={route.path} >
+            <Link to={route.path} key={route.path}>
               <Button
                 variant="link"
                 className={`w-full text-left ${getLinkClasses(route.path)}`}
@@ -116,13 +119,13 @@ export function DashboardSidebar() {
         </div>
         <div className="mt-auto">
           <Link to="/">
-          <Button
-            variant="outline"
-            className="w-full mt-4 text-gray-800 text-lg"
+            <Button
+              variant="outline"
+              className="w-full mt-4 text-gray-800 text-lg"
             >
-             <FaHome size={25} className="mr-5"/> Back To Home
-          </Button>
-            </Link>
+              <FaHome size={25} className="mr-5" /> Back To Home
+            </Button>
+          </Link>
         </div>
       </div>
     </div>

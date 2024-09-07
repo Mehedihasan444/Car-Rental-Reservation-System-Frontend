@@ -1,5 +1,11 @@
 import { baseApi } from "@/redux/api/baseApi";
 
+
+interface Queries {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  [key: string]: any; // Use the appropriate type instead of `any` if you know it
+}
+
 const carApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     createCar: builder.mutation({
@@ -10,10 +16,22 @@ const carApi = baseApi.injectEndpoints({
       }),
     }),
     getAllCars: builder.query({
-      query: () => ({
-        url: "/cars",
-        method: "GET",
-      }),
+      query: (queries) => {
+        const cleanedQueries = Object.entries(queries).reduce<Queries>((acc, [key, value]) => {
+          if (value !== '') {
+            acc[key] = value;
+          }
+          return acc;
+        }, {});
+    
+        const params = new URLSearchParams(cleanedQueries);
+    
+        return {
+          url: `/cars?${params.toString()}`,
+          method: "GET",
+        };
+      },
+      providesTags: ["car"],
     }),
     getCar: builder.query({
       query: (carId) => ({
