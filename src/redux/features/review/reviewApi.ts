@@ -8,18 +8,21 @@ const ReviewApi = baseApi.injectEndpoints({
         method: "POST",
         body: data,
       }),
+      invalidatesTags:["review"],
     }),
     getAllReviews: builder.query({
       query: () => ({
         url: "/reviews",
         method: "GET",
       }),
+      providesTags: ["review"],
     }),
     getAReviews: builder.query({
       query: (car) => ({
         url: `/reviews/${car}`,
         method: "GET",
       }),
+      providesTags: ["review"],
     }),
     updateReview: builder.mutation({
       query: ({ reviewId, ...data }) => ({
@@ -27,12 +30,14 @@ const ReviewApi = baseApi.injectEndpoints({
         method: "PUT",
         body: data,
       }),
+      invalidatesTags: ["review"],
     }),
     deleteReview: builder.mutation({
       query: (reviewId) => ({
         url: `/reviews/${reviewId}`,
         method: "DELETE",
       }),
+      invalidatesTags: ["review"],
     }),
   }),
 });

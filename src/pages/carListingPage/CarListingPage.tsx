@@ -5,16 +5,13 @@ import { TCar } from "@/types/TCar";
 import Loading from "@/utils/Loading";
 import { TQueries } from "@/types/TQueries";
 import { ChangeEvent, useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+
 
 const CarListingPage = () => {
   const [queries, setQueries] = useState<TQueries>({ page: 1, limit: 10 });
-  const [searchParams] = useSearchParams();
-  const searchTerm = searchParams.get("");
-  const { data = {}, isLoading } = useGetAllCarsQuery(
-    searchTerm ? { page: 1, limit: 10, searchTerm: searchTerm } : queries
-  );
+
+  const { data = {}, isLoading } = useGetAllCarsQuery(queries);
   const { totalCount: count, cars } = data.data || {};
   const [currentPage, setCurrentPage] = useState(queries.page || 1);
   const [itemsPerPage, setItemsPerPage] = useState(queries.limit || 10);
@@ -35,7 +32,7 @@ const CarListingPage = () => {
     setCurrentPage(1);
     setQueries({ ...queries, limit: val, page: 1 });
   };
-console.log(count)
+
   const handlePreviousPage = () => {
     if (currentPage > 1) {
       const newPage = currentPage - 1;
@@ -57,9 +54,30 @@ console.log(count)
     setQueries({ ...queries, page: page + 1 });
   };
   return (
-    <div className="lg:flex relative">
-      <div className="lg:w-1/4 lg:p-4  md:flex-col md:flex lg:m-5 rounded-md md:mr-5">
+    <div className="lg:flex relative justify-between  gap-5">
+      <div className="lg:w-1/4 lg:p-4   flex  justify-between  lg:m-5 rounded-md px-5 ">
         <CarsPageSideBer queries={queries} setQueries={setQueries} />
+        <div className="flex items-center lg:hidden">
+          <div className="flex justify-between items-center gap-5 w-full">
+            <h3 className="text-sm font-semibold mb-2 ">Sort By:</h3>
+            <div>
+              <select
+                value={queries?.sort}
+                onChange={(e) =>
+                  setQueries({ ...queries, sort: e.target.value })
+                }
+                className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300"
+              >
+                <option value="" disabled selected>
+                  Price
+                </option>
+                <option value="desc">High To Low</option>
+                <option value="asc">Low To High</option>
+                {/* <option value="rating">Rating</option> */}
+              </select>
+            </div>
+          </div>
+        </div>
       </div>
       <div className="w-full lg:w-3/4 p-4 mx-5 md:mx-0 relative">
         <div className="flex justify-between items-center md:gap-10">
@@ -69,11 +87,29 @@ console.log(count)
               {cars?.length || 0}
             </h2>
           </div>
+          <div className="hidden lg:flex justify-between items-center gap-5 mb-4">
+            <h3 className="text-sm font-semibold mb-2">Sort By:</h3>
+            <div>
+              <select
+                value={queries?.sort}
+                onChange={(e) =>
+                  setQueries({ ...queries, sort: e.target.value })
+                }
+                className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300"
+              >
+                <option value="" disabled selected>
+                  Price
+                </option>
+                <option value="desc">High To Low</option>
+                <option value="asc">Low To High</option>
+                {/* <option value="rating">Rating</option> */}
+              </select>
+            </div>
+          </div>
         </div>
         <hr />
         <div
-          className={`mt-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  min-h-[50vh] gap-5 mb-8
-          `}
+          className={`mt-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  min-h-[50vh] gap-5 mb-8`}
         >
           {isLoading ? (
             <div className="flex justify-center items-center w-full absolute top-0 right-0 bottom-0 left-0">

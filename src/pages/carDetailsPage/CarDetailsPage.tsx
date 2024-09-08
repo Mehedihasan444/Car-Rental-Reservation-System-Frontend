@@ -139,14 +139,15 @@ const CarDetailsPage = () => {
             </div>
           </div>
           <div className="flex items-center space-x-2">
-            <Link to="/booking">
               <Button
+              disabled={car?.status === "booked"}
                 onClick={handleBooking}
                 className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded"
               >
+            <Link to="/booking">
                 Book Now
-              </Button>
             </Link>
+              </Button>
           </div>
         </div>
       </div>

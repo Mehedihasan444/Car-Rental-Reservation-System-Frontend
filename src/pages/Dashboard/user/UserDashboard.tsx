@@ -50,7 +50,7 @@ const UserDashboard = () => {
 
 
   return (
-    <div className="p-6 bg-gray-50 min-h-screen w-full">
+    <div className="p-6 bg-gray-50 h-screen w-full overflow-y-scroll">
       <div className="max-w-4xl mx-auto space-y-6">
         {/* Personal Information */}
         <Card className="shadow-lg">

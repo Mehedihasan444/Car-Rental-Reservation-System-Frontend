@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import PriceSlider from "@/components/ui/priceSlider";
+import { Separator } from "@/components/ui/separator";
 import {
   Sheet,
   SheetClose,
@@ -28,13 +29,13 @@ export function CarsPageSideBer({
   };
 
   return (
-    <div className="">
+    <div className="lg:w-full">
       <div className="lg:hidden">
         <Sheet key={"left"}>
           <SheetTrigger asChild>
             <Button
               variant="ghost"
-              className="flex gap-2 text-lg float-right border"
+              className="flex gap-2 text-lg  border"
             >
               <FaFilter /> Filter
             </Button>
@@ -208,7 +209,7 @@ export function CarsPageSideBer({
       {/*  */}
       <div className="hidden lg:inline-block w-full">
         <div className="flex justify-between items-center">
-          <h2 className="text-lg font-semibold mb-4">Filter Options</h2>
+          <h2 className="text-lg font-semibold mb-4 flex items-center gap-2"><FaFilter/>Filter Options</h2>
           <Button
             variant={"outline"}
             className=""
@@ -217,6 +218,7 @@ export function CarsPageSideBer({
             Reset
           </Button>
         </div>
+        <Separator className="my-2"/>
 
         {/* Category filter */}
         <div className="mb-4">

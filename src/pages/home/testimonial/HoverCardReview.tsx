@@ -6,8 +6,9 @@ import {
   HoverCardTrigger,
 } from "@/components/ui/hover-card";
 import { FaAngleDoubleRight } from "react-icons/fa";
+import { TReview } from "@/types/TReview";
 
-export const HoverCardReview = () => {
+export const HoverCardReview = ({testimonial}:{testimonial:TReview}) => {
   return (
     <HoverCard>
       <HoverCardTrigger asChild>
@@ -20,14 +21,14 @@ export const HoverCardReview = () => {
         <div className="flex justify-between space-x-4 z-50">
           <div className="flex-1">
             <img
-              src="https://www.madebydesignesia.com/themes/rentaly/images/cars-alt/jeep-renegade.png"
+              src={testimonial?.car?.images[0]}
               alt=""
               className=""
             />
           </div>
           <div className="space-y-1 flex-1">
             <h4 className="text-sm font-semibold">Jeep Renegade</h4>
-            <h4 className="font-semibold">TK 20</h4>
+            <h4 className="font-semibold">TK {testimonial?.car?.pricePerHour}</h4>
 
               <span className="text-xs text-muted-foreground">
                 Rented at :

@@ -68,14 +68,19 @@ const CarCard = ({
           <span className="font-medium text-gray-600">Per Hour Rate</span>
           <h2 className="font-bold text-xl">TK {pricePerHour}</h2>
         </div>
-        <Link to={`/details/${_id}`}>
           <Button
             className="mt-4 sm:mt-0 "
-            disabled={status !== "available"}
+            disabled={status === "booked"}
           >
-            Rent Now
-          </Button>
+        <Link to={`/details/${_id}`}>
+        {
+          status === "booked"
+           ? "Booked"
+            : "Rent Now"
+        }
+           
         </Link>
+          </Button>
       </CardFooter>
     </Card>
   );

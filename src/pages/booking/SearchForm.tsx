@@ -1,25 +1,43 @@
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { TQueries } from "@/types/TQueries";
+import { useState } from "react";
 
-import  { useState } from "react";
-
-const SearchForm = ({ onSearch }) => {
+const SearchForm = ({
+  queries,
+  setQueries,
+}: {
+  queries: TQueries;
+  setQueries: React.Dispatch<React.SetStateAction<TQueries>>;
+}) => {
   const [formData, setFormData] = useState({
     type: "",
     features: "",
-    location: "",
-    pickupDate: "",
-    dropoffDate: "",
+    engineType: "",
+    // location: "",
+    // pickupDate: "",
+    // dropOffDate: ""
   });
 
-  const handleInputChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    onSearch(formData);
+    setQueries({
+      ...queries,
+      searchTerm: formData?.features,
+      type: formData?.type,
+      engineType: formData?.engineType,
+      // location: formData?.location,
+      // pickupDate: formData?.pickupDate,
+      // dropOffDate: formData?.dropOffDate
+    });
   };
 
   return (
@@ -27,91 +45,124 @@ const SearchForm = ({ onSearch }) => {
       <h2 className="text-2xl font-semibold mb-4">Search for Cars</h2>
       <form onSubmit={handleSubmit}>
         <div className="flex flex-wrap gap-5 justify-between">
-        <div className="mb-4">
-         
-          <label className="block text-sm font-medium text-gray-700">
-            Car Type
-          </label>
-      
-            <select
-              name="type"
-              value={formData?.type || ""}
-              onChange={handleInputChange}
-              className="mt-1 p-2 border border-gray-300 rounded w-full"
-            >
-              <option value="" disabled>
-                Select Type
-              </option>
-              <option value="Sedan">Sedan</option>
-              <option value="SUV">SUV</option>
-              <option value="Hatchback">Hatchback</option>
-              <option value="Convertible">Convertible</option>
-              <option value="Truck">Truck</option>
-              <option value="Coupe">Coupe</option>
-              <option value="Minivan">Minivan</option>
-              <option value="Hybrid">Hybrid</option>
-              <option value="Electric">Electric</option>
-            </select>
-       
-        </div>
-        <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700">
-            Features
-          </label>
-          <input
-            type="text"
-            name="features"
-            value={formData.features}
-            onChange={handleInputChange}
-            className="mt-1 p-2 border border-gray-300 rounded w-full"
-            placeholder="GPS, AC, Child Seat..."
-          />
-        </div>
-        <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700">
-            Location
-          </label>
-          <input
-            type="text"
-            name="location"
-            value={formData.location}
-            onChange={handleInputChange}
-            className="mt-1 p-2 border border-gray-300 rounded w-full"
-            placeholder="City or Airport"
-          />
-        </div>
-        <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700">
-            Pick-up Date
-          </label>
-          <input
-            type="date"
-            name="pickupDate"
-            value={formData.pickupDate}
-            onChange={handleInputChange}
-            className="mt-1 p-2 border border-gray-300 rounded w-full"
-          />
-        </div>
-        <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700">
-            Drop-off Date
-          </label>
-          <input
-            type="date"
-            name="dropoffDate"
-            value={formData.dropoffDate}
-            onChange={handleInputChange}
-            className="mt-1 p-2 border border-gray-300 rounded w-full"
-          />
-        </div>
-        <div className="mb-4 flex items-end">
+          <div className="mb-4 flex items-center gap-5">
+            <Label className="block text-lg font-medium text-gray-700 w-full">
+              Car Type
+            </Label>
 
-        <button
-          type="submit"
-          className="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 w-full"
-          >
-          Search Cars
-        </button>
+            <Select
+              value={formData?.type || ""}
+              onValueChange={(value) =>
+                setFormData({ ...formData, type: value })
+              }
+            >
+              <SelectTrigger className="min-w-[180px]">
+                <SelectValue placeholder="Select Type" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  <SelectItem value="Sedan">Sedan</SelectItem>
+                  <SelectItem value="SUV">SUV</SelectItem>
+                  <SelectItem value="Hatchback">Hatchback</SelectItem>
+                  <SelectItem value="Convertible">Convertible</SelectItem>
+                  <SelectItem value="Truck">Truck</SelectItem>
+                  <SelectItem value="Coupe">Coupe</SelectItem>
+                  <SelectItem value="Minivan">Minivan</SelectItem>
+                  <SelectItem value="Hybrid">Hybrid</SelectItem>
+                  <SelectItem value="Electric">Electric</SelectItem>
+                </SelectGroup>
+              </SelectContent>
+            </Select>
+          </div>
+          <div className="mb-4 flex items-center gap-5">
+            <Label className="block text-lg font-medium text-gray-700">
+              Features
+            </Label>
+            <Input
+              type="text"
+              name="features"
+              value={formData?.features || ""}
+              onChange={(e) =>
+                setFormData({ ...formData, features: e.target.value })
+              }
+              placeholder="GPS, AC, Child Seat..."
+            />
+          </div>
+
+          {/* Fuel Type filter */}
+          <div className="mb-4 flex items-center gap-5">
+            <Label className="block text-lg font-medium text-gray-700 w-full">
+              Fuel Type
+            </Label>
+            <Select
+              value={formData.engineType || ""}
+              onValueChange={(value) =>
+                setFormData({ ...formData, engineType: value })
+              }
+            >
+              <SelectTrigger className="min-w-[180px]">
+                <SelectValue placeholder="Select Engine Type" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  <SelectItem value="Petrol">Petrol Engine</SelectItem>
+                  <SelectItem value="Diesel">Diesel Engine</SelectItem>
+                  <SelectItem value="Electric">Electric Engine</SelectItem>
+                  <SelectItem value="Hybrid">Hybrid Engine</SelectItem>
+                  <SelectItem value="CNG">CNG Engine</SelectItem>
+                  <SelectItem value="LPG">LPG Engine</SelectItem>
+                </SelectGroup>
+              </SelectContent>
+            </Select>
+          </div>
+
+          {/* <div className="mb-4 flex flex-col">
+            <Label className="block text-lg font-medium text-gray-700">
+              Location
+            </Label>
+            <Input
+              type="text"
+              name="location"
+              value={queries?.location || ""}
+              onChange={(e) =>
+                setQueries({ ...queries, location: e.target.value })
+              }
+              placeholder="City or Airport"
+            />
+          </div>
+          <div className="mb-4 flex flex-col">
+            <Label className="block text-lg font-medium text-gray-700">
+              Pick-up Date
+            </Label>
+            <Input
+              type="date"
+              name="pickupDate"
+              value={queries?.pickupDate || ""}
+              onChange={(e) =>
+                setQueries({ ...queries, pickupDate: e.target.value })
+              }
+            />
+          </div>
+          <div className="mb-4 flex flex-col">
+            <Label className="block text-lg font-medium text-gray-700">
+              Drop-off Date
+            </Label>
+            <Input
+              type="date"
+              name="dropOffDate"
+              value={queries?.dropOffDate || ""}
+              onChange={(e) =>
+                setQueries({ ...queries, dropOffDate: e.target.value })
+              }
+            />
+          </div> */}
+          <div className="mb-4 flex items-end">
+            <button
+              type="submit"
+              className="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 w-full"
+            >
+              Search Cars
+            </button>
           </div>
         </div>
       </form>

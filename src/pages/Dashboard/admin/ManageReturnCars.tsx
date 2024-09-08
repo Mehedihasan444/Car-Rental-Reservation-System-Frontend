@@ -32,7 +32,7 @@ const ManageReturnCars = () => {
   };
 
   return (
-    <div className="p-6 bg-gray-50 min-h-screen">
+    <div className="p-6 bg-gray-50 h-screen overflow-y-scroll">
       <div className="max-w-6xl mx-auto space-y-6">
         {/* Manage Return Cars Card */}
         <Card className="shadow-lg">

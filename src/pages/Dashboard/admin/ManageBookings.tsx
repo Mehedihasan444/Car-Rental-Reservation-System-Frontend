@@ -18,7 +18,7 @@ const ManageBookings = () => {
       bookingId: booking?._id,
     };
     const res = await updateBooking(newData);
-    console.log(res);
+
     if (res?.data?.success) {
       toast({
         description: "Booking updated successfully!",

@@ -1,12 +1,15 @@
-
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import SearchForm from "./SearchForm";
 import SearchResults from "./SearchResults";
-import BookingForm from "./BookingForm";
+import BookingForm, { TBookingData } from "./BookingForm";
 import BookingConfirmation from "./BookingConfirmation";
 import { useAppSelector } from "@/redux/hooks";
 import { RootState } from "@/redux/store";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
+import { TQueries } from "@/types/TQueries";
+import { useGetAllCarsQuery } from "@/redux/features/car/carApi";
+import { TCar } from "@/types/TCar";
+import { TBookingDetails } from "@/types/TBookingDetails";
 
 const BookingPage = () => {
   const bookingCarDetails = useAppSelector(
@@ -16,33 +19,32 @@ const BookingPage = () => {
   const [bookingDetails, setBookingDetails] = useState(
     bookingCarDetails || null
   );
-  const [userData, setUserData] = useState<any | null>(null);
-  const [cars, setCars] = useState<any[]>([]);
-  const [selectedCar, setSelectedCar] = useState<any | null>(null);
+  const [queries, setQueries] = useState<TQueries>({ page: 1, limit: 10 });
+  const { data = {}, isLoading } = useGetAllCarsQuery(queries);
+  const {  cars: allCars } = data.data || {};
+  const [userData, setUserData] = useState<TBookingData | null>(null);
+  const [cars, setCars] = useState<TCar[]>([]);
 
-  const handleSearch = (searchData: any) => {
-    // Fetch cars based on search criteria
-    const fetchedCars = [
-      // Dummy data
-      {
-        id: 1,
-        name: "Toyota Prius",
-        image: "/images/prius.jpg",
-        description: "Hybrid, GPS, 4 Seats",
-        price: 100,
-      },
-      // More car data
-    ];
-    setCars(fetchedCars);
+
+  // UseEffect to set cars based on queries
+  useEffect(() => {
+    if (queries?.type || queries?.features) {
+      setCars(allCars || []);
+    }
+  }, [queries, allCars]);
+
+  const handleSelectCar = (car: TCar) => {
+
+    setBookingDetails(car); // Set the selected car details for booking
   };
 
-  const handleSelectCar = (car: any) => {
-    setSelectedCar(car);
-  };
-
-  const handleConfirmBooking = (bookingData: any) => {
+  const handleConfirmBooking = (bookingData: TBookingData) => {
     setUserData(bookingData);
-    setBookingDetails({ ...bookingDetails, ...bookingData });
+    const bookingInfo = {
+      ...bookingDetails,
+      ...bookingData,
+    };
+    setBookingDetails(bookingInfo as TBookingDetails);
   };
 
   return (
@@ -51,15 +53,14 @@ const BookingPage = () => {
         {bookingDetails ? (
           <div className="">
             <div className="p-5 shadow-lg border rounded-lg bg-white mb-5">
-
-            <h1 className="text-xl font-semibold">Finalize Your Booking</h1>
+              <h1 className="text-xl font-semibold">Finalize Your Booking</h1>
             </div>
             <div className="lg:flex justify-between gap-5 p-5 shadow-lg border rounded-lg bg-white">
               <div className="flex-1">
                 <BookingForm onConfirmBooking={handleConfirmBooking} />
               </div>
               <div className="flex-1">
-                <Card key={bookingDetails?._id} className=" mb-6">
+                <Card key={bookingDetails?._id} className="mb-6">
                   <CardContent>
                     <div className="flex items-center mt-5">
                       <img
@@ -79,7 +80,8 @@ const BookingPage = () => {
                           {bookingDetails?.pricePerHour}
                         </p>
                         <p>
-                          <strong>Features:</strong> {bookingDetails?.features}
+                          <strong>Features:</strong>{" "}
+                          {bookingDetails?.features?.join(", ")}
                         </p>
                       </div>
                     </div>
@@ -109,10 +111,12 @@ const BookingPage = () => {
           </div>
         ) : (
           <>
-            <SearchForm onSearch={handleSearch} />
-            {cars.length > 0 && (
+            <SearchForm queries={queries} setQueries={setQueries} />
+            {!isLoading && cars?.length > 0 && (
               <SearchResults cars={cars} onSelectCar={handleSelectCar} />
             )}
+            {isLoading && <p>Loading cars...</p>}
+            {!isLoading && cars?.length === 0 && <p>No cars found.</p>}
           </>
         )}
       </div>

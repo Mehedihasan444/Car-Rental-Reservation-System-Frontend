@@ -9,8 +9,8 @@ import { DeleteCar } from "./DeleteCar";
 
 const ManageCars = () => {
   // fetch data from
-  const { data = {} } = useGetAllCarsQuery(undefined);
-  const { data: cars } = data;
+  const { data = {} } = useGetAllCarsQuery({page:1,limit:10});
+  const {  cars } = data.data;
   //
   const [formState, setFormState] = useState(false);
   const [selectedCar, setSelectedCar] = useState<TCar | null>(null);
