@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
@@ -10,7 +9,6 @@ import {
 } from "@/redux/features/user/userApi";
 import { TUser } from "@/redux/features/auth/authSlice";
 import { toast } from "@/components/ui/use-toast";
-import { Separator } from "@/components/ui/separator";
 
 const UserManagement = () => {
   // fetch all users
