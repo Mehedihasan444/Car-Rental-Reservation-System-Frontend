@@ -31,7 +31,7 @@ const BookingApi = baseApi.injectEndpoints({
         method: "PUT",
         body: data,
       }),
-      invalidatesTags: ["booking"],
+      invalidatesTags: ["booking","car"],
     }),
     deleteBooking: builder.mutation({
       query: (bookingId) => ({

@@ -212,7 +212,7 @@ export function CarsPageSideBer({
           <h2 className="text-lg font-semibold mb-4 flex items-center gap-2"><FaFilter/>Filter Options</h2>
           <Button
             variant={"outline"}
-            className=""
+        className="dark:text-white"
             onClick={() => setQueries({})}
           >
             Reset
@@ -348,7 +348,7 @@ export function CarsPageSideBer({
             <PriceSlider  value={priceRange} onChange={handlePriceChange}/>
             <Button
               variant={"outline"}
-              className=""
+               className="dark:text-white"
               onClick={() =>
                 setQueries({
                   ...queries,

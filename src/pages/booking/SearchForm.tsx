@@ -46,7 +46,7 @@ const SearchForm = ({
       <form onSubmit={handleSubmit}>
         <div className="flex flex-wrap gap-5 justify-between">
           <div className="mb-4 flex items-center gap-5">
-            <Label className="block text-lg font-medium text-gray-700 w-full">
+            <Label className="block text-lg font-medium text-gray-700  w-full">
               Car Type
             </Label>
 
@@ -56,7 +56,7 @@ const SearchForm = ({
                 setFormData({ ...formData, type: value })
               }
             >
-              <SelectTrigger className="min-w-[180px]">
+              <SelectTrigger className="min-w-[180px] dark:text-white">
                 <SelectValue placeholder="Select Type" />
               </SelectTrigger>
               <SelectContent>
@@ -86,6 +86,7 @@ const SearchForm = ({
                 setFormData({ ...formData, features: e.target.value })
               }
               placeholder="GPS, AC, Child Seat..."
+              className="dark:text-white"
             />
           </div>
 
@@ -100,7 +101,7 @@ const SearchForm = ({
                 setFormData({ ...formData, engineType: value })
               }
             >
-              <SelectTrigger className="min-w-[180px]">
+              <SelectTrigger className="min-w-[180px] dark:text-white">
                 <SelectValue placeholder="Select Engine Type" />
               </SelectTrigger>
               <SelectContent>

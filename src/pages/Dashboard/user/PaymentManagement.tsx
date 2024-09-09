@@ -8,8 +8,9 @@ const PaymentManagement = () => {
   const { data = {} } = useGetUserBookingsQuery(undefined);
   const { data: bookings } = data;
 
+  console.log(bookings)
   const returnedCars = bookings?.filter(
-    (booking: TBooking) => booking.isBooked === "returned"
+    (booking: TBooking) => booking.isBooked === "returned" && booking.payment==="due"
   );
 
   const handlePay = async (car: TBooking) => {

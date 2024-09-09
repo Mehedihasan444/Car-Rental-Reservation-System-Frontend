@@ -10,9 +10,10 @@ const AdminDashboard = () => {
   const { data = {} } = useGetAllBookingsQuery(undefined);
   const { data: bookings = [] } = data;
 
-  const { data: allCars = {} } = useGetAllCarsQuery(undefined);
-  const { data: cars } = allCars;
+  const { data: allCars = {} } = useGetAllCarsQuery({page:1,limit:10});
+  const {  cars } = allCars.data|| {};
 
+  // Calculate total income from returned bookings
   const totalIncome = bookings
     .filter((booking: TBooking) => booking.isBooked === "returned")
     .reduce((sum: number, booking: TBooking) => sum + booking?.totalCost, 0);

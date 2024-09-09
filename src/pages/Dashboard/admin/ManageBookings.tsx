@@ -59,7 +59,9 @@ const ManageBookings = () => {
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
-                {bookings?.map((booking: TBooking) => (
+                {!bookings?.length ? (
+                  <p className="mt-5">No bookings available.</p>
+                ) :bookings?.map((booking: TBooking) => (
                   <tr key={booking._id}>
                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                       {booking?.user?.name}

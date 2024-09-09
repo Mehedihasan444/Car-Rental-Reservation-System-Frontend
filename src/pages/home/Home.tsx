@@ -14,8 +14,8 @@ const Home = () => {
             <WhyChooseUs/>
             <Promise/>
             <ExploreBangladesh/>
-            <FAQ/>
             <Testimonial/>
+            <FAQ/>
         </div>
     );
 };

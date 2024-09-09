@@ -48,7 +48,9 @@ const ManageCars = () => {
         )}
         {/* List of cars */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {cars?.map((car: TCar) => (
+          {!cars?.length ? (
+                  <p className="mt-5">No Cars available.</p>
+                ) :cars?.map((car: TCar) => (
             <Card key={car._id} className="shadow-lg">
               <CardContent className="p-5">
                 <img

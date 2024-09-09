@@ -13,6 +13,7 @@ const ReviewForm = ({ car }: { car: string }) => {
   const { data = {} } = useGetAReviewsQuery(car);
   const { data: reviews } = data;
 
+  console.log(reviews)
   const [rating, setRating] = useState<number | null>(null);
   const [hover, setHover] = useState<number | null>(null);
   const [comment, setComment] = useState("");

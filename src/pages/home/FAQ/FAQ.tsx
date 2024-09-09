@@ -1,15 +1,47 @@
 import {
-    Accordion,
-    AccordionContent,
-    AccordionItem,
-    AccordionTrigger,
-  } from "@/components/ui/accordion";
-  
-  export function FAQ() {
-    return (
-        <div className="w-full max-w-7xl mx-auto my-20">
-<h1 className="text-4xl font-bold  my-10">Frequently Asked Questions </h1>
-      <Accordion type="single" collapsible className="">
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+
+export function FAQ() {
+  return (
+    <div className="w-full max-w-7xl mx-auto my-20 max-h-[60vh]">
+      <h1 className="text-4xl font-bold  my-5">Frequently Asked Questions </h1>
+    <div className="flex justify-between items-center gap-10">
+
+      <div className="flex-1">
+          <Accordion type="single" collapsible className="text-blue-500">
+
+        <AccordionItem value="Do I need a credit card?">
+          <AccordionTrigger>Do I need a credit card?</AccordionTrigger>
+          <AccordionContent>
+            - Yes, a valid credit card is required for booking.
+          </AccordionContent>
+        </AccordionItem>
+        <AccordionItem value="Is there a mileage limit?">
+          <AccordionTrigger>Is there a mileage limit?</AccordionTrigger>
+          <AccordionContent>
+            - Unlimited mileage on all rentals.
+          </AccordionContent>
+        </AccordionItem>
+        <AccordionItem value="Can I cancel my booking?">
+          <AccordionTrigger>Can I cancel my booking?</AccordionTrigger>
+          <AccordionContent>
+            - Yes, free cancellation up to 24 hours before pick-up.
+          </AccordionContent>
+        </AccordionItem>
+      </Accordion>
+      </div>
+      <div className="flex-1 ">
+        <img src="https://miro.medium.com/v2/resize:fit:1400/0*fjAGp_YGPXNRI6Zo" alt="" className="w-full" />
+      </div>
+    </div>
+    </div>
+  );
+}
+
 
         {/* <AccordionItem value="pricing">
           <AccordionTrigger>Pricing Details</AccordionTrigger>
@@ -51,27 +83,3 @@ import {
           </AccordionContent>
         </AccordionItem>
  */}
-
-        <AccordionItem value="Do I need a credit card?">
-          <AccordionTrigger>Do I need a credit card?</AccordionTrigger>
-          <AccordionContent>
-          - Yes, a valid credit card is required for booking.
-          </AccordionContent>
-        </AccordionItem>
-        <AccordionItem value="Is there a mileage limit?">
-          <AccordionTrigger>Is there a mileage limit?</AccordionTrigger>
-          <AccordionContent>
-          - Unlimited mileage on all rentals.
-          </AccordionContent>
-        </AccordionItem>
-        <AccordionItem value="Can I cancel my booking?">
-          <AccordionTrigger>Can I cancel my booking?</AccordionTrigger>
-          <AccordionContent>
-          - Yes, free cancellation up to 24 hours before pick-up.
-          </AccordionContent>
-        </AccordionItem>
-      </Accordion>
-        </div>
-    );
-  }
-  

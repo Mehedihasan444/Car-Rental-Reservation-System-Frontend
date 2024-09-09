@@ -16,23 +16,25 @@ import { RatingComponent } from "@/utils/RatingComponent";
 import { HoverCardReview } from "./HoverCardReview";
 import { useGetAllReviewsQuery } from "@/redux/features/review/reviewApi";
 import { TReview } from "@/types/TReview";
-import Avatar from 'react-avatar';
+import Avatar from "react-avatar";
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
 
 export const Testimonial = () => {
-  const {data={}}=useGetAllReviewsQuery(undefined)
-  const {data:reviews}=data
-console.log(reviews)
+  const { data = {} } = useGetAllReviewsQuery(undefined);
+  const { data: reviews } = data;
+  const [isExpanded, setIsExpanded] = useState(false);
+  const MAX_LENGTH = 100; // Adjust the max length for truncation
+
+  const toggleReadMore = () => {
+    setIsExpanded(!isExpanded);
+  };
   return (
-    <div
-      className=" bg-center bg-cover  max-w-7xl mx-auto bg-no-repeat w-full h-full my-10 lg:min-h-[500px]"
-      style={{
-        backgroundImage: `url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLwHJnFbz5ZL93i4-aIZoABzuSyhWk_8p4zv-n1PYumHCe5g583fP8Otsz8Y1A0w5i6Xc&usqp=CAU')`, // Replace with your background image URL
-      }}
-    >
-      <div className="bg-black bg-opacity-70  lg:rounded-lg px-10 py-20 lg:p-20   text-white lg:flex justify-between gap-10 lg:min-h-[500px] h-full w-full">
+    <div className=" w-full h-full mt-10 ">
+      <div className="max-w-7xl mx-auto lg:rounded-lg px-10 py-20 lg:p-20    lg:flex justify-between gap-10  h-full w-full">
         <div className="flex flex-col justify-center text-left flex-1">
           <div className="">
-            <h3 className="text-sm bg-opacity-70  mb-6 bg-white p-3 rounded-md text-blue-700 inline-block font-bold">
+            <h3 className="text-sm bg-opacity-70  mb-6  rounded-md text-blue-700 inline-block font-bold">
               Trusted by thousands for a seamless rental experience.
             </h3>
           </div>
@@ -46,41 +48,63 @@ console.log(reviews)
           </p>
         </div>
         {/* testimonials */}
-        <div className="w-full flex justify-center items-center flex-1">
+        <div className="w-full flex justify-center items-center flex-1  py-14 ">
           <Carousel
             opts={{
               align: "start",
             }}
-            orientation="vertical"
-            className="w-full max-w-xs"
+            // orientation="vertical"
+            className="w-full max-w-sm shadow-lg"
           >
-            <CarouselContent className="-mt-1 h-[310px]">
-              {reviews?.map((testimonial:TReview, index:number) => (
-                <CarouselItem key={index}>
-                  <div className="p-4">
-                    <Card className="bg-white bg-opacity-90">
+            <CarouselContent className="-mt-1 rounded-md">
+              {reviews?.map((testimonial: TReview, index: number) => (
+                <CarouselItem key={index} className="">
+                  <div className="p-4 bg-blue-200  bg-opacity-90   ">
+                    <Card className="min-h-[350px] flex items-center justify-center flex-col">
                       <CardHeader className="flex items-center justify-center space-x-4 pb-0">
                         <div className="flex items-center justify-center">
-                        <Avatar name={testimonial.name} size="50" className="rounded-full"/>
+                          <Avatar
+                            name={testimonial.name}
+                            size="50"
+                            className="rounded-full"
+                          />
                           {/* <img
                             src={testimonial?.image}
                             alt={`${testimonial.name}'s photo`}
                             className="w-12 h-12 rounded-full"
                           /> */}
                         </div>
-                        <div className="!ml-0">
+                        <div className="!ml-0 ">
                           <CardTitle className="text-lg text-center ">
                             {testimonial.name}
                           </CardTitle>
-                          <RatingComponent value={testimonial.rating} />
+                          <RatingComponent  value={testimonial.rating} />
                         </div>
                       </CardHeader>
-                      <CardContent className="">
+                      <CardContent className="mt-2">
                         <CardDescription className="text-center">
-                          {testimonial.comment}
+                          {isExpanded ||
+                          testimonial.comment.length <= MAX_LENGTH
+                            ? testimonial.comment
+                            : `${testimonial.comment.substring(
+                                0,
+                                MAX_LENGTH
+                              )}...`}
                         </CardDescription>
+
+                        {testimonial.comment.length > MAX_LENGTH && (
+                          <div className="flex justify-end items-start ">
+
+                          <Button variant={"link"} size={"sm"} 
+                            onClick={toggleReadMore}
+                            className="text-blue-500 hover:underline text-xs"
+                          >
+                            {isExpanded ? "Read Less" : "Read More"}
+                          </Button>
+                          </div>
+                        )}
                         <div className="flex items-center justify-center ">
-                          <HoverCardReview testimonial={testimonial}/>
+                          <HoverCardReview testimonial={testimonial} />
                         </div>
                       </CardContent>
                     </Card>
@@ -88,8 +112,8 @@ console.log(reviews)
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <CarouselPrevious className="text-black" />
-            <CarouselNext className="text-black" />
+            <CarouselPrevious className="text-black dark:text-white" />
+            <CarouselNext className="text-black dark:text-white" />
           </Carousel>
         </div>
       </div>

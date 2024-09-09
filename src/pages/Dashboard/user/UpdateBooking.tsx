@@ -38,15 +38,15 @@ import { useUpdateBookingMutation } from "@/redux/features/booking/bookingApi";
 import { toast } from "@/components/ui/use-toast";
 
 export function UpdateBooking({ booking }: { booking: TBooking }) {
-  const { data = {} } = useGetAllCarsQuery(undefined);
-  const { data: cars } = data;
+
+  const { data = {} } = useGetAllCarsQuery({page:1,limit:10});
+  const {  cars } = data.data|| {};
   const [formData, setFormData] = useState({
     car: booking?.car?._id || "",
     date: new Date(booking?.date).toISOString().split("T")[0],
     startTime: booking?.startTime || "",
   });
   const [updateBooking] = useUpdateBookingMutation();
-
   const handleDateChange = (day: Date | undefined) => {
     if (day) {
       setFormData((prevData) => ({
@@ -71,11 +71,11 @@ export function UpdateBooking({ booking }: { booking: TBooking }) {
   };
 
   const handleSaveChanges = () => {
-    console.log(formData);
     updateBooking({ bookingId: booking._id, ...formData })
       .unwrap()
       .then((res) => {
         if (res.success) {
+
           toast({
             description: "Booking updated successfully!",
           });
@@ -89,7 +89,10 @@ export function UpdateBooking({ booking }: { booking: TBooking }) {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="outline" disabled={booking?.isBooked === "confirmed"}>
+        <Button
+          variant="outline"
+          disabled={booking?.isBooked === "confirmed" || booking?.isBooked === "returned"}
+        >
           Modify
         </Button>
       </DialogTrigger>

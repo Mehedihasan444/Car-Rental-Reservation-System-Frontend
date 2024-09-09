@@ -1,11 +1,12 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import {
-  useGetAllBookingsQuery,
-  useUpdateBookingMutation,
-} from "@/redux/features/booking/bookingApi";
+import { useGetAllBookingsQuery } from "@/redux/features/booking/bookingApi";
 import { TBooking } from "@/types/TBooking";
 import { toast } from "@/components/ui/use-toast";
+import { useReturnCarMutation } from "@/redux/features/car/carApi";
+import { format } from "date-fns";
+
+const now = new Date();
 
 const ManageReturnCars = () => {
   // fetch user bookings
@@ -14,16 +15,15 @@ const ManageReturnCars = () => {
   const bookedCars = bookings?.filter(
     (booking: TBooking) => booking.isBooked === "confirmed"
   );
-  // update bookings
-  const [updateBooking] = useUpdateBookingMutation();
+  // returned car
+  const [returnCar] = useReturnCarMutation();
 
   const handleReturn = async (booking: TBooking) => {
     const newData = {
-      isBooked: "returned",
       bookingId: booking?._id,
+      endTime: format(now, "HH:mm"),
     };
-    const res = await updateBooking(newData);
-    console.log(res);
+    const res = await returnCar(newData);
     if (res?.data?.success) {
       toast({
         description: "Booking updated successfully!",
@@ -67,46 +67,56 @@ const ManageReturnCars = () => {
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
-                {bookedCars?.map((car: TBooking) => (
-                  <tr key={car._id}>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                      {car?.user?.name}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      {car?.car?.name}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      {car?.date}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      {car.startTime}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      {car.isBooked === "returned" ? car.endTime : "N/A"}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      <span
-                        className={`inline-flex px-3 py-1 text-xs font-medium leading-5 rounded-full ${
-                          car.isBooked === "confirmed"
-                            ? "bg-yellow-100 text-yellow-800"
-                            : "bg-green-100 text-green-800"
-                        }`}
-                      >
-                        {car?.isBooked === "confirmed" ? "Booked" : "N/A"}
-                      </span>
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                      {car.isBooked === "confirmed" && (
-                        <Button
-                          onClick={() => handleReturn(car)}
-                          className="bg-blue-500 text-white hover:bg-blue-600"
-                        >
-                          Return Car
-                        </Button>
-                      )}
+                {!bookedCars?.length ? (
+                  <tr>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:bg-black dark:text-white">
+                      
+                        No bookings available.
+                   
                     </td>
                   </tr>
-                ))}
+                ) : (
+                  bookedCars?.map((car: TBooking) => (
+                    <tr key={car._id}>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                        {car?.user?.name}
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                        {car?.car?.name}
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                        {car?.date}
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                        {car.startTime}
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                        {car.isBooked === "returned" ? car.endTime : "N/A"}
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                        <span
+                          className={`inline-flex px-3 py-1 text-xs font-medium leading-5 rounded-full ${
+                            car.isBooked === "confirmed"
+                              ? "bg-yellow-100 text-yellow-800"
+                              : "bg-green-100 text-green-800"
+                          }`}
+                        >
+                          {car?.isBooked === "confirmed" ? "Booked" : "N/A"}
+                        </span>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                        {car.isBooked === "confirmed" && (
+                          <Button
+                            onClick={() => handleReturn(car)}
+                            className="bg-blue-500 text-white hover:bg-blue-600"
+                          >
+                            Return Car
+                          </Button>
+                        )}
+                      </td>
+                    </tr>
+                  ))
+                )}
               </tbody>
             </table>
           </CardContent>

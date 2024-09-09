@@ -9,7 +9,7 @@ const SocialLogin = () => {
     <>
       <div className="relative mb-5">
         <hr className="mx-6 " />
-        <p className="text-center absolute -top-3 bg-white inline-block right-0 left-0 w-40 mx-auto px-5">
+        <p className="text-center absolute -top-3 bg-white dark:bg-black dark:text-white inline-block right-0 left-0 w-40 mx-auto px-5">
           Or sign up with
         </p>
       </div>

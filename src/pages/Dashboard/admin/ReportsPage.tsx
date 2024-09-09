@@ -115,19 +115,19 @@ const ReportsPage = () => {
         {/* Reports Card */}
         <Card className="shadow-lg ">
           <CardHeader>
-            <CardTitle>Reports</CardTitle>
+            <CardTitle >Reports</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-6">
               {/* Report Filters */}
               <div className="bg-white p-4 rounded-lg shadow flex flex-row items-center gap-5 justify-between">
-                <h3 className="text-lg font-medium">Filter Reports</h3>
+                <h3 className="text-lg font-medium dark:text-black">Filter Reports</h3>
                 <div className="flex items-center space-x-4">
                   <select
                     id="interval"
                     value={interval}
                     onChange={handleIntervalChange}
-                    className="p-2 border rounded"
+                    className="p-2 border rounded dark:text-black"
                   >
                     {options.map((option) => (
                       <option key={option.value} value={option.value}>
@@ -163,7 +163,7 @@ const ReportsPage = () => {
                   </div>
                   <Button
                     onClick={handlePrintReport}
-                    className="bg-green-500 text-white hover:bg-green-600 mt-4"
+                    className="bg-green-500 text-white hover:bg-green-600 mt-4 dark:bg-green-500 dark:text-white dark:hover:bg-green-600"
                   >
                     Print Report
                   </Button>

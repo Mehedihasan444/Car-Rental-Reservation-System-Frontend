@@ -10,6 +10,7 @@ import { format } from "date-fns";
 import { Calendar as CalendarIcon, MapPin } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 export const HeroSection = () => {
   const [pickUpDate, setPickUpDate] = useState<Date>();
@@ -30,21 +31,25 @@ export const HeroSection = () => {
         <p className="text-lg sm:text-xl mb-6 sm:mb-8">
           Trusted by thousands for a seamless rental experience.
         </p>
-
-        <Button size="lg" className="bg-red-600 hover:bg-red-700 mb-6 sm:mb-10">
+        <Link to="/booking">
+        <Button
+          size="lg"
+          className="bg-red-600 hover:bg-red-700 mb-6 sm:mb-10 dark:bg-red-600 dark:hover:bg-red-700 dark:text-white"
+          >
           Book Now
         </Button>
+          </Link>
 
         <div className="bg-white bg-opacity-90 p-4 sm:p-6 rounded-lg shadow-lg w-full max-w-md sm:max-w-2xl">
           <form className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <div className="relative w-full sm:w-auto flex-1">
               <MapPin
                 size={16}
-                className="absolute left-3 top-1/2 transform -translate-y-1/2 text-black"
+                className="absolute left-3 top-1/2 transform -translate-y-1/2 text-black dark:text-white"
               />
               <Input
                 placeholder="Enter location"
-                className="pl-10 flex-1 text-black"
+                className="pl-10 flex-1 text-black dark:text-white"
               />
             </div>
 
@@ -57,11 +62,13 @@ export const HeroSection = () => {
                     !pickUpDate && "text-muted-foreground"
                   )}
                 >
-                  <CalendarIcon className="mr-2 h-4 w-4 text-black" />
+                  <CalendarIcon className="mr-2 h-4 w-4 text-black dark:text-white" />
                   {pickUpDate ? (
                     format(pickUpDate, "PPP")
                   ) : (
-                    <span className="text-black">Pick-up date</span>
+                    <span className="text-black dark:text-white">
+                      Pick-up date
+                    </span>
                   )}
                 </Button>
               </PopoverTrigger>
@@ -84,11 +91,13 @@ export const HeroSection = () => {
                     !dropOffDate && "text-muted-foreground"
                   )}
                 >
-                  <CalendarIcon className="mr-2 h-4 w-4 text-black" />
+                  <CalendarIcon className="mr-2 h-4 w-4 text-black dark:text-white" />
                   {dropOffDate ? (
                     format(dropOffDate, "PPP")
                   ) : (
-                    <span className="text-black">Drop-off date</span>
+                    <span className="text-black dark:text-white">
+                      Drop-off date
+                    </span>
                   )}
                 </Button>
               </PopoverTrigger>
@@ -101,10 +110,10 @@ export const HeroSection = () => {
                 />
               </PopoverContent>
             </Popover>
-
-            <Button className="bg-blue-600 hover:bg-blue-700 w-full sm:w-auto">
+            <Link to="/cars">
+            <Button className="bg-blue-600 hover:bg-blue-700 w-full sm:w-auto  dark:bg-blue-600 dark:hover:bg-blue-700 dark:text-white">
               Check Availability
-            </Button>
+            </Button></Link>
           </form>
         </div>
       </div>

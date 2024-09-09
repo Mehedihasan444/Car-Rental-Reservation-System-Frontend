@@ -97,7 +97,7 @@ const userRoutes = [
         },
         {
           path: "booking",
-          element: <BookingPage />,
+          element:   <ProtectedRoute allowedRoles={['user',"admin"]}><BookingPage /></ProtectedRoute>,
         },
       ],
     },

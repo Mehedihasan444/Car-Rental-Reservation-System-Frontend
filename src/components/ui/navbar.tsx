@@ -7,19 +7,20 @@ import {
   NavigationMenuList,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { Button } from "./button";
 import carLogo from "../../assets/carLogo.png";
 import { ResponsiveSidebar } from "./responsiveSidebar";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { RootState } from "@/redux/store";
 import { logout } from "@/redux/features/auth/authSlice";
+// import { FaMoon, FaSun } from "react-icons/fa";
+import { ModeToggle } from "./ModeToggle";
 
 export function Navbar() {
   const user = useAppSelector((state: RootState) => state?.auth?.user);
   const dispatch = useAppDispatch();
 
-  
   const handleLogout = () => {
     // Logout logic here
     dispatch(logout());
@@ -42,58 +43,119 @@ export function Navbar() {
         <ResponsiveSidebar />
         <NavigationMenu className="hidden sm:inline-block">
           <NavigationMenuList className="space-x-4">
-            <NavigationMenuItem>
-              <Link to="/">
+            <NavigationMenuItem className="dark:text-white">
+              <NavLink
+                to="/"
+                className={({ isActive, isPending, isTransitioning }) =>
+                  [
+                    isPending ? "pending" : "",
+                    isActive ? "text-blue-500" : "",
+                    isTransitioning ? "transitioning" : "",
+                  ].join(" ")
+                }
+              >
                 <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                   Home
                 </NavigationMenuLink>
-              </Link>
+              </NavLink>
             </NavigationMenuItem>
-            <NavigationMenuItem>
-              <Link to="/cars">
+            <NavigationMenuItem className="dark:text-white">
+              <NavLink
+                to="/cars"
+                className={({ isActive, isPending, isTransitioning }) =>
+                  [
+                    isPending ? "pending" : "",
+                    isActive ? "text-blue-500" : "",
+                    isTransitioning ? "transitioning" : "",
+                  ].join(" ")
+                }
+              >
                 <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                   Cars
                 </NavigationMenuLink>
-              </Link>
+              </NavLink>
             </NavigationMenuItem>
-            <NavigationMenuItem>
-              <Link to="/about">
+            <NavigationMenuItem className="dark:text-white">
+              <NavLink
+                to="/about"
+                className={({ isActive, isPending, isTransitioning }) =>
+                  [
+                    isPending ? "pending" : "",
+                    isActive ? "text-blue-500" : "",
+                    isTransitioning ? "transitioning" : "",
+                  ].join(" ")
+                }
+              >
                 <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                   About Us
                 </NavigationMenuLink>
-              </Link>
+              </NavLink>
             </NavigationMenuItem>
-            <NavigationMenuItem>
-              <Link to="/booking">
+            <NavigationMenuItem className="dark:text-white">
+              <NavLink
+                to="/booking"
+                className={({ isActive, isPending, isTransitioning }) =>
+                  [
+                    isPending ? "pending" : "",
+                    isActive ? "text-blue-500" : "",
+                    isTransitioning ? "transitioning" : "",
+                  ].join(" ")
+                }
+              >
                 <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                   Booking
                 </NavigationMenuLink>
-              </Link>
+              </NavLink>
             </NavigationMenuItem>
-           { user&&<NavigationMenuItem>
-              <Link to={`/dashboard/${user?.role}`}>
-                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                  Dashboard
-                </NavigationMenuLink>
-              </Link>
-            </NavigationMenuItem>}
+            {user && (
+              <NavigationMenuItem className="dark:text-white">
+                <NavLink
+                  to={`/dashboard/${user?.role}`}
+                  className={({ isActive, isPending, isTransitioning }) =>
+                    [
+                      isPending ? "pending" : "",
+                      isActive ? "text-blue-500" : "",
+                      isTransitioning ? "transitioning" : "",
+                    ].join("dark:text-white ")
+                  }
+                >
+                  <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                    Dashboard
+                  </NavigationMenuLink>
+                </NavLink>
+              </NavigationMenuItem>
+            )}
           </NavigationMenuList>
         </NavigationMenu>
       </div>
 
       {/* Login/Sign Up Buttons */}
       <div className="space-x-2 hidden sm:inline-block">
+  
+       
+        {/* <Button variant={"outline"}>
+          <FaMoon />
+        </Button>
+        <Button variant={"outline"}>
+          <FaSun />
+        </Button> */}
+     
         {user ? (
-          <Button onClick={handleLogout}>Logout</Button>
+          <div className="flex items-center justify-between gap-3">
+           <ModeToggle/>
+          <Button className="dark:border-black dark:border" onClick={handleLogout}>Logout</Button>
+          </div>
         ) : (
-          <>
+          <div className="flex items-end justify-center gap-3">
+        
+           <ModeToggle/>
             <Link to="/login">
-              <Button variant="outline">Login</Button>
+              <Button variant="outline" className="dark:text-white">Login</Button>
             </Link>
             <Link to="/register">
-              <Button>Sign Up</Button>
+              <Button className="dark:border-black dark:border" >Sign Up</Button>
             </Link>
-          </>
+          </div>
         )}
       </div>
     </div>

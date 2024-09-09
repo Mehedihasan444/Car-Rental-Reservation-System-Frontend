@@ -43,7 +43,7 @@ export function DashboardSidebar() {
 
   const getLinkClasses = (path: string) =>
     location.pathname === path
-      ? "bg-gray-700 text-white"
+      ? "bg-white text-black dark:text-black"
       : "text-gray-300 hover:bg-gray-700";
 
   return (
@@ -65,7 +65,7 @@ export function DashboardSidebar() {
                 Dashboard
               </SheetTitle>
             </SheetHeader>
-            <Separator className="mb-3" />
+            <Separator className="mb-3 "  />
 
             {/* Main content area with flex-grow */}
             <div className=" grid gap-4 mt-2">
@@ -86,7 +86,7 @@ export function DashboardSidebar() {
               <Link to="/" className="w-full">
                 <Button
                   variant="outline"
-                  className="w-full mt-4 text-gray-800 text-lg flex items-center justify-center"
+                  className="w-full mt-4 text-gray-800 text-lg flex items-center justify-center dark:text-white"
                 >
                   <FaHome size={25} className="mr-5" />
                   Back To Home
@@ -121,7 +121,7 @@ export function DashboardSidebar() {
           <Link to="/">
             <Button
               variant="outline"
-              className="w-full mt-4 text-gray-800 text-lg"
+              className="w-full mt-4 text-gray-800 text-lg dark:text-white"
             >
               <FaHome size={25} className="mr-5" /> Back To Home
             </Button>

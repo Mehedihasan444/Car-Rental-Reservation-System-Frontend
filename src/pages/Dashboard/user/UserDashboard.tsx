@@ -6,7 +6,7 @@ import { useGetUserQuery, useUpdateUserMutation } from "@/redux/features/user/us
 import { useAppSelector } from "@/redux/hooks";
 import { RootState } from "@/redux/store";
 import { TBooking } from "@/types/TBooking";
-import {  useState } from "react";
+import {  useEffect, useState } from "react";
 
 const UserDashboard = () => {
   const user = useAppSelector((state: RootState) => state?.auth?.user);
@@ -47,7 +47,16 @@ const UserDashboard = () => {
     });
     setIsEditing(false);
   };
-
+useEffect(()=>{
+  setFormData(
+    {
+      name: userInfo?.name ,
+      email: userInfo?.email ,
+      phone: userInfo?.phone ,
+      address: userInfo?.address ,
+    }
+  )
+},[userInfo])
 
   return (
     <div className="p-6 bg-gray-50 h-screen w-full overflow-y-scroll">
