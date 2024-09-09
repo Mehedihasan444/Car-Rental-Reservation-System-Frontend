@@ -7,9 +7,9 @@ import {
 
 export function FAQ() {
   return (
-    <div className="w-full max-w-7xl mx-auto my-20 max-h-[60vh]">
+    <div className="w-full max-w-7xl mx-auto my-20 sm:max-h-[60vh] px-5 lg:px-0">
       <h1 className="text-4xl font-bold  my-5">Frequently Asked Questions </h1>
-    <div className="flex justify-between items-center gap-10">
+    <div className="sm:flex justify-between items-center gap-10">
 
       <div className="flex-1">
           <Accordion type="single" collapsible className="text-blue-500">

@@ -74,7 +74,7 @@ export const Footer = () => {
           </div>
 
           {/* Navigation Links */}
-          <div className="flex-1 flex flex-col items-center space-y-5">
+          <div className="flex-1 flex flex-col items-center justify-center space-y-5 w-full my-5 ">
             <h3 className="font-semibold text-lg">Navigation Links</h3>
             <div className=" space-y-4 text-sm text-left flex flex-col w-full items-center">
               <Link to="/cars" className="hover:text-gray-400">
@@ -90,25 +90,25 @@ export const Footer = () => {
           </div>
 
           {/* Newsletter Subscription */}
-          <div className="flex-1 space-y-5 flex flex-col items-end ">
+          <div className="flex-1 space-y-5 flex flex-col items-center w-full sm:items-end ">
             <h3 className="font-semibold text-lg">
               Get New letter by subscribing
             </h3>
             <form
               onSubmit={handleSubscribe}
-              className="mb-6 md:mb-0 space-y-3 sm:space-y-0 "
+              className="mb-6 md:mb-0 space-y-3 lg:space-y-0 "
             >
               <input
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="px-4 py-2 text-gray-900 rounded-l-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="px-4 py-2 text-gray-900 rounded-l-md focus:outline-none focus:ring-2 focus:ring-blue-500 "
                 placeholder="Subscribe to our newsletter"
                 required
               />
               <button
                 type="submit"
-                className="px-4 py-2 bg-blue-600 rounded-r-md text-white hover:bg-blue-700 transition"
+                className="px-4 py-2  bg-blue-600 rounded-r-md text-white hover:bg-blue-700 transition"
               >
                 Subscribe
               </button>
@@ -117,17 +117,17 @@ export const Footer = () => {
         </div>
 
         <div className="border-t border-gray-700 pt-6 mt-6 text-center">
-        <div className=" space-x-4 text-center my-2 ">
-              <Link to="/privacy-policy" className="hover:text-gray-400">
-                Privacy Policy
-              </Link>
-              <Link to="/terms-of-service" className="hover:text-gray-400">
-                Terms of Service
-              </Link>
-              <Link to="/contact" className="hover:text-gray-400">
-                Contact Us
-              </Link>
-            </div>
+          <div className=" space-x-4 text-center my-2 ">
+            <Link to="/privacy-policy" className="hover:text-gray-400">
+              Privacy Policy
+            </Link>
+            <Link to="/terms-of-service" className="hover:text-gray-400">
+              Terms of Service
+            </Link>
+            <Link to="/contact" className="hover:text-gray-400">
+              Contact Us
+            </Link>
+          </div>
           <p className="text-sm text-gray-400 mb-4">
             &copy; {new Date().getFullYear()} RentoCar. All rights reserved.
           </p>

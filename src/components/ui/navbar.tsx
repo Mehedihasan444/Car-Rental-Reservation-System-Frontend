@@ -39,7 +39,10 @@ export function Navbar() {
       </div>
 
       {/* Navigation Menu */}
-      <div className="">
+      <div className="flex gap-3 ">
+        <div className="sm:hidden">
+          <ModeToggle />
+        </div>
         <ResponsiveSidebar />
         <NavigationMenu className="hidden sm:inline-block">
           <NavigationMenuList className="space-x-4">
@@ -131,29 +134,33 @@ export function Navbar() {
 
       {/* Login/Sign Up Buttons */}
       <div className="space-x-2 hidden sm:inline-block">
-  
-       
         {/* <Button variant={"outline"}>
           <FaMoon />
         </Button>
         <Button variant={"outline"}>
           <FaSun />
         </Button> */}
-     
+
         {user ? (
           <div className="flex items-center justify-between gap-3">
-           <ModeToggle/>
-          <Button className="dark:border-black dark:border" onClick={handleLogout}>Logout</Button>
+            <ModeToggle />
+            <Button
+              className="dark:border-black dark:border"
+              onClick={handleLogout}
+            >
+              Logout
+            </Button>
           </div>
         ) : (
           <div className="flex items-end justify-center gap-3">
-        
-           <ModeToggle/>
+            <ModeToggle />
             <Link to="/login">
-              <Button variant="outline" className="dark:text-white">Login</Button>
+              <Button variant="outline" className="dark:text-white">
+                Login
+              </Button>
             </Link>
             <Link to="/register">
-              <Button className="dark:border-black dark:border" >Sign Up</Button>
+              <Button className="dark:border-black dark:border">Sign Up</Button>
             </Link>
           </div>
         )}

@@ -1,7 +1,7 @@
 const Promise = () => {
     return (
       <div className="bg-gray-100 py-10 ">
-        <div className="max-w-7xl mx-auto space-y-8 px-6 lg:px-8 flex  justify-between items-center gap-5">
+        <div className="max-w-7xl mx-auto space-y-8 px-6 lg:px-8 lg:flex  justify-between items-center gap-5">
           {/* Image Section */}
           <div className="relative flex-1 flex items-center justify-center ">
             <img
