@@ -15,7 +15,8 @@ const PaymentManagement = () => {
 
   const handlePay = async (car: TBooking) => {
     // Implement payment logic here
-    const res = await axios.post("http://localhost:5000/api/payment", car);
+    // const res = await axios.post("http://localhost:5000/api/payment", car);
+    const res = await axios.post("https://car-rental-reservation-system-backend-sigma.vercel.app/api/payment", car);
     if (res?.data?.data?.payment_url)
       window.location.href = res?.data?.data?.payment_url;
   };

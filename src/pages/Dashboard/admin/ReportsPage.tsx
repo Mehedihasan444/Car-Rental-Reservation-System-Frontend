@@ -10,6 +10,7 @@ import {
   Title,
   Tooltip,
   Legend,
+  LineController,
 } from "chart.js";
 import printJS from "print-js";
 import { useGetAllBookingsQuery } from "@/redux/features/booking/bookingApi";
@@ -18,7 +19,7 @@ import { TBooking } from "@/types/TBooking";
 import { TChartData } from "@/types/TChartData";
 
 // Register ChartJS components
-ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
+ChartJS.register(  LineController,CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
 const ReportsPage = () => {
   const { data = {} } = useGetAllBookingsQuery(undefined);
