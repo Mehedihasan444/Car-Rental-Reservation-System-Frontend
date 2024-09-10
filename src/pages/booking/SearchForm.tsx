@@ -1,4 +1,4 @@
-import { Input } from "@/components/ui/input";
+
 import { Label } from "@/components/ui/label";
 import {
   Select,
@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/select";
 import { TQueries } from "@/types/TQueries";
 import { useState } from "react";
+import MultiSelect from "./MultiSelect";
 
 const SearchForm = ({
   queries,
@@ -20,36 +21,34 @@ const SearchForm = ({
 }) => {
   const [formData, setFormData] = useState({
     type: "",
-    features: "",
+    features: [] as string[], // Storing selected features as an array
     engineType: "",
-    // location: "",
-    // pickupDate: "",
-    // dropOffDate: ""
   });
+const [features,setFeatures]=useState<string[]>([])
+
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setQueries({
       ...queries,
-      searchTerm: formData?.features,
+      searchTerm: features,
       type: formData?.type,
       engineType: formData?.engineType,
-      // location: formData?.location,
-      // pickupDate: formData?.pickupDate,
-      // dropOffDate: formData?.dropOffDate
     });
   };
 
   return (
     <div className="bg-white shadow-lg dark:bg-slate-700 rounded-lg p-6 mx-5 sm:mx-0">
-      <h2 className="text-2xl font-semibold mb-4 dark:text-white">Search for Cars</h2>
+      <h2 className="text-2xl font-semibold mb-4 dark:text-white">
+        Search for Cars
+      </h2>
       <form onSubmit={handleSubmit}>
         <div className="flex flex-wrap gap-5 justify-between ">
+          {/* Car Type */}
           <div className="mb-4 flex items-center gap-5">
-            <Label className="dark:text-white block text-lg font-medium text-gray-700  w-full">
+            <Label className="dark:text-white block text-lg font-medium text-gray-700 w-full">
               Car Type
             </Label>
-
             <Select
               value={formData?.type || ""}
               onValueChange={(value) =>
@@ -59,7 +58,7 @@ const SearchForm = ({
               <SelectTrigger className="min-w-[180px] dark:text-white">
                 <SelectValue placeholder="Select Type" />
               </SelectTrigger>
-              <SelectContent>
+              <SelectContent >
                 <SelectGroup>
                   <SelectItem value="Sedan">Sedan</SelectItem>
                   <SelectItem value="SUV">SUV</SelectItem>
@@ -74,23 +73,150 @@ const SearchForm = ({
               </SelectContent>
             </Select>
           </div>
+
+          {/* Car Features - Multiselect */}
           <div className="mb-4 flex items-center gap-5">
             <Label className="dark:text-white block text-lg font-medium text-gray-700">
               Features
             </Label>
-            <Input
-              type="text"
-              name="features"
-              value={formData?.features || ""}
-              onChange={(e) =>
-                setFormData({ ...formData, features: e.target.value })
-              }
-              placeholder="GPS, AC, Child Seat..."
-              className="dark:text-white"
-            />
+            <div className="min-w-[180px] dark:text-white">
+            {/* <Select>
+        <SelectTrigger className="min-w-[180px] dark:text-white">
+          <SelectValue placeholder="Select Features" />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectGroup>
+            <SelectItem
+              value="Air Conditioning"
+              onClick={() => handleFeatureChange("Air Conditioning")}
+            >
+              <div className="flex items-center">
+                <input
+                  type="checkbox"
+                  checked={formData.features.includes("Air Conditioning")}
+                  readOnly
+                  className="mr-2"
+                />
+                Air Conditioning
+              </div>
+            </SelectItem>
+            <SelectItem value="GPS" onClick={() => handleFeatureChange("GPS")}>
+              <div className="flex items-center">
+                <input
+                  type="checkbox"
+                  checked={formData.features.includes("GPS")}
+                  readOnly
+                  className="mr-2"
+                />
+                GPS
+              </div>
+            </SelectItem>
+            <SelectItem
+              value="Bluetooth"
+              onClick={() => handleFeatureChange("Bluetooth")}
+            >
+              <div className="flex items-center">
+                <input
+                  type="checkbox"
+                  checked={formData.features.includes("Bluetooth")}
+                  readOnly
+                  className="mr-2"
+                />
+                Bluetooth
+              </div>
+            </SelectItem>
+            <SelectItem
+              value="Backup Camera"
+              onClick={() => handleFeatureChange("Backup Camera")}
+            >
+              <div className="flex items-center">
+                <input
+                  type="checkbox"
+                  checked={formData.features.includes("Backup Camera")}
+                  readOnly
+                  className="mr-2"
+                />
+                Backup Camera
+              </div>
+            </SelectItem>
+            <SelectItem
+              value="Heated Seats"
+              onClick={() => handleFeatureChange("Heated Seats")}
+            >
+              <div className="flex items-center">
+                <input
+                  type="checkbox"
+                  checked={formData.features.includes("Heated Seats")}
+                  readOnly
+                  className="mr-2"
+                />
+                Heated Seats
+              </div>
+            </SelectItem>
+            <SelectItem
+              value="Sunroof"
+              onClick={() => handleFeatureChange("Sunroof")}
+            >
+              <div className="flex items-center">
+                <input
+                  type="checkbox"
+                  checked={formData.features.includes("Sunroof")}
+                  readOnly
+                  className="mr-2"
+                />
+                Sunroof
+              </div>
+            </SelectItem>
+            <SelectItem
+              value="Child Seat"
+              onClick={() => handleFeatureChange("Child Seat")}
+            >
+              <div className="flex items-center">
+                <input
+                  type="checkbox"
+                  checked={formData.features.includes("Child Seat")}
+                  readOnly
+                  className="mr-2"
+                />
+                Child Seat
+              </div>
+            </SelectItem>
+            <SelectItem
+              value="Cruise Control"
+              onClick={() => handleFeatureChange("Cruise Control")}
+            >
+              <div className="flex items-center">
+                <input
+                  type="checkbox"
+                  checked={formData.features.includes("Cruise Control")}
+                  readOnly
+                  className="mr-2"
+                />
+                Cruise Control
+              </div>
+            </SelectItem>
+            <SelectItem
+              value="Automatic Transmission"
+              onClick={() => handleFeatureChange("Automatic Transmission")}
+            >
+              <div className="flex items-center">
+                <input
+                  type="checkbox"
+                  checked={formData.features.includes("Automatic Transmission")}
+                  readOnly
+                  className="mr-2"
+                />
+                Automatic Transmission
+              </div>
+            </SelectItem>
+          </SelectGroup>
+        </SelectContent>
+      </Select> */}
+      <MultiSelect setFeatures={setFeatures}/>
+            </div>
           </div>
 
-          {/* Fuel Type filter */}
+          {/* Fuel Type */}
           <div className="mb-4 flex items-center gap-5">
             <Label className="dark:text-white block text-lg font-medium text-gray-700 w-full">
               Fuel Type
@@ -117,7 +243,25 @@ const SearchForm = ({
             </Select>
           </div>
 
-          {/* <div className="mb-4 flex flex-col">
+          {/* Search Button */}
+          <div className="mb-4 flex items-end">
+            <button
+              type="submit"
+              className="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 w-full"
+            >
+              Search Cars
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  );
+};
+
+export default SearchForm;
+
+{
+  /* <div className="mb-4 flex flex-col">
             <Label className="dark:text-white block text-lg font-medium text-gray-700">
               Location
             </Label>
@@ -156,19 +300,5 @@ const SearchForm = ({
                 setQueries({ ...queries, dropOffDate: e.target.value })
               }
             />
-          </div> */}
-          <div className="mb-4 flex items-end">
-            <button
-              type="submit"
-              className="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 w-full"
-            >
-              Search Cars
-            </button>
-          </div>
-        </div>
-      </form>
-    </div>
-  );
-};
-
-export default SearchForm;
+          </div> */
+}

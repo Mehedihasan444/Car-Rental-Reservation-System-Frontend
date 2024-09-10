@@ -25,12 +25,12 @@ const BookingPage = () => {
   const [userData, setUserData] = useState<TBookingData | null>(null);
   const [cars, setCars] = useState<TCar[]>([]);
 
-
+console.log(allCars)
   // UseEffect to set cars based on queries
   useEffect(() => {
-    if (queries?.type || queries?.features) {
+    // if (queries?.type || queries?.features || queries?.engineType) {
+    // }
       setCars(allCars || []);
-    }
   }, [queries, allCars]);
 
   const handleSelectCar = (car: TCar) => {

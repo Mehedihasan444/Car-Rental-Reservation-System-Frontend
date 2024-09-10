@@ -1,5 +1,5 @@
 export interface TQueries {
-  searchTerm?: string;
+  searchTerm?: string[];
   limit?: number;
   page?: number;
   sort?: string;

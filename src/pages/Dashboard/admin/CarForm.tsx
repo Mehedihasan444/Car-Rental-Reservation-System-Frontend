@@ -7,10 +7,11 @@ import {
   useCreateCarMutation,
   useUpdateCarMutation,
 } from "@/redux/features/car/carApi";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { TCar } from "@/types/TCar";
 import { toast } from "@/components/ui/use-toast";
 import axios from "axios";
+import MultiSelect from "@/pages/booking/MultiSelect";
 
 // imagebb credentials
 const imageHostingKey = import.meta.env.VITE_IMAGE_HOSTING_KEY;
@@ -22,8 +23,10 @@ const CarForm = ({ selectedCar }: { selectedCar: TCar | null }) => {
   const [formData, setFormData] = useState<Partial<TCar | null>>(selectedCar);
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
   const [imageFile, setImageFile] = useState<File[] | []>([]);
-  const [imagePreview, setImagePreview] = useState<string[]>(selectedCar?.images || []);
-
+  const [imagePreview, setImagePreview] = useState<string[]>(
+    selectedCar?.images || []
+  );
+  const [features, setFeatures] = useState<string[]>([]);
 
   const handleInputChange = (
     e: React.ChangeEvent<
@@ -34,10 +37,13 @@ const CarForm = ({ selectedCar }: { selectedCar: TCar | null }) => {
     setFormData({ ...formData, [id]: value });
   };
 
-  const handleFeatureChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
-    setFormData({ ...formData, features: value.split(",") });
-  };
+  useEffect(() => {
+    setFormData({ ...formData, features });
+  }, [features]);
+  // const handleFeatureChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   const { value } = e.target;
+  //   setFormData({ ...formData, features: value.split(",") });
+  // };
 
   const handleImageUpload = (files: FileList | null) => {
     if (files) {
@@ -101,7 +107,7 @@ const CarForm = ({ selectedCar }: { selectedCar: TCar | null }) => {
 
     try {
       if (selectedCar) {
-        const previousImages = selectedCar?.images 
+        const previousImages = selectedCar?.images;
         // Update existing car
         const updatedCar = {
           ...formData,
@@ -110,7 +116,6 @@ const CarForm = ({ selectedCar }: { selectedCar: TCar | null }) => {
           noOfDoors: Number(formData?.noOfDoors),
           images: [...previousImages, ...uploadedImageUrls],
         };
-
 
         const res = await updateCar({
           carId: selectedCar._id,
@@ -141,7 +146,7 @@ const CarForm = ({ selectedCar }: { selectedCar: TCar | null }) => {
       }
 
       // Clear the form and reset states
-      setFormData({}); 
+      setFormData({});
       setImageFile([]);
       setImagePreview([]);
     } catch (error) {
@@ -233,12 +238,13 @@ const CarForm = ({ selectedCar }: { selectedCar: TCar | null }) => {
 
         <div className="flex flex-col space-y-2">
           <Label htmlFor="features">Features (comma-separated)</Label>
-          <Input
+          {/* <Input
             id="features"
             placeholder="e.g., Air Conditioning, Navigation System"
             value={(formData?.features || []).join(",")}
             onChange={handleFeatureChange}
-          />
+          /> */}
+          <MultiSelect setFeatures={setFeatures} />
         </div>
         <div className="flex justify-between items-center gap-2">
           <div className="flex flex-col space-y-2 w-full">
