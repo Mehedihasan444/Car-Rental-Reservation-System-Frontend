@@ -27,40 +27,40 @@ export function ResponsiveSidebar() {
       <Drawer>
         <DrawerTrigger asChild>
           <Button variant="outline">
-            <Menu className="h-6 w-6" />
+            <Menu className="h-6 w-6 dark:text-white" />
           </Button>
         </DrawerTrigger>
         <DrawerContent>
           <div className="mx-auto w-full max-w-sm">
             <DrawerHeader>
-              <DrawerTitle>Menu</DrawerTitle>
+              <DrawerTitle className="dark:text-white">Menu</DrawerTitle>
             </DrawerHeader>
             <div className="p-4">
               <ul className="space-y-4">
                 <li>
-                  <Link to="/" className="block text-lg font-medium">
+                  <Link to="/" className="block text-lg font-medium dark:text-white">
                     Home
                   </Link>
                 </li>
                 <li>
-                  <Link to="/cars" className="block text-lg font-medium">
+                  <Link to="/cars" className="block text-lg font-medium dark:text-white">
                     Cars
                   </Link>
                 </li>
                 <li>
-                  <Link to="/about" className="block text-lg font-medium">
+                  <Link to="/about" className="block text-lg font-medium dark:text-white">
                     About Us
                   </Link>
                 </li>
                 <li>
-                  <Link to="/booking" className="block text-lg font-medium">
+                  <Link to="/booking" className="block text-lg font-medium dark:text-white">
                     Booking
                   </Link>
                 </li>
                 {user && (
                   <Link
                     to={`/dashboard/${user?.role}`}
-                    className="block text-lg font-medium"
+                    className="block text-lg font-medium dark:text-white"
                   >
                     Dashboard
                   </Link>
@@ -69,9 +69,9 @@ export function ResponsiveSidebar() {
             </div>
             <DrawerFooter className="flex flex-col space-y-2">
               {user ? (
-                <div className="flex items-center justify-between gap-3">
+                <div className="flex items-center justify-between gap-3 w-full">
                   <Button
-                    className="dark:border-black dark:border"
+                    className="dark:border-black dark:border w-full"
                     onClick={handleLogout}
                   >
                     Logout
@@ -84,7 +84,7 @@ export function ResponsiveSidebar() {
                   </Link>
 
                   <Link to="/register" className="w-full">
-                    <Button variant="outline" className="w-full">
+                    <Button variant="outline" className="w-full dark:text-white dark:border dark:border-white">
                       Sign Up
                     </Button>
                   </Link>

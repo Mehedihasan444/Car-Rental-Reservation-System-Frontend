@@ -24,7 +24,7 @@ export function CarsPageSideBer({
   setQueries: React.Dispatch<React.SetStateAction<TQueries>>;
 }) {
   const [priceRange, setPriceRange] = useState<number[]>([50]);
-  const handlePriceChange = (value:number[]) => {
+  const handlePriceChange = (value: number[]) => {
     setPriceRange(value);
   };
 
@@ -33,10 +33,7 @@ export function CarsPageSideBer({
       <div className="lg:hidden">
         <Sheet key={"left"}>
           <SheetTrigger asChild>
-            <Button
-              variant="ghost"
-              className="flex gap-2 text-lg  border"
-            >
+            <Button variant="ghost" className="flex gap-2 text-lg  border dark:text-white">
               <FaFilter /> Filter
             </Button>
           </SheetTrigger>
@@ -143,7 +140,10 @@ export function CarsPageSideBer({
                   className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300"
                   value={queries.seatingCapacity || ""}
                   onChange={(e) =>
-                    setQueries({ ...queries, seatingCapacity: Number(e.target.value) })
+                    setQueries({
+                      ...queries,
+                      seatingCapacity: Number(e.target.value),
+                    })
                   }
                 >
                   <option value="">All Seating Capacities</option>
@@ -161,7 +161,10 @@ export function CarsPageSideBer({
                   className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300"
                   value={queries.noOfDoors || ""}
                   onChange={(e) =>
-                    setQueries({ ...queries, noOfDoors: Number(e.target.value) })
+                    setQueries({
+                      ...queries,
+                      noOfDoors: Number(e.target.value),
+                    })
                   }
                 >
                   <option value="" selected disabled>
@@ -177,7 +180,10 @@ export function CarsPageSideBer({
               <div className="mb-4">
                 <h3 className="text-sm font-semibold mb-2">Price Range</h3>
                 <div className="flex justify-between items-center gap-2">
-                  <PriceSlider value={priceRange} onChange={handlePriceChange}/>
+                  <PriceSlider
+                    value={priceRange}
+                    onChange={handlePriceChange}
+                  />
                   <Button
                     variant={"outline"}
                     className=""
@@ -209,20 +215,23 @@ export function CarsPageSideBer({
       {/*  */}
       <div className="hidden lg:inline-block w-full">
         <div className="flex justify-between items-center">
-          <h2 className="text-lg font-semibold mb-4 flex items-center gap-2"><FaFilter/>Filter Options</h2>
+          <h2 className="dark:text-white text-lg font-semibold mb-4 flex items-center gap-2">
+            <FaFilter />
+            Filter Options
+          </h2>
           <Button
             variant={"outline"}
-        className="dark:text-white"
+            className="dark:text-white"
             onClick={() => setQueries({})}
           >
             Reset
           </Button>
         </div>
-        <Separator className="my-2"/>
+        <Separator className="my-2" />
 
         {/* Category filter */}
         <div className="mb-4">
-          <h3 className="text-sm font-semibold mb-2">Car Type</h3>
+          <h3 className="text-sm font-semibold mb-2 dark:text-white">Car Type</h3>
           <select
             className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300"
             value={queries.type || ""}
@@ -245,7 +254,7 @@ export function CarsPageSideBer({
 
         {/* Brand filter */}
         <div className="mb-4">
-          <h3 className="text-sm font-semibold mb-2">Brand</h3>
+          <h3 className="text-sm font-semibold mb-2 dark:text-white">Brand</h3>
           <select
             className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300"
             value={queries.brand || ""}
@@ -266,7 +275,7 @@ export function CarsPageSideBer({
 
         {/* Fuel Type filter */}
         <div className="mb-4">
-          <h3 className="text-sm font-semibold mb-2">Fuel Type</h3>
+          <h3 className="text-sm font-semibold mb-2 dark:text-white">Fuel Type</h3>
           <select
             className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300"
             value={queries.fuelType || ""}
@@ -288,7 +297,7 @@ export function CarsPageSideBer({
 
         {/* Transmission filter */}
         <div className="mb-4 ">
-          <h3 className="text-sm font-semibold mb-2">Transmission</h3>
+          <h3 className="text-sm font-semibold mb-2 dark:text-white">Transmission</h3>
           <select
             className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300"
             value={queries.transmission || ""}
@@ -306,12 +315,15 @@ export function CarsPageSideBer({
 
         {/* Seating Capacity filter */}
         <div className="mb-4">
-          <h3 className="text-sm font-semibold mb-2">Seating Capacity</h3>
+          <h3 className="text-sm font-semibold mb-2 dark:text-white">Seating Capacity</h3>
           <select
             className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300"
             value={queries.seatingCapacity || ""}
             onChange={(e) =>
-              setQueries({ ...queries, seatingCapacity: Number(e.target.value )})
+              setQueries({
+                ...queries,
+                seatingCapacity: Number(e.target.value),
+              })
             }
           >
             <option value="">All Seating Capacities</option>
@@ -324,7 +336,7 @@ export function CarsPageSideBer({
         </div>
         {/*number of  doors */}
         <div className="mb-4">
-          <h3 className="text-sm font-semibold mb-2">No. of Doors</h3>
+          <h3 className="text-sm font-semibold mb-2 dark:text-white">No. of Doors</h3>
           <select
             className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300"
             value={queries.noOfDoors || ""}
@@ -343,12 +355,12 @@ export function CarsPageSideBer({
         </div>
         {/* Price range filter */}
         <div className="mb-4">
-          <h3 className="text-sm font-semibold mb-2">Price Range</h3>
+          <h3 className="text-sm font-semibold mb-2 dark:text-white">Price Range</h3>
           <div className="flex justify-between items-center gap-2">
-            <PriceSlider  value={priceRange} onChange={handlePriceChange}/>
+            <PriceSlider value={priceRange} onChange={handlePriceChange} />
             <Button
               variant={"outline"}
-               className="dark:text-white"
+              className="dark:text-white"
               onClick={() =>
                 setQueries({
                   ...queries,

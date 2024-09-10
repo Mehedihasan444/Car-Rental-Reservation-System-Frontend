@@ -15,7 +15,7 @@ const CarSlider = () => {
   const { cars } = data.data || {};
 
   return (
-    <div>
+    <div className="">
       <Carousel className="w-full max-w-xs md:max-w-2xl lg:max-w-7xl mx-auto ">
         <CarouselContent className="-ml-1 ">
           {isLoading ? (
@@ -31,8 +31,8 @@ const CarSlider = () => {
             ))
           )}
         </CarouselContent>
-        <CarouselPrevious className="dark:text-white"/>
-        <CarouselNext className="dark:text-white"/>
+        <CarouselPrevious className="dark:text-white ml-5 sm:ml-0"/>
+        <CarouselNext className="dark:text-white mr-5 sm:ml-0"/>
       </Carousel>
     </div>
   );

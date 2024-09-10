@@ -28,7 +28,7 @@ const OurFleet = () => {
     <section className="lg:h-screen max-w-7xl lg:mx-auto mx-5 my-10 lg:my-0 flex items-center justify-center">
       <div className="space-y-10">
         <div className="text-center space-y-3">
-          <h2 className="text-4xl font-bold text-gray-900">Our Fleet</h2>
+          <h2 className="text-4xl font-bold text-gray-900 dark:text-white">Our Fleet</h2>
           <p className="text-gray-600">
             Experience unparalleled comfort, performance, and exclusivity with
             our exquisite fleet of vehicles.
@@ -36,7 +36,7 @@ const OurFleet = () => {
         </div>
         <div className="lg:flex justify-between items-center gap-10 ">
           <div className="flex-1">
-            <h2 className="text-4xl font-bold text-gray-900">
+            <h2 className="text-4xl font-bold text-gray-900 dark:text-white">
               We offer customers a wide range of{" "}
               <span className="text-blue-700">commercial cars</span> and{" "}
               <span className="text-blue-700">luxury cars</span>

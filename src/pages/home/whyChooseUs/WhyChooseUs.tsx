@@ -7,7 +7,7 @@ const WhyChooseUs = () => {
         <h4 className="text-blue-600 p-3 text-xs  inline-flex font-bold rounded-md bg-gray-200">
           Why Choose Us
         </h4>
-        <h2 className="text-4xl font-bold text-center ">Our Features</h2>
+        <h2 className="text-4xl font-bold text-center dark:text-white">Our Features</h2>
         <p className="inline-flex text-gray-600 font-semibold">
           Discover a world of convenience, safety, and customization, paving the
           way for unforgettable adventures and seamless mobility solutions.
@@ -23,8 +23,8 @@ const WhyChooseUs = () => {
               </div>
             </div>
             <div className="">
-              <h3 className="font-bold text-xl">First class services</h3>
-              <p className="">
+              <h3 className="font-bold text-xl dark:text-white">First class services</h3>
+              <p className="dark:text-white">
                 Where luxury meets exceptional care, creating unforgettable
                 moments and exceeding your every expectation.
               </p>
@@ -36,7 +36,7 @@ const WhyChooseUs = () => {
                 <FaRoad size={30} className="" color="white" />
               </div>
             </div>
-            <div className="">
+            <div className="dark:text-white">
               <h3 className="font-bold text-xl">24/7 road assistance</h3>
               <p className="">
                 Reliable support when you need it most, keeping you on the move
@@ -54,7 +54,7 @@ const WhyChooseUs = () => {
           />
         </div>
         {/* col-3 */}
-        <div className="space-y-5">
+        <div className="space-y-5 dark:text-white">
           <div className="flex justify-between gap-5">
             <div className="text-right">
               <h3 className="font-bold text-xl"> Quality at Minimum Expense</h3>

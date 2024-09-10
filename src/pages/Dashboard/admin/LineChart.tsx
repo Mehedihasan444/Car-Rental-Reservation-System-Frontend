@@ -7,12 +7,13 @@ import {
   CategoryScale,
   Tooltip,
   Legend,
+  LineController,
 } from "chart.js";
 import { useGetUserBookingsQuery } from "@/redux/features/booking/bookingApi";
 import { TBooking } from "@/types/TBooking";
 
-// Register necessary elements for the line chart
-ChartJS.register(LineElement, PointElement, LinearScale, CategoryScale, Tooltip, Legend);
+// Register necessary elements for the line chart, including LineController
+ChartJS.register(LineController, LineElement, PointElement, LinearScale, CategoryScale, Tooltip, Legend);
 
 const LineChart = () => {
   // Fetch user bookings

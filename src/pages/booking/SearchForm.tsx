@@ -41,7 +41,7 @@ const SearchForm = ({
   };
 
   return (
-    <div className="bg-white shadow-lg rounded-lg p-6 ">
+    <div className="bg-white shadow-lg rounded-lg p-6 mx-5 sm:mx-0">
       <h2 className="text-2xl font-semibold mb-4">Search for Cars</h2>
       <form onSubmit={handleSubmit}>
         <div className="flex flex-wrap gap-5 justify-between">

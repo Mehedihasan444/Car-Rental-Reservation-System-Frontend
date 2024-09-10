@@ -7,7 +7,7 @@ import { BreadcrumbComponent } from "./BreadcrumbComponent";
 
 const AboutUsPage = () => {
   return (
-    <div className=" bg-gray-100 min-h-screen">
+    <div className="  min-h-screen">
       {/* Header */}
       <header
         className=" text-white py-6 text-center bg-center bg-cover bg-no-repeat"

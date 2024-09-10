@@ -38,6 +38,7 @@ const ManageBookings = () => {
             <CardTitle>Manage Bookings</CardTitle>
           </CardHeader>
           <CardContent>
+            <div className="overflow-x-scroll">
             <table className="min-w-full divide-y divide-gray-200">
               <thead className="bg-gray-100">
                 <tr>
@@ -112,7 +113,7 @@ const ManageBookings = () => {
                   </tr>
                 ))}
               </tbody>
-            </table>
+            </table></div>
           </CardContent>
         </Card>
       </div>

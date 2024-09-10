@@ -49,7 +49,7 @@ export function DashboardSidebar() {
   return (
     <div className="lg:h-screen">
       {/* Mobile View */}
-      <div className="grid grid-cols-1 gap-2 lg:hidden">
+      <div className="grid grid-cols-1 gap-2  overflow-y-scroll lg:hidden">
         <Sheet key={"left"}>
           <SheetTrigger asChild>
             <Button variant="ghost" size={"icon"} className="text-2xl m-5">
@@ -65,7 +65,7 @@ export function DashboardSidebar() {
                 Dashboard
               </SheetTitle>
             </SheetHeader>
-            <Separator className="mb-3 "  />
+            <Separator className="mb-3 " />
 
             {/* Main content area with flex-grow */}
             <div className=" grid gap-4 mt-2">

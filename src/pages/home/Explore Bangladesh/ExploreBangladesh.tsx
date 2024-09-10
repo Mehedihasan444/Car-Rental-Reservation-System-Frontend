@@ -13,7 +13,7 @@ const ExploreBangladesh = () => {
   ];
 
   return (
-    <div className="bg-gray-100 py-10">
+    <div className="dark:text-white py-10">
       <div className="max-w-7xl mx-auto px-4 lg:px-8">
         <h1 className="text-4xl font-bold text-center mb-10">
           Explore Bangladesh

@@ -40,6 +40,7 @@ const ManageReturnCars = () => {
             <CardTitle>Manage Return Cars</CardTitle>
           </CardHeader>
           <CardContent>
+            <div className="overflow-x-scroll">
             <table className="min-w-full divide-y divide-gray-200">
               <thead className="bg-gray-100">
                 <tr>
@@ -118,7 +119,7 @@ const ManageReturnCars = () => {
                   ))
                 )}
               </tbody>
-            </table>
+            </table></div>
           </CardContent>
         </Card>
       </div>

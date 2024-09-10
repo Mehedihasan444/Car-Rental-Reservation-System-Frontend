@@ -1,10 +1,11 @@
 import { Chart } from "react-chartjs-2";
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
+import { Chart as ChartJS, ArcElement, Tooltip, Legend , PieController,} from "chart.js";
 import { useGetAllBookingsQuery } from "@/redux/features/booking/bookingApi"; // Adjust import based on your setup
 import { TBooking } from "@/types/TBooking";
 
-// Register necessary elements for pie chart
-ChartJS.register(ArcElement, Tooltip, Legend);
+
+// Register necessary elements for the pie chart, including PieController
+ChartJS.register(PieController, ArcElement, Tooltip, Legend);
 
 const PieChart = () => {
   // Fetch user bookings
@@ -36,6 +37,7 @@ const PieChart = () => {
       },
     ],
   };
+
 
   return (
     <div className="p-5">

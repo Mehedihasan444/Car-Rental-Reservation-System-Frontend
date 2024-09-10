@@ -116,7 +116,7 @@ const BookingPage = () => {
               <SearchResults cars={cars} onSelectCar={handleSelectCar} />
             )}
             {isLoading && <p>Loading cars...</p>}
-            {!isLoading && cars?.length === 0 && <p>No cars found.</p>}
+            {!isLoading && cars?.length === 0 && <p className="mx-5 sm:mx-0">No cars found.</p>}
           </>
         )}
       </div>

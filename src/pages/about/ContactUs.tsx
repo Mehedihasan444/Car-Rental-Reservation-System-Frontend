@@ -3,11 +3,11 @@ import { FaHome, FaPhone, FaEnvelopeSquare, FaClock } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
 const ContactUs = () => {
   return (
-    <div className=" lg:my-0 lg:h-screen flex justify-center items-center p-10 lg:p-0 bg-white mx-5 lg:mx-0">
+    <div className=" lg:my-0 lg:h-screen flex justify-center items-center p-10 lg:p-0 dark:bg-slate-900 bg-white mx-5 lg:mx-0">
       <div className="">
         <div className="text-center">
-          <h2 className="text-3xl font-bold mb-4">Contact Us</h2>
-          <p className="text-lg">
+          <h2 className="text-3xl font-bold mb-4 dark:text-white">Contact Us</h2>
+          <p className="text-lg dark:text-white">
             Fill out the form below to send us a message
           </p>
         </div>
@@ -15,7 +15,7 @@ const ContactUs = () => {
           <div className="flex-1">
             <ContactForm />
           </div>
-          <div className="space-y-5 flex-1">
+          <div className="space-y-5 flex-1 dark:text-white">
             <p>
               Have questions or need assistance? We're here to help. Reach out
               to us through any of the following channels, and our team will get

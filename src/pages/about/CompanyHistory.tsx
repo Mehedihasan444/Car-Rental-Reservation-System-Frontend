@@ -12,10 +12,10 @@ const CompanyHistory = () => {
           />
         </div>
         <div className="flex-1">
-          <h2 className="text-4xl font-extrabold text-gray-800 mb-6 text-center border-b-4 border-blue-500 inline-block pb-2">
+          <h2 className="dark:text-white text-4xl font-extrabold text-gray-800 mb-6 text-center border-b-4 border-blue-500 inline-block pb-2">
             Our Story
           </h2>
-          <p className="text-lg text-gray-700 leading-relaxed">
+          <p className="text-lg text-gray-700 leading-relaxed dark:text-white">
             Since our inception in 2010, we have been committed to providing
             exceptional car rental services. Our mission is to deliver reliable,
             affordable transportation solutions with a focus on customer

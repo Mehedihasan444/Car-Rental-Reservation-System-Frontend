@@ -34,14 +34,14 @@ export const Testimonial = () => {
       <div className="max-w-7xl mx-auto lg:rounded-lg px-10 py-20 lg:p-20    lg:flex justify-between gap-10  h-full w-full">
         <div className="flex flex-col justify-center text-left flex-1">
           <div className="">
-            <h3 className="text-sm bg-opacity-70  mb-6  rounded-md text-blue-700 inline-block font-bold">
+            <h3 className="text-sm bg-opacity-70  mb-6   rounded-md text-blue-700 inline-block font-bold">
               Trusted by thousands for a seamless rental experience.
             </h3>
           </div>
-          <h2 className="text-4xl font-bold mb-4">
+          <h2 className="dark:text-white text-4xl font-bold mb-4">
             What Our Customers Are Saying
           </h2>
-          <p className="max-w-2xl mx-auto mb-12 opacity-80">
+          <p className="dark:text-white max-w-2xl mx-auto mb-12 opacity-80">
             Our commitment to providing the best car rental service is reflected
             in the feedback we receive from our valued customers. Here’s what
             they have to say about their experiences with us.
@@ -112,8 +112,8 @@ export const Testimonial = () => {
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <CarouselPrevious className="text-black dark:text-white" />
-            <CarouselNext className="text-black dark:text-white" />
+            <CarouselPrevious className="text-black dark:text-white ml-5 sm:ml-0" />
+            <CarouselNext className="text-black dark:text-white mr-5 sm:mr-0" />
           </Carousel>
         </div>
       </div>

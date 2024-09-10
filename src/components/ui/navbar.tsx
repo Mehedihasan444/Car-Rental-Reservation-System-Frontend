@@ -33,7 +33,7 @@ export function Navbar() {
         <Link to="/">
           <img src={carLogo} alt="logo" className="w-16 h-16" />
         </Link>
-        <span className="font-serif absolute top-11 -left-3 text-sm font-bold  uppercase">
+        <span className="font-serif absolute top-11 -left-3 text-sm font-bold  uppercase dark:text-white">
           RentoCar
         </span>
       </div>
@@ -43,10 +43,12 @@ export function Navbar() {
         <div className="sm:hidden">
           <ModeToggle />
         </div>
+        {/* mobile */}
         <ResponsiveSidebar />
+        {/* Desktop */}
         <NavigationMenu className="hidden sm:inline-block">
-          <NavigationMenuList className="space-x-4">
-            <NavigationMenuItem className="dark:text-white">
+          <NavigationMenuList className="space-x-4 ">
+            <NavigationMenuItem className="dark:text-white dark:bg-slate-900">
               <NavLink
                 to="/"
                 className={({ isActive, isPending, isTransitioning }) =>
@@ -54,10 +56,10 @@ export function Navbar() {
                     isPending ? "pending" : "",
                     isActive ? "text-blue-500" : "",
                     isTransitioning ? "transitioning" : "",
-                  ].join(" ")
+                  ].join("")
                 }
               >
-                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                <NavigationMenuLink className={navigationMenuTriggerStyle()} >
                   Home
                 </NavigationMenuLink>
               </NavLink>
@@ -179,7 +181,7 @@ const ListItem = React.forwardRef<
         <a
           ref={ref}
           className={cn(
-            "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
+            "block select-none  space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
             className
           )}
           {...props}

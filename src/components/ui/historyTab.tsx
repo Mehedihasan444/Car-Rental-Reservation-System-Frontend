@@ -23,7 +23,7 @@ export function HistoryTab() {
           PRESTIGE
         </TabsTrigger>
       </TabsList>
-      <TabsContent value="luxury">
+      <TabsContent className="dark:text-white" value="luxury">
         <p>
           We offer a meticulously curated collection of the most sought-after
           luxury vehicles on the market. Whether you prefer the sporty allure of
@@ -32,7 +32,7 @@ export function HistoryTab() {
           perfect car to match your discerning taste.
         </p>
       </TabsContent>
-      <TabsContent value="comfort">
+      <TabsContent value="comfort" className="dark:text-white">
         <p className="">
           We prioritize your comfort and convenience throughout your journey. We
           understand that a comfortable ride can make a world of difference,
@@ -41,7 +41,7 @@ export function HistoryTab() {
           comfortable cars that cater to your specific needs.
         </p>
       </TabsContent>
-      <TabsContent value="prestige">
+      <TabsContent value="prestige" className="dark:text-white">
         <p className="">
           We understand that prestige goes beyond luxury. It's about making a
           statement, embracing sophistication, and indulging in the finer things

@@ -59,7 +59,7 @@ const CarListingPage = () => {
         <CarsPageSideBer queries={queries} setQueries={setQueries} />
         <div className="flex items-center lg:hidden">
           <div className="flex justify-between items-center gap-5 w-full">
-            <h3 className="text-sm font-semibold mb-2 ">Sort By:</h3>
+            <h3 className="text-sm font-semibold mb-2 dark:text-white">Sort By:</h3>
             <div>
               <select
                 value={queries?.sort}
@@ -82,13 +82,13 @@ const CarListingPage = () => {
       <div className="w-full lg:w-3/4 p-4 mx-5 md:mx-0 relative">
         <div className="flex justify-between items-center md:gap-10">
           <div className="hidden lg:flex justify-between items-center gap-5 mb-4 flex-1">
-            <h2 className="text-sm">
+            <h2 className="text-sm dark:text-white">
               Cars Found:
               {cars?.length || 0}
             </h2>
           </div>
           <div className="hidden lg:flex justify-between items-center gap-5 mb-4">
-            <h3 className="text-sm font-semibold mb-2">Sort By:</h3>
+            <h3 className="text-sm font-semibold mb-2 dark:text-white">Sort By:</h3>
             <div>
               <select
                 value={queries?.sort}
@@ -116,7 +116,7 @@ const CarListingPage = () => {
               <Loading loading={isLoading} />
             </div>
           ) : !cars?.length ? (
-            <h1 className="">No cars found</h1>
+            <h1 className="dark:text-white">No cars found</h1>
           ) : (
             cars?.map((car: TCar, idx: number) => (
               <CarCard {...car} key={idx} />
