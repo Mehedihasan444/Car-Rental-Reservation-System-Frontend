@@ -48,14 +48,14 @@ const BookingPage = () => {
   };
 
   return (
-    <div className="bg-gray-100 min-h-screen">
+    <div className="bg-gray-100 dark:bg-slate-900 min-h-screen">
       <div className="max-w-7xl mx-auto space-y-5 py-10">
         {bookingDetails ? (
           <div className="">
-            <div className="p-5 shadow-lg border rounded-lg bg-white mb-5">
+            <div className="p-5 shadow-lg border rounded-lg bg-white  mb-5">
               <h1 className="text-xl font-semibold">Finalize Your Booking</h1>
             </div>
-            <div className="lg:flex justify-between gap-5 p-5 shadow-lg border rounded-lg bg-white">
+            <div className="lg:flex justify-between gap-5 p-5 shadow-lg border rounded-lg bg-white ">
               <div className="flex-1">
                 <BookingForm onConfirmBooking={handleConfirmBooking} />
               </div>

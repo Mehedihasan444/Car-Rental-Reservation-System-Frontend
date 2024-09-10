@@ -46,9 +46,9 @@ export function Navbar() {
         {/* mobile */}
         <ResponsiveSidebar />
         {/* Desktop */}
-        <NavigationMenu className="hidden sm:inline-block">
+        <NavigationMenu className="hidden sm:inline-block ">
           <NavigationMenuList className="space-x-4 ">
-            <NavigationMenuItem className="dark:text-white dark:bg-slate-900">
+            <NavigationMenuItem className="dark:text-white ">
               <NavLink
                 to="/"
                 className={({ isActive, isPending, isTransitioning }) =>
@@ -64,7 +64,7 @@ export function Navbar() {
                 </NavigationMenuLink>
               </NavLink>
             </NavigationMenuItem>
-            <NavigationMenuItem className="dark:text-white">
+            <NavigationMenuItem className="dark:text-white ">
               <NavLink
                 to="/cars"
                 className={({ isActive, isPending, isTransitioning }) =>

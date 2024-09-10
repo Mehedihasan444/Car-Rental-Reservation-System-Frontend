@@ -41,12 +41,12 @@ const SearchForm = ({
   };
 
   return (
-    <div className="bg-white shadow-lg rounded-lg p-6 mx-5 sm:mx-0">
-      <h2 className="text-2xl font-semibold mb-4">Search for Cars</h2>
+    <div className="bg-white shadow-lg dark:bg-slate-700 rounded-lg p-6 mx-5 sm:mx-0">
+      <h2 className="text-2xl font-semibold mb-4 dark:text-white">Search for Cars</h2>
       <form onSubmit={handleSubmit}>
-        <div className="flex flex-wrap gap-5 justify-between">
+        <div className="flex flex-wrap gap-5 justify-between ">
           <div className="mb-4 flex items-center gap-5">
-            <Label className="block text-lg font-medium text-gray-700  w-full">
+            <Label className="dark:text-white block text-lg font-medium text-gray-700  w-full">
               Car Type
             </Label>
 
@@ -75,7 +75,7 @@ const SearchForm = ({
             </Select>
           </div>
           <div className="mb-4 flex items-center gap-5">
-            <Label className="block text-lg font-medium text-gray-700">
+            <Label className="dark:text-white block text-lg font-medium text-gray-700">
               Features
             </Label>
             <Input
@@ -92,7 +92,7 @@ const SearchForm = ({
 
           {/* Fuel Type filter */}
           <div className="mb-4 flex items-center gap-5">
-            <Label className="block text-lg font-medium text-gray-700 w-full">
+            <Label className="dark:text-white block text-lg font-medium text-gray-700 w-full">
               Fuel Type
             </Label>
             <Select
@@ -118,7 +118,7 @@ const SearchForm = ({
           </div>
 
           {/* <div className="mb-4 flex flex-col">
-            <Label className="block text-lg font-medium text-gray-700">
+            <Label className="dark:text-white block text-lg font-medium text-gray-700">
               Location
             </Label>
             <Input
@@ -132,7 +132,7 @@ const SearchForm = ({
             />
           </div>
           <div className="mb-4 flex flex-col">
-            <Label className="block text-lg font-medium text-gray-700">
+            <Label className="dark:text-white block text-lg font-medium text-gray-700">
               Pick-up Date
             </Label>
             <Input
@@ -145,7 +145,7 @@ const SearchForm = ({
             />
           </div>
           <div className="mb-4 flex flex-col">
-            <Label className="block text-lg font-medium text-gray-700">
+            <Label className="dark:text-white block text-lg font-medium text-gray-700">
               Drop-off Date
             </Label>
             <Input

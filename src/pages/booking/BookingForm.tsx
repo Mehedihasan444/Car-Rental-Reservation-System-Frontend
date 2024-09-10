@@ -48,7 +48,7 @@ const BookingForm = ({
   return (
     // <div className="bg-white rounded-lg p-6 max-w-md mx-auto flex-1 w-full">
     <div
-      className={`bg-white rounded-lg p-6 max-w-md mx-auto flex-1 w-full ${
+      className={`bg-white  rounded-lg p-6 max-w-md mx-auto flex-1 w-full ${
         isSubmitted ? "blur-sm" : ""
       }`}
     >
