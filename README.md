@@ -1,50 +1,75 @@
-# React + TypeScript + Vite
+# Car Rental Reservation System
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is a comprehensive **Car Rental Reservation System** built by vite with the help of **React**, **Redux Toolkit**, and **Chart.js**. The system allows users to browse cars, make bookings, view reports, and manage reservations. The admin can manage bookings, users, and generate visual reports.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **User Authentication**: Registration and login system with role-based access (User/Admin).
+- **Car Listings**: View available cars with filtering options by type, brand, price, etc.
+- **Booking Management**: Users can book, view, and manage their car rentals.
+- **Admin Dashboard**: Manage cars, bookings, and payments, with secure access via protected routes.
+- **Reports and Analytics**: Visual reports of bookings, including charts like line and pie charts.
+- **Dynamic Charts**: Using `Chart.js` to display booking trends and statistics.
+- **Review System**: Customers can provide reviews on their rental experience.
+- **FAQ Section**: Provides answers to frequently asked questions for users.
 
-## Expanding the ESLint configuration
+## Tech Stack
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- **Frontend**: React, Tailwind CSS, ShadCN UI
+- **State Management**: Redux Toolkit with `redux-persist` for authentication persistence
+- **Charts**: Chart.js integrated with React via `react-chartjs-2`
+- **Backend**: MongoDB (via Mongoose) and Express API (not included in this repo, replace with actual API).
+- **Form Validation**: Zod for validation schemas
+- **Authentication**: JWT-based authentication
 
-- Configure the top-level `parserOptions` property like this:
+## Setup Instructions
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+### Prerequisites
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+- Node.js (v14+)
+- npm or yarn package manager
+- MongoDB server
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+### Installation
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/Mehedihasan444/Car-Rental-Reservation-System-Frontend.git
+
+   ```
+
+2. Navigate to the project directory:
+
+   cd car-rental-reservation-system
+
+3. Install dependencies:
+
+   npm install
+
+4. Set up environment variables:
+
+   Create a .env.local file in the root of the project and include the following values:
+
+   VITE_IMAGE_HOSTING_KEY= your imagebb key
+
+
+5. Start the development server:
+
+   npm run dev
+
+   The app will be available at http://localhost:5173.
+
+# Project Structure
+
+    ├── public/
+
+    ├── src/
+    │ ├── components/ # Reusable UI components
+    │ ├── features/ # Redux slices for bookings, cars, users, etc.
+    │ ├── pages/ # Application pages (e.g., Home, Booking, Admin Dashboard)
+    │ ├── utils/ # Helper functions and utilities
+    │ └── types/ # TypeScript type definitions (e.g., TBooking, TUser)
+    ├── .env.local # Environment variables
+    ├── package.json # Project metadata and dependencies
+    └── README.md # Project documentation
