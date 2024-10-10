@@ -27,12 +27,12 @@ const CarCard = ({
   images,
 }: TCar) => {
   return (
-    <Card className="w-full sm:w-[300px]  mx-auto my-4 sm:my-6 bg-white  rounded-md overflow-hidden">
+    <Card className="w-[280px] sm:w-[300px]  mx-auto my-4 sm:my-6 bg-white  rounded-md overflow-hidden">
       <CardHeader className="relative p-3">
         <img
           src={images[0] || ""}
           alt={name}
-          className="w-full h-48 rounded-md border  object-cover transform transition-transform duration-300 ease-in-out hover:scale-105"
+          className="w-full sm:h-48 rounded-md border  object-cover transform transition-transform duration-300 ease-in-out hover:scale-105"
         />
       </CardHeader>
       <CardContent>
@@ -63,24 +63,16 @@ const CarCard = ({
         </div>
       </CardContent>
       <hr className="mx-6 my-2 border-gray-200" />
-      <CardFooter className="flex flex-col sm:flex-row justify-between items-center p-4">
-        <div className="text-center sm:text-left">
+      <CardFooter className="flex  flex-row justify-between items-center p-4">
+        <div className=" sm:text-left">
           <span className="font-medium text-gray-600">Per Hour Rate</span>
           <h2 className="font-bold text-xl">TK {pricePerHour}</h2>
         </div>
-          <Button
-            className="mt-4 sm:mt-0 "
-            disabled={status === "booked"}
-          >
-        <Link to={`/details/${_id}`}>
-        {
-          status === "booked"
-           ? "Booked"
-            : "Rent Now"
-        }
-           
-        </Link>
-          </Button>
+        <Button className="mt-4 sm:mt-0 " disabled={status === "booked"}>
+          <Link to={`/details/${_id}`}>
+            {status === "booked" ? "Booked" : "Rent Now"}
+          </Link>
+        </Button>
       </CardFooter>
     </Card>
   );

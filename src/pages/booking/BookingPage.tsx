@@ -10,8 +10,18 @@ import { TQueries } from "@/types/TQueries";
 import { useGetAllCarsQuery } from "@/redux/features/car/carApi";
 import { TCar } from "@/types/TCar";
 import { TBookingDetails } from "@/types/TBookingDetails";
+import { useLocation } from "react-router-dom";
 
 const BookingPage = () => {
+  // Use the useLocation hook to get the current location object
+  const location = useLocation();
+
+  // Create a URLSearchParams object to extract query parameters
+  const queryParams = new URLSearchParams(location.search);
+
+  // Get the 'search' query parameter
+  const searchQuery = queryParams.get("search");
+
   const bookingCarDetails = useAppSelector(
     (state: RootState) => state?.bookingInfo?.bookingInfo
   );
@@ -21,21 +31,23 @@ const BookingPage = () => {
   );
   const [queries, setQueries] = useState<TQueries>({ page: 1, limit: 10 });
   const { data = {}, isLoading } = useGetAllCarsQuery(queries);
-  const {  cars: allCars } = data.data || {};
+  const { cars: allCars } = data.data || {};
   const [userData, setUserData] = useState<TBookingData | null>(null);
   const [cars, setCars] = useState<TCar[]>([]);
+  const availableCars = useAppSelector((state: RootState) => state?.cars?.availableCars) || [];
 
-console.log(allCars)
   // UseEffect to set cars based on queries
   useEffect(() => {
-    // if (queries?.type || queries?.features || queries?.engineType) {
-    // }
+    if (searchQuery === 'true') {
+      setCars(availableCars);
+    } else {
       setCars(allCars || []);
-  }, [queries, allCars]);
-
+    }
+  }, [queries, allCars, availableCars]);
+ 
   const handleSelectCar = (car: TCar) => {
-
-    setBookingDetails(car); // Set the selected car details for booking
+    // Set the selected car details for booking
+    setBookingDetails(car);
   };
 
   const handleConfirmBooking = (bookingData: TBookingData) => {
@@ -116,7 +128,9 @@ console.log(allCars)
               <SearchResults cars={cars} onSelectCar={handleSelectCar} />
             )}
             {isLoading && <p>Loading cars...</p>}
-            {!isLoading && cars?.length === 0 && <p className="mx-5 sm:mx-0">No cars found.</p>}
+            {!isLoading && cars?.length === 0 && (
+              <p className="mx-5 sm:mx-0">No cars found.</p>
+            )}
           </>
         )}
       </div>

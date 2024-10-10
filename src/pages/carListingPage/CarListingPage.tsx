@@ -54,7 +54,7 @@ const CarListingPage = () => {
     setQueries({ ...queries, page: page + 1 });
   };
   return (
-    <div className="lg:flex relative justify-between  gap-5">
+    <div className="lg:flex relative justify-between  gap-5 lg:mr-5">
       <div className="lg:w-1/4 lg:p-4   flex  justify-between  lg:m-5 rounded-md px-5 ">
         <CarsPageSideBer queries={queries} setQueries={setQueries} />
         <div className="flex items-center lg:hidden">
@@ -79,7 +79,7 @@ const CarListingPage = () => {
           </div>
         </div>
       </div>
-      <div className="w-full lg:w-3/4 p-4 mx-5 md:mx-0 relative">
+      <div className="w-full lg:w-3/4 p-4  md:mx-0 relative">
         <div className="flex justify-between items-center md:gap-10">
           <div className="hidden lg:flex justify-between items-center gap-5 mb-4 flex-1">
             <h2 className="text-sm dark:text-white">
@@ -109,7 +109,7 @@ const CarListingPage = () => {
         </div>
         <hr />
         <div
-          className={`mt-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  min-h-[50vh] gap-5 mb-8`}
+          className={`mt-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  min-h-[50vh] gap-5 mb-10`}
         >
           {isLoading ? (
             <div className="flex justify-center items-center w-full absolute top-0 right-0 bottom-0 left-0">
@@ -123,7 +123,7 @@ const CarListingPage = () => {
             ))
           )}
         </div>
-        <div className="flex justify-center sm:justify-end items-center absolute bottom-5 right-5">
+        <div className="flex justify-center sm:justify-end items-center absolute bottom-5 right-5 ">
           <div className="text-center">
             <Button
               className="mr-3 text-green-300"

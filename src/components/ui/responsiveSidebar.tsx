@@ -23,7 +23,7 @@ export function ResponsiveSidebar() {
     dispatch(logout());
   };
   return (
-    <div className="sm:hidden">
+    <div className="lg:hidden">
       <Drawer>
         <DrawerTrigger asChild>
           <Button variant="outline">

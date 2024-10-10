@@ -39,7 +39,7 @@ const CarForm = ({ selectedCar }: { selectedCar: TCar | null }) => {
 
   useEffect(() => {
     setFormData({ ...formData, features });
-  }, [features]);
+  }, [features,formData]);
   // const handleFeatureChange = (e: React.ChangeEvent<HTMLInputElement>) => {
   //   const { value } = e.target;
   //   setFormData({ ...formData, features: value.split(",") });
@@ -388,6 +388,15 @@ const CarForm = ({ selectedCar }: { selectedCar: TCar | null }) => {
             </div>
           )}
         </div>
+       {selectedCar&& <div className="flex flex-col space-y-2 w-full">
+          <Label htmlFor="seatingCapacity">Current Location</Label>
+          <Input
+            id="currentLocation"
+            placeholder="e.g., 5"
+            value={formData?.currentLocation || ""}
+            onChange={handleInputChange}
+          />
+        </div>}
       </div>
 
       <Button type="submit" className="mt-4">

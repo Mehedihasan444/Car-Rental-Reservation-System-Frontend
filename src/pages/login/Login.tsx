@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -23,7 +24,6 @@ const Login = () => {
   const [login, { isLoading }] = useLoginMutation();
   const navigate = useNavigate();
   const { toast } = useToast();
-
 
   const dispatch = useAppDispatch();
 
@@ -55,19 +55,34 @@ const Login = () => {
 
     if (validateForm()) {
       try {
+        // Attempt login
         const result = await login(formData).unwrap();
+
         if (result?.success) {
+          // If login is successful
           dispatch(signIn({ user: result?.data, token: result?.token }));
           toast({
-            description: "Signed in successful!",
+            description: "Signed in successfully!",
           });
-          navigate("/"); // Redirect to the home after successful login
+          navigate("/"); // Redirect to the homepage after successful login
+        } else {
+          // If login fails but no exception is thrown
+          toast({
+            description: result?.message || "Login failed. Please try again.",
+            variant: "destructive",
+          });
         }
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
       } catch (error: any) {
+        // Handle API errors or unexpected issues
         setErrors({
-          ...error,
-          apiError: "Invalid email or password. Please try again.",
+          ...errors, // Keep existing form errors if any
+          apiError:
+            error?.data?.message ||
+            "Invalid email or password. Please try again.",
+        });
+        toast({
+          description: "An error occurred during login.",
+          variant: "destructive",
         });
       }
     }
@@ -81,9 +96,9 @@ const Login = () => {
           <CardDescription>
             Don't have an account?
             <Link to="/register">
-            <Button variant={"link"} className="text-blue-500">
-              Register
-            </Button>
+              <Button variant={"link"} className="text-blue-500">
+                Register
+              </Button>
             </Link>
           </CardDescription>
         </CardHeader>

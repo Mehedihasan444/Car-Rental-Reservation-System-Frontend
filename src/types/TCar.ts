@@ -17,4 +17,5 @@ export type TCar = {
   color: string;
   noOfDoors: number;
   year: number;
+  currentLocation?: string;
 };

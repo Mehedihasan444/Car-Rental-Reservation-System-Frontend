@@ -1,21 +1,38 @@
 import { Button } from "@/components/ui/button";
-import { Calendar } from "@/components/ui/calendar";
 import { Input } from "@/components/ui/input";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
-import { format } from "date-fns";
-import { Calendar as CalendarIcon, MapPin } from "lucide-react";
-import { cn } from "@/lib/utils";
-import { useState } from "react";
-import { Link } from "react-router-dom";
+
+import { MapPin } from "lucide-react";
+import { ChangeEvent, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAvailabilityCheckQuery } from "@/redux/features/car/carApi";
+import { TQueries } from "@/types/TQueries";
+import { useAppDispatch } from "@/redux/hooks";
+import { setAvailableCars } from "@/redux/features/car/carSlice";
+
 
 export const HeroSection = () => {
-  const [pickUpDate, setPickUpDate] = useState<Date>();
-  const [dropOffDate, setDropOffDate] = useState<Date>();
+  const [searchTerm, setSearchTerm] = useState("");
+  const [queries, setQueries] = useState<TQueries>({ page: 1, limit: 10 });
 
+  const { data = {},isSuccess } = useAvailabilityCheckQuery(queries);
+  const { data: cars } = data;
+
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setQueries({ ...queries, searchTerm });
+    if (isSuccess) {
+      dispatch(setAvailableCars(cars));
+      
+      navigate(
+        "/booking?search=true"
+      );
+    }
+    // Redirect to the cars or booking page with query parameters
+  };
+ 
   return (
     <div
       className="relative h-screen bg-cover bg-center flex items-center justify-center"
@@ -24,97 +41,50 @@ export const HeroSection = () => {
       }}
     >
       <div className="absolute inset-0 bg-black bg-opacity-50"></div>
-      <div className="relative z-10 text-center text-white max-w-3xl mx-auto p-6">
+
+      <div className="relative z-10 text-center text-white max-w-4xl mx-auto p-6 ">
         <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6">
           Find the Perfect Ride for Your Journey
         </h1>
         <p className="text-lg sm:text-xl mb-6 sm:mb-8">
           Trusted by thousands for a seamless rental experience.
         </p>
-        <Link to="/booking">
         <Button
           size="lg"
           className="bg-red-600 hover:bg-red-700 mb-6 sm:mb-10 dark:bg-red-600 dark:hover:bg-red-700 dark:text-white"
-          >
+          onClick={() => navigate("/booking")} 
+        >
           Book Now
         </Button>
-          </Link>
-
-        <div className="bg-white bg-opacity-90 p-4 sm:p-6 rounded-lg shadow-lg w-full max-w-md sm:max-w-2xl">
-          <form className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <div className="relative w-full sm:w-auto flex-1">
-              <MapPin
-                size={16}
-                className="absolute left-3 top-1/2 transform -translate-y-1/2 text-black dark:text-white"
-              />
-              <Input
-                placeholder="Enter location"
-                className="pl-10 flex-1 text-black dark:text-white"
-              />
-            </div>
-
-            <Popover>
-              <PopoverTrigger asChild>
-                <Button
-                  variant={"outline"}
-                  className={cn(
-                    "w-full sm:w-auto justify-start text-left font-normal text-black",
-                    !pickUpDate && "text-muted-foreground"
-                  )}
-                >
-                  <CalendarIcon className="mr-2 h-4 w-4 text-black dark:text-white" />
-                  {pickUpDate ? (
-                    format(pickUpDate, "PPP")
-                  ) : (
-                    <span className="text-black dark:text-white">
-                      Pick-up date
-                    </span>
-                  )}
-                </Button>
-              </PopoverTrigger>
-              <PopoverContent className="w-auto p-0">
-                <Calendar
-                  mode="single"
-                  selected={pickUpDate}
-                  onSelect={setPickUpDate}
-                  initialFocus
+        <div className="flex justify-center items-center">
+          <div className="bg-white bg-opacity-50 p-4 sm:p-6 rounded-lg shadow-lg w-full max-w-md sm:max-w-xl">
+            <form
+              onSubmit={handleSubmit}
+              className="flex flex-col md:flex-row items-center justify-center gap-4"
+            >
+              <div className="relative w-full  flex-1">
+                <MapPin
+                  size={16}
+                  className="absolute left-3 top-1/2 transform -translate-y-1/2 text-black dark:text-white"
                 />
-              </PopoverContent>
-            </Popover>
-
-            <Popover>
-              <PopoverTrigger asChild>
-                <Button
-                  variant={"outline"}
-                  className={cn(
-                    "w-full sm:w-auto justify-start text-left font-normal text-black",
-                    !dropOffDate && "text-muted-foreground"
-                  )}
-                >
-                  <CalendarIcon className="mr-2 h-4 w-4 text-black dark:text-white" />
-                  {dropOffDate ? (
-                    format(dropOffDate, "PPP")
-                  ) : (
-                    <span className="text-black dark:text-white">
-                      Drop-off date
-                    </span>
-                  )}
-                </Button>
-              </PopoverTrigger>
-              <PopoverContent className="w-auto p-0">
-                <Calendar
-                  mode="single"
-                  selected={dropOffDate}
-                  onSelect={setDropOffDate}
-                  initialFocus
+                <Input
+                  onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                    setSearchTerm(e.target.value)
+                  }
+                  placeholder="Enter location"
+                  required
+                  className="pl-10 w-full   flex-1 text-black dark:text-white"
                 />
-              </PopoverContent>
-            </Popover>
-            <Link to="/cars">
-            <Button className="bg-blue-600 hover:bg-blue-700 w-full sm:w-auto  dark:bg-blue-600 dark:hover:bg-blue-700 dark:text-white">
-              Check Availability
-            </Button></Link>
-          </form>
+              </div>
+
+              <Button
+                type="submit"
+                className="bg-blue-600 hover:bg-blue-700 w-full sm:w-auto dark:bg-blue-600 dark:hover:bg-blue-700 dark:text-white"
+              >
+                Check Availability
+              </Button>
+            </form>
+          </div>
         </div>
       </div>
     </div>

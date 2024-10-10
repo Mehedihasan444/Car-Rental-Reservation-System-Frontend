@@ -16,7 +16,17 @@ import { RootState } from "@/redux/store";
 import { logout } from "@/redux/features/auth/authSlice";
 // import { FaMoon, FaSun } from "react-icons/fa";
 import { ModeToggle } from "./ModeToggle";
-
+import Avatar from "react-avatar";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuShortcut,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { LogOut } from "lucide-react";
 export function Navbar() {
   const user = useAppSelector((state: RootState) => state?.auth?.user);
   const dispatch = useAppDispatch();
@@ -29,24 +39,31 @@ export function Navbar() {
     <div className="flex justify-between items-center max-w-7xl mx-auto py-4 px-5 lg:px-0">
       {/* Logo and Company Name */}
       {/* logo */}
-      <div className="relative ">
+      <div className="relative ml-5 lg:ml-0">
         <Link to="/">
           <img src={carLogo} alt="logo" className="w-16 h-16" />
+          <span className="font-serif absolute top-11 -left-3 text-sm font-bold  uppercase dark:text-white">
+            RentoCar
+          </span>
         </Link>
-        <span className="font-serif absolute top-11 -left-3 text-sm font-bold  uppercase dark:text-white">
-          RentoCar
-        </span>
       </div>
 
       {/* Navigation Menu */}
       <div className="flex gap-3 ">
-        <div className="sm:hidden">
+        <div className="lg:hidden">
           <ModeToggle />
         </div>
         {/* mobile */}
+        {user && (
+          <Avatar
+            name={user?.name}
+            size="45"
+            className=" rounded-full lg:hidden"
+          />
+        )}
         <ResponsiveSidebar />
         {/* Desktop */}
-        <NavigationMenu className="hidden sm:inline-block ">
+        <NavigationMenu className="hidden lg:inline-block ">
           <NavigationMenuList className="space-x-4 ">
             <NavigationMenuItem className="dark:text-white ">
               <NavLink
@@ -59,7 +76,7 @@ export function Navbar() {
                   ].join("")
                 }
               >
-                <NavigationMenuLink className={navigationMenuTriggerStyle()} >
+                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                   Home
                 </NavigationMenuLink>
               </NavLink>
@@ -112,7 +129,7 @@ export function Navbar() {
                 </NavigationMenuLink>
               </NavLink>
             </NavigationMenuItem>
-            {user && (
+            {/* {user && (
               <NavigationMenuItem className="dark:text-white">
                 <NavLink
                   to={`/dashboard/${user?.role}`}
@@ -129,13 +146,13 @@ export function Navbar() {
                   </NavigationMenuLink>
                 </NavLink>
               </NavigationMenuItem>
-            )}
+            )} */}
           </NavigationMenuList>
         </NavigationMenu>
       </div>
 
       {/* Login/Sign Up Buttons */}
-      <div className="space-x-2 hidden sm:inline-block">
+      <div className="space-x-2 hidden lg:inline-block">
         {/* <Button variant={"outline"}>
           <FaMoon />
         </Button>
@@ -146,12 +163,29 @@ export function Navbar() {
         {user ? (
           <div className="flex items-center justify-between gap-3">
             <ModeToggle />
-            <Button
+            {/* <Button
               className="dark:border-black dark:border"
               onClick={handleLogout}
             >
               Logout
-            </Button>
+            </Button> */}
+            <DropdownMenu>
+              <DropdownMenuTrigger>
+                <Avatar name={user?.name} size="45" className=" rounded-full" />
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="w-40 pl-6">
+                <DropdownMenuLabel>{user?.name}</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem className="cursor-pointer"><a href={`/dashboard/${user?.role}`}>Dashboard</a></DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem className="cursor-pointer">
+                  <LogOut className="mr-2 h-4 w-4" />
+                  <span onClick={handleLogout}>Log out</span>
+                  <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+            {/* <Avatar src="http://www.gravatar.com/avatar/a16a38cdfe8b2cbd38e8a56ab93238d3" size="45" className=" rounded-full"/> */}
           </div>
         ) : (
           <div className="flex items-end justify-center gap-3">

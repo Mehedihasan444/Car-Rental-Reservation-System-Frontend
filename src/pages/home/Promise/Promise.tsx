@@ -13,16 +13,16 @@ const Promise = () => {
   
           {/* Content Section */}
           <div className="bg-white dark:bg-slate-700  p-8 rounded-lg flex-1">
-            <h1 className="text-4xl font-bold text-gray-800 mb-6 dark:text-white">
+            <h1 className="text-2xl sm:text-4xl font-bold text-gray-800 mb-6 dark:text-white">
               Our Commitment to the Bangladesh Promise
             </h1>
-            <p className="text-lg text-gray-700 leading-relaxed mb-4 dark:text-white">
+            <p className="sm:text-lg text-gray-700 leading-relaxed mb-4 dark:text-white">
               At <span className="font-semibold text-blue-600">RentoCar</span>, we are on a mission to make travel more
               sustainable in Bangladesh, both for locals and international visitors. Along with our eco-friendly fleet,
               including low-emission and hybrid vehicles, we are committed to promoting responsible travel across our business
               operations.
             </p>
-            <p className="text-lg text-gray-700 leading-relaxed dark:text-white">
+            <p className="sm:text-lg text-gray-700 leading-relaxed dark:text-white">
               In Bangladesh, caring for the land and people is deeply rooted in our culture. We invite you to join us on our
               mission to protect and preserve the natural beauty and heritage of Bangladesh, ensuring it remains safe and
               beautiful for future generations of travelers.

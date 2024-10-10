@@ -50,6 +50,10 @@ const CarDetailsPage = () => {
 
         {/* Car Details */}
         <div className="md:col-span-1 space-y-4">
+          <p className="">
+
+          Brand: <span className="text-blue-500">{car?.brand}</span>
+          </p>
           <h1 className="text-4xl font-bold">{car?.name}</h1>
           <p className="text-lg">{car?.description}</p>
 
@@ -59,7 +63,7 @@ const CarDetailsPage = () => {
               {car?.features?.map((feature: string, idx: number) => (
                 <span
                   key={idx}
-                  className="bg-blue-100 text-blue-800  shadow-inner  rounded-md px-4 py-1 text-sm  font-semibold"
+                  className="bg-blue-100 text-blue-800  shadow-inner  rounded-md px-4 py-1 text-xs  font-semibold"
                 >
                   {feature}
                 </span>
@@ -69,13 +73,13 @@ const CarDetailsPage = () => {
 
           <div className="flex gap-5 items-center">
             <h2 className="text-xl font-semibold">Color:</h2>
-            <p className="bg-blue-100 text-blue-800  shadow-inner  rounded-md px-4 py-1 text-sm  font-semibold">
+            <p className="bg-blue-100 text-blue-800  shadow-inner  rounded-md px-4 py-1 text-xs  font-semibold">
               {car?.color}
             </p>
           </div>
           <div className="flex gap-5 items-center">
             <h2 className="text-xl font-semibold">Type:</h2>
-            <p className="bg-blue-100 text-blue-800  shadow-inner  rounded-md px-4 py-1 text-sm  font-semibold">
+            <p className="bg-blue-100 text-blue-800  shadow-inner  rounded-md px-4 py-1 text-xs  font-semibold">
               {car?.engineType}
             </p>
           </div>

@@ -31,8 +31,8 @@ const CarSlider = () => {
             ))
           )}
         </CarouselContent>
-        <CarouselPrevious className="dark:text-white ml-5 sm:ml-0"/>
-        <CarouselNext className="dark:text-white mr-5 sm:ml-0"/>
+        <CarouselPrevious className="dark:text-white ml-7 sm:ml-0 text-blue-500 border-blue-500" />
+        <CarouselNext className="dark:text-white mr-7 md:mr-0 sm:ml-0 text-blue-500 border-blue-500" />
       </Carousel>
     </div>
   );

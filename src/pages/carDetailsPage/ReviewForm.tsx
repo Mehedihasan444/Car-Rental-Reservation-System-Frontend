@@ -13,7 +13,7 @@ const ReviewForm = ({ car }: { car: string }) => {
   const { data = {} } = useGetAReviewsQuery(car);
   const { data: reviews } = data;
 
-  console.log(reviews)
+
   const [rating, setRating] = useState<number | null>(null);
   const [hover, setHover] = useState<number | null>(null);
   const [comment, setComment] = useState("");
@@ -40,8 +40,9 @@ const ReviewForm = ({ car }: { car: string }) => {
     <div className="lg:flex justify-center  gap-5">
       <div className="max-w-xl mx-auto p-6 bg-white shadow-lg rounded-lg flex-1 h-full ">
       <h2 className="text-2xl font-bold  mb-6">Customer Reviews</h2>
-
-        {reviews?.slice(0,2)?.map((review: TReview) => (
+{!reviews.length?<p>No review post yet!</p>:""}
+        {
+        reviews?.slice(0,2)?.map((review: TReview) => (
           <div
             key={review._id}
             className="bg-gray-100 p-4 mb-4 rounded-lg shadow-sm"

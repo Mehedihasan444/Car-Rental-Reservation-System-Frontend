@@ -30,14 +30,14 @@ export function CarsPageSideBer({
 
   return (
     <div className="lg:w-full">
-      <div className="lg:hidden">
-        <Sheet key={"left"}>
+      <div className="lg:hidden ">
+        <Sheet key={"left"} >
           <SheetTrigger asChild>
             <Button variant="ghost" className="flex gap-2 text-lg  border dark:text-white">
               <FaFilter /> Filter
             </Button>
           </SheetTrigger>
-          <SheetContent side={"left"}>
+          <SheetContent side={"left"} className="h-screen overflow-y-scroll">
             <SheetHeader>
               <SheetTitle>Filter Cars</SheetTitle>
               <SheetDescription>
@@ -213,7 +213,7 @@ export function CarsPageSideBer({
       </div>
 
       {/*  */}
-      <div className="hidden lg:inline-block w-full">
+      <div className="hidden lg:inline-block w-full sticky top-10 shadow p-10">
         <div className="flex justify-between items-center">
           <h2 className="dark:text-white text-lg font-semibold mb-4 flex items-center gap-2">
             <FaFilter />
@@ -373,7 +373,7 @@ export function CarsPageSideBer({
             </Button>
           </div>
           <div>
-            <p>Selected price range: TK1 - TK{priceRange.join(" - ")}</p>
+            <p className="dark:text-white">Selected price range: TK1 - TK{priceRange.join(" - ")}</p>
           </div>
         </div>
       </div>

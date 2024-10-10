@@ -18,7 +18,7 @@ const ExploreBangladesh = () => {
         <h1 className="text-4xl font-bold text-center mb-10">
           Explore Bangladesh
         </h1>
-        <div className="grid grid-cols-6 grid-rows-3 gap-4">
+        <div className="grid grid-cols-6 grid-rows-3 gap-1 sm:gap-4">
           <div className="col-span-2 row-span-2">
             <img
               src={images[0]}

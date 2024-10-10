@@ -10,16 +10,24 @@ import {
   Title,
   Tooltip,
   Legend,
-  LineController,
+  BarController,
 } from "chart.js";
 import printJS from "print-js";
 import { useGetAllBookingsQuery } from "@/redux/features/booking/bookingApi";
-import dayjs from "dayjs"; 
+import dayjs from "dayjs";
 import { TBooking } from "@/types/TBooking";
 import { TChartData } from "@/types/TChartData";
 
 // Register ChartJS components
-ChartJS.register(  LineController,CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
+ChartJS.register(
+  BarController,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend
+);
 
 const ReportsPage = () => {
   const { data = {} } = useGetAllBookingsQuery(undefined);
@@ -116,13 +124,15 @@ const ReportsPage = () => {
         {/* Reports Card */}
         <Card className="shadow-lg ">
           <CardHeader>
-            <CardTitle >Reports</CardTitle>
+            <CardTitle>Reports</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-6">
               {/* Report Filters */}
               <div className="bg-white p-4 rounded-lg shadow flex flex-row items-center gap-5 justify-between">
-                <h3 className="text-lg font-medium dark:text-black">Filter Reports</h3>
+                <h3 className="text-lg font-medium dark:text-black">
+                  Filter Reports
+                </h3>
                 <div className="flex items-center space-x-4">
                   <select
                     id="interval"

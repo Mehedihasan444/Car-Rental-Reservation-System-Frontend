@@ -64,6 +64,24 @@ const carApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["car","booking"],
     }),
+    availabilityCheck: builder.query({
+      query: (queries) => {
+        const cleanedQueries = Object.entries(queries).reduce<Queries>((acc, [key, value]) => {
+          if (value !== '') {
+            acc[key] = value;
+          }
+          return acc;
+        }, {});
+    
+        const params = new URLSearchParams(cleanedQueries);
+    
+        return {
+          url: `/cars/check-availability?${params.toString()}`,
+          method: "GET",
+        };
+      },
+      providesTags: ["car"],
+    })
   }),
 });
 
@@ -74,4 +92,5 @@ export const {
   useGetCarQuery,
   useUpdateCarMutation,
   useReturnCarMutation,
+  useAvailabilityCheckQuery
 } = carApi;
