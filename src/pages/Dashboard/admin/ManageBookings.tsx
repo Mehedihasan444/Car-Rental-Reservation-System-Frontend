@@ -31,7 +31,7 @@ const ManageBookings = () => {
 
   return (
     <div className="p-6 bg-gray-50 h-screen overflow-y-scroll">
-      <div className="max-w-6xl mx-auto space-y-6">
+      <div className=" space-y-6">
         {/* Manage Bookings Card */}
         <Card className="shadow-lg">
           <CardHeader>
