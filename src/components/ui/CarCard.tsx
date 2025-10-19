@@ -18,59 +18,87 @@ const CarCard = ({
   type,
   pricePerHour,
   status,
-  // brand,
-  // model,
-  // fuelType,
-  // transmission,
   seatingCapacity,
   noOfDoors,
   images,
 }: TCar) => {
+  const isBooked = status === "booked";
+
   return (
-    <Card className="w-[280px] sm:w-[300px]  mx-auto my-4 sm:my-6 bg-white  rounded-md overflow-hidden">
-      <CardHeader className="relative p-3">
-        <img
-          src={images[0] || ""}
-          alt={name}
-          className="w-full sm:h-48 rounded-md border  object-cover transform transition-transform duration-300 ease-in-out hover:scale-105"
-        />
-      </CardHeader>
-      <CardContent>
-        <div className="flex justify-between items-center py-3">
-          <CardTitle className="text-lg font-semibold">{name}</CardTitle>
-          <span className="flex gap-1 items-center text-red-500">
-            <BsSuitHeartFill size={20} />
-            {44}
-          </span>
+    <Card className=" mx-auto my-4 sm:my-6 bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300">
+      <CardHeader className="relative p-0">
+        <div className="relative overflow-hidden">
+          <img
+            src={images[0] || ""}
+            alt={name}
+            className="w-full h-48 object-cover transform transition-transform duration-300 ease-in-out hover:scale-110"
+          />
+          {isBooked && (
+            <div className="absolute top-3 right-3 bg-red-500 text-white text-xs font-semibold px-3 py-1 rounded-full shadow-md">
+              Booked
+            </div>
+          )}
+          {!isBooked && (
+            <div className="absolute top-3 right-3 bg-green-500 text-white text-xs font-semibold px-3 py-1 rounded-full shadow-md">
+              Available
+            </div>
+          )}
         </div>
-        <div className="text-sm flex flex-wrap items-center gap-4">
-          <span className="flex items-center gap-1 font-medium text-gray-700">
-            <FaUser size={14} color="blue" />
-            {26}
+      </CardHeader>
+
+      <CardContent className="p-4">
+        <div className="flex justify-between items-center mb-3">
+          <CardTitle className="text-lg font-semibold text-gray-900 dark:text-white">
+            {name}
+          </CardTitle>
+          <button
+            className="text-gray-400 hover:text-red-500 dark:hover:text-red-400 transition-colors duration-200"
+            aria-label="Add to favorites"
+          >
+            <BsSuitHeartFill size={18} />
+          </button>
+        </div>
+
+        <div className="grid grid-cols-2 gap-3 text-sm">
+          <span className="flex items-center gap-2 text-gray-600 dark:text-gray-400">
+            <FaUser className="text-blue-600 dark:text-blue-400" size={14} />
+            <span className="font-medium">{seatingCapacity} Seats</span>
           </span>
-          <span className="flex items-center gap-1 font-medium text-gray-700">
-            <GiSuitcase size={18} color="blue" />
-            {seatingCapacity}
+          <span className="flex items-center gap-2 text-gray-600 dark:text-gray-400">
+            <GiCarDoor className="text-blue-600 dark:text-blue-400" size={16} />
+            <span className="font-medium">{noOfDoors} Doors</span>
           </span>
-          <span className="flex items-center gap-1 font-medium text-gray-700">
-            <FaCar size={16} color="blue" />
-            {type}
+          <span className="flex items-center gap-2 text-gray-600 dark:text-gray-400">
+            <FaCar className="text-blue-600 dark:text-blue-400" size={14} />
+            <span className="font-medium">{type}</span>
           </span>
-          <span className="flex items-center gap-1 font-medium text-gray-700">
-            <GiCarDoor size={16} color="blue" />
-            {noOfDoors}
+          <span className="flex items-center gap-2 text-gray-600 dark:text-gray-400">
+            <GiSuitcase className="text-blue-600 dark:text-blue-400" size={16} />
+            <span className="font-medium">2 Bags</span>
           </span>
         </div>
       </CardContent>
-      <hr className="mx-6 my-2 border-gray-200" />
-      <CardFooter className="flex  flex-row justify-between items-center p-4">
-        <div className=" sm:text-left">
-          <span className="font-medium text-gray-600">Per Hour Rate</span>
-          <h2 className="font-bold text-xl">TK {pricePerHour}</h2>
+
+      <hr className="border-gray-200 dark:border-slate-700" />
+
+      <CardFooter className="flex flex-row justify-between items-center p-4">
+        <div>
+          <span className="text-xs text-gray-500 dark:text-gray-400 block mb-1">
+            Per Hour Rate
+          </span>
+          <h2 className="font-bold text-xl text-gray-900 dark:text-white">
+            ৳{pricePerHour}
+          </h2>
         </div>
-        <Button className="mt-4 sm:mt-0 " disabled={status === "booked"}>
-          <Link to={`/details/${_id}`}>
-            {status === "booked" ? "Booked" : "Rent Now"}
+        <Button
+          className={`${isBooked
+            ? "bg-gray-400 cursor-not-allowed hover:bg-gray-400"
+            : "bg-blue-600 hover:bg-blue-700 shadow-md hover:shadow-lg"
+            } text-white font-semibold rounded-lg transition-all duration-300 px-6 py-2`}
+          disabled={isBooked}
+        >
+          <Link to={`/details/${_id}`} className={isBooked ? "pointer-events-none" : ""}>
+            {isBooked ? "Booked" : "Rent Now"}
           </Link>
         </Button>
       </CardFooter>
