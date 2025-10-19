@@ -14,6 +14,7 @@ import { ResponsiveSidebar } from "./responsiveSidebar";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { RootState } from "@/redux/store";
 import { logout } from "@/redux/features/auth/authSlice";
+import tokenManager from "@/utils/tokenManager";
 // import { FaMoon, FaSun } from "react-icons/fa";
 import { ModeToggle } from "./ModeToggle";
 import Avatar from "react-avatar";
@@ -29,10 +30,22 @@ import {
 import { LogOut } from "lucide-react";
 export function Navbar() {
   const user = useAppSelector((state: RootState) => state?.auth?.user);
+  const token = useAppSelector((state: RootState) => state?.auth?.token);
   const dispatch = useAppDispatch();
 
+  // Debug logging
+  React.useEffect(() => {
+    console.log('🔍 Navbar - User state:', user);
+    console.log('🔍 Navbar - User role:', user?.role);
+    console.log('🔍 Navbar - Token state:', token ? 'Present' : 'Not present');
+    console.log('🔍 Navbar - Current URL:', window.location.href);
+    console.log('🔍 Navbar - Current pathname:', window.location.pathname);
+  }, [user, token]);
+
   const handleLogout = () => {
-    // Logout logic here
+    // Clear tokens from tokenManager
+    tokenManager.clearTokens();
+    // Logout from Redux
     dispatch(logout());
   };
   return (
@@ -66,68 +79,80 @@ export function Navbar() {
         <NavigationMenu className="hidden lg:inline-block ">
           <NavigationMenuList className="space-x-4 ">
             <NavigationMenuItem className="dark:text-white ">
-              <NavLink
-                to="/"
-                className={({ isActive, isPending, isTransitioning }) =>
-                  [
-                    isPending ? "pending" : "",
-                    isActive ? "text-blue-500" : "",
-                    isTransitioning ? "transitioning" : "",
-                  ].join("")
-                }
+              <NavigationMenuLink
+                asChild
+                className={navigationMenuTriggerStyle()}
               >
-                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                <NavLink
+                  to="/"
+                  className={({ isActive, isPending, isTransitioning }) =>
+                    cn(
+                      isPending && "pending",
+                      isActive && "text-blue-500",
+                      isTransitioning && "transitioning"
+                    )
+                  }
+                >
                   Home
-                </NavigationMenuLink>
-              </NavLink>
+                </NavLink>
+              </NavigationMenuLink>
             </NavigationMenuItem>
             <NavigationMenuItem className="dark:text-white ">
-              <NavLink
-                to="/cars"
-                className={({ isActive, isPending, isTransitioning }) =>
-                  [
-                    isPending ? "pending" : "",
-                    isActive ? "text-blue-500" : "",
-                    isTransitioning ? "transitioning" : "",
-                  ].join(" ")
-                }
+              <NavigationMenuLink
+                asChild
+                className={navigationMenuTriggerStyle()}
               >
-                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                <NavLink
+                  to="/cars"
+                  className={({ isActive, isPending, isTransitioning }) =>
+                    cn(
+                      isPending && "pending",
+                      isActive && "text-blue-500",
+                      isTransitioning && "transitioning"
+                    )
+                  }
+                >
                   Cars
-                </NavigationMenuLink>
-              </NavLink>
+                </NavLink>
+              </NavigationMenuLink>
             </NavigationMenuItem>
             <NavigationMenuItem className="dark:text-white">
-              <NavLink
-                to="/about"
-                className={({ isActive, isPending, isTransitioning }) =>
-                  [
-                    isPending ? "pending" : "",
-                    isActive ? "text-blue-500" : "",
-                    isTransitioning ? "transitioning" : "",
-                  ].join(" ")
-                }
+              <NavigationMenuLink
+                asChild
+                className={navigationMenuTriggerStyle()}
               >
-                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                <NavLink
+                  to="/about"
+                  className={({ isActive, isPending, isTransitioning }) =>
+                    cn(
+                      isPending && "pending",
+                      isActive && "text-blue-500",
+                      isTransitioning && "transitioning"
+                    )
+                  }
+                >
                   About Us
-                </NavigationMenuLink>
-              </NavLink>
+                </NavLink>
+              </NavigationMenuLink>
             </NavigationMenuItem>
             <NavigationMenuItem className="dark:text-white">
-              <NavLink
-                to="/booking"
-                className={({ isActive, isPending, isTransitioning }) =>
-                  [
-                    isPending ? "pending" : "",
-                    isActive ? "text-blue-500" : "",
-                    isTransitioning ? "transitioning" : "",
-                  ].join(" ")
-                }
+              <NavigationMenuLink
+                asChild
+                className={navigationMenuTriggerStyle()}
               >
-                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                <NavLink
+                  to="/booking"
+                  className={({ isActive, isPending, isTransitioning }) =>
+                    cn(
+                      isPending && "pending",
+                      isActive && "text-blue-500",
+                      isTransitioning && "transitioning"
+                    )
+                  }
+                >
                   Booking
-                </NavigationMenuLink>
-              </NavLink>
+                </NavLink>
+              </NavigationMenuLink>
             </NavigationMenuItem>
             {/* {user && (
               <NavigationMenuItem className="dark:text-white">
@@ -176,11 +201,15 @@ export function Navbar() {
               <DropdownMenuContent className="w-40 pl-6">
                 <DropdownMenuLabel>{user?.name}</DropdownMenuLabel>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem className="cursor-pointer"><a href={`/dashboard/${user?.role}`}>Dashboard</a></DropdownMenuItem>
-                <DropdownMenuSeparator />
                 <DropdownMenuItem className="cursor-pointer">
+                  <Link to={`/dashboard/${user?.role}`} className="w-full">
+                    Dashboard
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem className="cursor-pointer" onClick={handleLogout}>
                   <LogOut className="mr-2 h-4 w-4" />
-                  <span onClick={handleLogout}>Log out</span>
+                  <span>Log out</span>
                   <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
                 </DropdownMenuItem>
               </DropdownMenuContent>
