@@ -109,7 +109,7 @@ const CarListingPage = () => {
         </div>
         <hr />
         <div
-          className={`mt-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  min-h-[50vh] gap-5 mb-10`}
+          className={`mt-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4  min-h-[50vh] gap-4 mb-10`}
         >
           {isLoading ? (
             <div className="flex justify-center items-center w-full absolute top-0 right-0 bottom-0 left-0">
