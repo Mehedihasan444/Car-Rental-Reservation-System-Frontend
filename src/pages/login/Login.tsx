@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -59,12 +58,42 @@ const Login = () => {
         const result = await login(formData).unwrap();
 
         if (result?.success) {
-          // If login is successful
+          // Backend sets refreshToken as httpOnly cookie automatically
+          // Update Redux state (tokenManager.setTokens is now handled in auth slice)
           dispatch(signIn({ user: result?.data, token: result?.token }));
+          
+          console.log('✅ Login successful, user:', result?.data);
+          console.log('� User Role from API:', result?.data?.role);
+          console.log('�🔑 Token stored, navigating to dashboard...');
+          
           toast({
             description: "Signed in successfully!",
           });
-          navigate("/"); // Redirect to the homepage after successful login
+          
+          // Navigate based on user role
+          if (result?.data?.role === 'admin') {
+            console.log('🎯 Navigating to ADMIN dashboard');
+            console.log('🔍 Current URL before navigation:', window.location.href);
+            navigate("/dashboard/admin");
+            console.log('🔍 Navigation called, URL should change to /dashboard/admin');
+            
+            // Check URL after a small delay
+            setTimeout(() => {
+              console.log('🔍 URL after 500ms:', window.location.href);
+              console.log('🔍 Pathname after 500ms:', window.location.pathname);
+            }, 500);
+          } else {
+            console.log('🎯 Navigating to USER dashboard');
+            console.log('🔍 Current URL before navigation:', window.location.href);
+            navigate("/dashboard/user");
+            console.log('🔍 Navigation called, URL should change to /dashboard/user');
+            
+            // Check URL after a small delay
+            setTimeout(() => {
+              console.log('🔍 URL after 500ms:', window.location.href);
+              console.log('🔍 Pathname after 500ms:', window.location.pathname);
+            }, 500);
+          }
         } else {
           // If login fails but no exception is thrown
           toast({
@@ -72,12 +101,13 @@ const Login = () => {
             variant: "destructive",
           });
         }
-      } catch (error: any) {
+      } catch (error: unknown) {
         // Handle API errors or unexpected issues
+        const apiError = error as { data?: { message?: string } };
         setErrors({
           ...errors, // Keep existing form errors if any
           apiError:
-            error?.data?.message ||
+            apiError?.data?.message ||
             "Invalid email or password. Please try again.",
         });
         toast({
