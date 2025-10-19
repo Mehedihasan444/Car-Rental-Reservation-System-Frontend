@@ -23,7 +23,7 @@ const PaymentManagement = () => {
 
   return (
     <div className="p-6 bg-gray-50 h-screen overflow-y-scroll">
-      <div className="max-w-4xl mx-auto space-y-6">
+      <div className=" space-y-6">
         {/* Payment Management */}
         <Card className="shadow-lg">
           <CardHeader>
