@@ -1,5 +1,6 @@
 
 import MainLayout from "./components/layout/MainLayout";
+import './utils/forceLogout'; // Import for global debugging
 
 function App() {
   return (
