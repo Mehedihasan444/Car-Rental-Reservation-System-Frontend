@@ -24,7 +24,7 @@ const CarSlider = () => {
             cars?.map((car: TCar, index: number) => (
               <CarouselItem
                 key={index}
-                className="pl-1 sm:mr-5  md:basis-1/2 lg:basis-1/4  flex justify-center items-center"
+                className="pl-1 sm:mr-4  md:basis-1/2 lg:basis-1/4  flex justify-center items-center"
               >
                 <CarCard {...car} />
               </CarouselItem>
