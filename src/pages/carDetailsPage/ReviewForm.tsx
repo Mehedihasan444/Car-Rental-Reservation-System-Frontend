@@ -5,7 +5,8 @@ import {
 } from "@/redux/features/review/reviewApi";
 import { TReview } from "@/types/TReview";
 import React, { useState } from "react";
-import { FaStar } from "react-icons/fa";
+import { FaStar, FaUser, FaEnvelope, FaComment } from "react-icons/fa";
+import { Button } from "@/components/ui/button";
 
 const ReviewForm = ({ car }: { car: string }) => {
   const [createReview] = useCreateReviewMutation();
@@ -31,142 +32,186 @@ const ReviewForm = ({ car }: { car: string }) => {
     const res = await createReview(formData);
     if (res?.data?.success) {
       toast({ description: "Review posted successfully." });
+      // Reset form
+      setRating(null);
+      setComment("");
+      setName("");
+      setEmail("");
     }
   };
 
   return (
-    <div className="my-12 bg-gray-100 p-8 rounded-md ">
-            <h2 className="text-2xl font-bold  mb-6">Reviews</h2>
-    <div className="lg:flex justify-center  gap-5">
-      <div className="max-w-xl mx-auto p-6 bg-white shadow-lg rounded-lg flex-1 h-full ">
-      <h2 className="text-2xl font-bold  mb-6">Customer Reviews</h2>
-{!reviews.length?<p>No review post yet!</p>:""}
-        {
-        reviews?.slice(0,2)?.map((review: TReview) => (
-          <div
-            key={review._id}
-            className="bg-gray-100 p-4 mb-4 rounded-lg shadow-sm"
-          >
-            <div className="flex justify-between items-center">
-            <h3 className="text-lg font-semibold">{review.name}</h3>
-            <p className="text-sm opacity-60">{review.createdAt}</p>
-
-            </div>
-            <p className="text-sm text-gray-600">{review.email}</p>
-            <div className="flex items-center mt-2">
-              {[...Array(5)].map((_, index) => (
-                <svg
-                  key={index}
-                  className={`w-5 h-5 ${
-                    review.rating > index ? "text-yellow-400" : "text-gray-300"
-                  }`}
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-              ))}
-            </div>
-            <p className="mt-2 text-gray-800">{review.comment}</p>
-          </div>
-        ))}
+    <div className="mb-8">
+      {/* Section Header */}
+      <div className="mb-6">
+        <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+          Customer Reviews
+        </h2>
+        <p className="text-gray-600 dark:text-gray-400">
+          Read what our customers say about this vehicle
+        </p>
       </div>
-      <div className="mt-5 lg:mt-0 max-w-xl mx-auto p-6 bg-white shadow-lg rounded-lg flex-1">
-        <h2 className="text-2xl font-bold text-center mb-6">Leave a Review</h2>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
-          {/* Rating */}
-          <div className="flex justify-center mb-4">
-            {[...Array(5)].map((_, index) => {
-              const ratingValue = index + 1;
-              return (
-                <label key={index}>
-                  <input
-                    type="radio"
-                    className="hidden"
-                    value={ratingValue}
-                    onClick={() => setRating(ratingValue)}
-                  />
-                  <FaStar
-                    size={30}
-                    className={`cursor-pointer transition-colors ${
-                      ((hover ?? 0) || (rating ?? 0)) >= ratingValue
-                        ? "text-yellow-400"
-                        : "text-gray-300"
-                    }`}
-                    onMouseEnter={() => setHover(ratingValue)}
-                    onMouseLeave={() => setHover(null)}
-                  />
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        {/* Existing Reviews - Takes 2 columns */}
+        <div className="lg:col-span-2">
+          <div className="bg-white dark:bg-slate-800 rounded-lg shadow-sm border border-gray-200 dark:border-slate-700 p-6">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+              All Reviews ({reviews?.length || 0})
+            </h3>
+            
+            {!reviews?.length ? (
+              <div className="text-center py-12">
+                <FaStar className="mx-auto text-gray-300 dark:text-gray-600 mb-3" size={48} />
+                <p className="text-gray-500 dark:text-gray-400">
+                  No reviews yet. Be the first to review!
+                </p>
+              </div>
+            ) : (
+              <div className="space-y-4 max-h-[500px] overflow-y-auto pr-2">
+                {reviews?.map((review: TReview) => (
+                  <div
+                    key={review._id}
+                    className="border-b border-gray-200 dark:border-slate-700 last:border-0 pb-4 last:pb-0"
+                  >
+                    <div className="flex justify-between items-start mb-2">
+                      <div>
+                        <h4 className="font-semibold text-gray-900 dark:text-white">
+                          {review.name}
+                        </h4>
+                        <p className="text-sm text-gray-500 dark:text-gray-400">
+                          {review.email}
+                        </p>
+                      </div>
+                      <span className="text-xs text-gray-400 dark:text-gray-500">
+                        {new Date(review.createdAt).toLocaleDateString()}
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-1 mb-2">
+                      {[...Array(5)].map((_, index) => (
+                        <FaStar
+                          key={index}
+                          size={14}
+                          className={
+                            review.rating > index
+                              ? "text-yellow-400"
+                              : "text-gray-300 dark:text-gray-600"
+                          }
+                        />
+                      ))}
+                    </div>
+                    <p className="text-gray-700 dark:text-gray-300 text-sm">
+                      {review.comment}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* Review Form - Takes 1 column */}
+        <div>
+          <div className="bg-white dark:bg-slate-800 rounded-lg shadow-sm border border-gray-200 dark:border-slate-700 p-6">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+              Write a Review
+            </h3>
+
+            <form onSubmit={handleSubmit} className="space-y-4">
+              {/* Rating */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  Rating
                 </label>
-              );
-            })}
-          </div>
+                <div className="flex gap-1">
+                  {[...Array(5)].map((_, index) => {
+                    const ratingValue = index + 1;
+                    return (
+                      <label key={index} className="cursor-pointer">
+                        <input
+                          type="radio"
+                          className="hidden"
+                          value={ratingValue}
+                          onClick={() => setRating(ratingValue)}
+                        />
+                        <FaStar
+                          size={24}
+                          className={`transition-colors ${
+                            ((hover ?? 0) || (rating ?? 0)) >= ratingValue
+                              ? "text-yellow-400"
+                              : "text-gray-300 dark:text-gray-600"
+                          }`}
+                          onMouseEnter={() => setHover(ratingValue)}
+                          onMouseLeave={() => setHover(null)}
+                        />
+                      </label>
+                    );
+                  })}
+                </div>
+              </div>
 
-          {/* Review Text */}
-          <div>
-            <label htmlFor="comment" className="block text-lg font-medium">
-              Your Comment
-            </label>
-            <textarea
-              id="comment"
-              rows={5}
-              className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400"
-              placeholder="Share your experience with us..."
-              value={comment}
-              onChange={(e) => setComment(e.target.value)}
-              required
-            />
-          </div>
+              {/* Name */}
+              <div>
+                <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  <FaUser className="inline mr-1" size={14} />
+                  Name
+                </label>
+                <input
+                  id="name"
+                  type="text"
+                  className="w-full px-3 py-2 border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-gray-900 dark:text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  placeholder="Your name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  required
+                />
+              </div>
 
-          {/* Name */}
-          <div>
-            <label htmlFor="name" className="block text-lg font-medium">
-              Your Name
-            </label>
-            <input
-              id="name"
-              type="text"
-              className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400"
-              placeholder="Enter your name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              required
-            />
-          </div>
+              {/* Email */}
+              <div>
+                <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  <FaEnvelope className="inline mr-1" size={14} />
+                  Email
+                </label>
+                <input
+                  id="email"
+                  type="email"
+                  className="w-full px-3 py-2 border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-gray-900 dark:text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  placeholder="your@email.com"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                />
+              </div>
 
-          {/* Email */}
-          <div>
-            <label htmlFor="email" className="block text-lg font-medium">
-              Your Email
-            </label>
-            <input
-              id="email"
-              type="email"
-              className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400"
-              placeholder="Enter your email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-          </div>
+              {/* Comment */}
+              <div>
+                <label htmlFor="comment" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  <FaComment className="inline mr-1" size={14} />
+                  Review
+                </label>
+                <textarea
+                  id="comment"
+                  rows={4}
+                  className="w-full px-3 py-2 border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-gray-900 dark:text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
+                  placeholder="Share your experience..."
+                  value={comment}
+                  onChange={(e) => setComment(e.target.value)}
+                  required
+                />
+              </div>
 
-          {/* Submit Button */}
-          <div className="flex justify-center">
-            <button
-              type="submit"
-              className="px-6 py-3 bg-blue-400 text-white font-semibold rounded-md hover:bg-blue-500 transition-colors"
-            >
-              Submit Review
-            </button>
+              {/* Submit Button */}
+              <Button
+                type="submit"
+                className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg h-10 transition-colors"
+              >
+                Submit Review
+              </Button>
+            </form>
           </div>
-        </form>
+        </div>
       </div>
-    </div>
     </div>
   );
 };
