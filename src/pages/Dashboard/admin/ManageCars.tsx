@@ -27,7 +27,7 @@ const ManageCars = () => {
 
   return (
     <div className="p-6 bg-gray-50 h-screen overflow-y-scroll">
-      <div className="max-w-6xl mx-auto space-y-6">
+      <div className=" space-y-6">
         <Card className="shadow-lg" ref={topRef}>
           <CardHeader className="flex justify-between items-center flex-row">
             <CardTitle>Manage Cars</CardTitle>
@@ -55,7 +55,7 @@ const ManageCars = () => {
           </Card>
         )}
         {/* List of cars */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {!cars?.length ? (
             <p className="mt-5">No Cars available.</p>
           ) : (
