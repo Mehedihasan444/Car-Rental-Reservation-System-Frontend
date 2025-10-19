@@ -8,7 +8,13 @@ import { RootState } from "@/redux/store";
 import { TBooking } from "@/types/TBooking";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { FaEdit, FaSave, FaTimes, FaUser, FaEnvelope, FaPhone, FaMapMarkerAlt, FaClock, FaCheckCircle, FaTimesCircle } from "react-icons/fa";
+import { FaEdit, FaSave, FaTimes, FaUser, FaEnvelope, FaPhone, FaMapMarkerAlt, FaClock, FaCheckCircle, FaTimesCircle, FaCamera } from "react-icons/fa";
+import { toast } from "@/components/ui/use-toast";
+import axios from "axios";
+
+// imgbb credentials
+const imageHostingKey = import.meta.env.VITE_IMAGE_HOSTING_KEY;
+const imageHostingApi = `https://api.imgbb.com/1/upload?key=${imageHostingKey}`;
 
 const UserDashboard = () => {
   const user = useAppSelector((state: RootState) => state?.auth?.user);
@@ -16,6 +22,8 @@ const UserDashboard = () => {
   const { data = {} } = useGetUserQuery(user?._id);
   const { data: userInfo } = data;
   const [isEditing, setIsEditing] = useState(false);
+  const [isUploadingImage, setIsUploadingImage] = useState(false);
+  const [profileImage, setProfileImage] = useState<string>(userInfo?.profileImage || "");
   const [formData, setFormData] = useState({
     name: userInfo?.name || "",
     email: userInfo?.email || "",
@@ -32,6 +40,36 @@ const UserDashboard = () => {
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
+  };
+
+  const handleProfileImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    setIsUploadingImage(true);
+    try {
+      const formData = new FormData();
+      formData.append("image", file);
+
+      const response = await axios.post(imageHostingApi, formData);
+      const imageUrl = response.data.data.display_url;
+      
+      setProfileImage(imageUrl);
+      
+      // Update user profile with new image
+      await updateUser({ UserId: user?._id, profileImage: imageUrl });
+      
+      toast({
+        description: "Profile picture updated successfully!",
+      });
+    } catch (error) {
+      console.error("Image upload error:", error);
+      toast({
+        description: "Failed to upload profile picture",
+      });
+    } finally {
+      setIsUploadingImage(false);
+    }
   };
 
   const handleSave =async () => {
@@ -58,6 +96,7 @@ useEffect(()=>{
       address: userInfo?.address ,
     }
   )
+  setProfileImage(userInfo?.profileImage || "")
 },[userInfo])
 
   const containerVariants = {
@@ -110,7 +149,7 @@ useEffect(()=>{
       initial="hidden"
       animate="visible"
       variants={containerVariants}
-      className="min-h-screen bg-gradient-to-br from-gray-50 via-purple-50 to-pink-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 p-4 md:p-8 overflow-y-auto"
+      className="h-screen bg-gradient-to-br from-gray-50 via-purple-50 to-pink-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 p-4 md:p-8 overflow-y-auto"
     >
       <div className=" space-y-8">
         {/* Header */}
@@ -144,6 +183,45 @@ useEffect(()=>{
               </div>
             </CardHeader>
             <CardContent className="p-6">
+              {/* Profile Picture Section */}
+              <div className="flex justify-center mb-8">
+                <div className="relative group">
+                  <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-purple-500 shadow-lg">
+                    {profileImage ? (
+                      <img
+                        src={profileImage}
+                        alt="Profile"
+                        className="w-full h-full object-cover"
+                      />
+                    ) : (
+                      <div className="w-full h-full bg-gradient-to-br from-purple-400 to-pink-400 flex items-center justify-center">
+                        <FaUser className="text-6xl text-white" />
+                      </div>
+                    )}
+                  </div>
+                  
+                  {/* Upload Button Overlay */}
+                  <label
+                    htmlFor="profile-image-upload"
+                    className="absolute bottom-0 right-0 w-10 h-10 bg-purple-600 hover:bg-purple-700 rounded-full flex items-center justify-center cursor-pointer shadow-lg transition-all duration-300 group-hover:scale-110"
+                  >
+                    {isUploadingImage ? (
+                      <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                    ) : (
+                      <FaCamera className="text-white" />
+                    )}
+                  </label>
+                  <input
+                    id="profile-image-upload"
+                    type="file"
+                    accept="image/*"
+                    className="hidden"
+                    onChange={handleProfileImageUpload}
+                    disabled={isUploadingImage}
+                  />
+                </div>
+              </div>
+
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {/* Name Field */}
                 <div className="space-y-2">
