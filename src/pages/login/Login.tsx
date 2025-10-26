@@ -19,6 +19,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [formData, setFormData] = useState({ email: "", password: "" });
+  const [open, setOpen] = useState(true);
   const [errors, setErrors] = useState<FormErrors>({});
   const [login, { isLoading }] = useLoginMutation();
   const navigate = useNavigate();
@@ -61,22 +62,22 @@ const Login = () => {
           // Backend sets refreshToken as httpOnly cookie automatically
           // Update Redux state (tokenManager.setTokens is now handled in auth slice)
           dispatch(signIn({ user: result?.data, token: result?.token }));
-          
+
           console.log('✅ Login successful, user:', result?.data);
           console.log('� User Role from API:', result?.data?.role);
           console.log('�🔑 Token stored, navigating to dashboard...');
-          
+
           toast({
             description: "Signed in successfully!",
           });
-          
+
           // Navigate based on user role
           if (result?.data?.role === 'admin') {
             console.log('🎯 Navigating to ADMIN dashboard');
             console.log('🔍 Current URL before navigation:', window.location.href);
             navigate("/dashboard/admin");
             console.log('🔍 Navigation called, URL should change to /dashboard/admin');
-            
+
             // Check URL after a small delay
             setTimeout(() => {
               console.log('🔍 URL after 500ms:', window.location.href);
@@ -87,7 +88,7 @@ const Login = () => {
             console.log('🔍 Current URL before navigation:', window.location.href);
             navigate("/dashboard/user");
             console.log('🔍 Navigation called, URL should change to /dashboard/user');
-            
+
             // Check URL after a small delay
             setTimeout(() => {
               console.log('🔍 URL after 500ms:', window.location.href);
@@ -119,7 +120,50 @@ const Login = () => {
   };
 
   return (
-    <div className="h-screen flex justify-center items-center">
+    <div className="h-screen flex flex-col justify-center items-center">
+      {/* admin credentials */}
+
+      <div className="w-[350px] mb-4">
+        <div
+          className={`border border-gray-200 shadow-sm rounded-lg overflow-hidden transition-all`}
+        >
+          {/* HEADER */}
+          <button
+            onClick={() => setOpen((p) => !p)}
+            className="w-full flex items-center justify-between gap-2 p-3 bg-white"
+          >
+            <div className="flex items-center gap-3">
+              <div className="w-1 h-6 bg-blue-600 rounded" /> {/* LEFT BORDER STYLE */}
+              <span className="font-semibold text-sm text-gray-900">
+                Demo Credentials
+              </span>
+            </div>
+            <svg
+              className={`w-5 h-5 text-gray-500 transition-transform duration-200 ${open ? "rotate-180" : ""
+                }`}
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+
+          {/* BODY */}
+          {open && (
+            <div className="px-5 pb-4 pt-1 text-sm text-gray-700">
+              Use these to sign in:
+              <div className="mt-2">
+                <span className="font-medium">Admin:</span>{" "}
+                <span className="italic">admin@gmail.com</span> /{" "}
+                <span className="italic">admin@gmail.com</span>
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+
+
       <Card className="w-[350px]">
         <CardHeader className="">
           <CardTitle>Login</CardTitle>

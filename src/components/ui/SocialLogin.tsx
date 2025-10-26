@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { CardFooter } from "@/components/ui/card";
-import { FaFacebook } from "react-icons/fa";
+// import { FaFacebook } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import auth from "@/AuthProvider/firebase.config";
@@ -93,13 +93,14 @@ const SocialLogin = () => {
               className="w-full shadow"
             >
               <FcGoogle size={25} />
+              <span className="ml-2">Google</span>
             </Button>
           </div>
-          <div className="flex-1 w-full">
+          {/* <div className="flex-1 w-full">
             <Button variant={"outline"} size={"lg"} className="w-full shadow">
               <FaFacebook size={25} color="blue" />
             </Button>
-          </div>
+          </div> */}
         </div>
       </CardFooter>
     </>
